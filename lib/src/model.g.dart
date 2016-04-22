@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-22T23:48:33.658498Z
+// 2016-04-22T23:50:42.201180Z
 
 part of vcore.model;
 
@@ -48,6 +48,44 @@ class _$NamedElementBuilder extends NamedElementBuilder {
   NamedElement build() {
     if (name == null) throw new ArgumentError('null name');
     return new _$NamedElement._(name: name);
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class Classifier
+// **************************************************************************
+
+class _$Classifier extends Classifier {
+  _$Classifier._() : super._() {}
+  factory _$Classifier([updates(ClassifierBuilder b)]) =>
+      (new ClassifierBuilder()..update(updates)).build();
+  Classifier rebuild(updates(ClassifierBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+  _$ClassifierBuilder toBuilder() => new _$ClassifierBuilder()..replace(this);
+  bool operator ==(other) {
+    if (other is! Classifier) return false;
+    return true;
+  }
+
+  int get hashCode {
+    return 922550110;
+  }
+
+  String toString() {
+    return 'Classifier {}';
+  }
+}
+
+class _$ClassifierBuilder extends ClassifierBuilder {
+  _$ClassifierBuilder() : super._();
+  void replace(Classifier other) {}
+  void update(updates(ClassifierBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  Classifier build() {
+    return new _$Classifier._();
   }
 }
 
