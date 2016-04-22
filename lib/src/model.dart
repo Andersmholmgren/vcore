@@ -9,7 +9,21 @@ part 'model.g.dart';
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-abstract class Classifier {}
+abstract class NamedElement implements Built<NamedElement, NamedElementBuilder> {
+  String get name;
+  NamedElement._();
+
+  factory NamedElement([updates(NamedElementBuilder b)]) = _$NamedElement;
+}
+
+abstract class NamedElementBuilder
+  implements Builder<NamedElement, NamedElementBuilder> {
+  String name;
+  NamedElementBuilder._();
+  factory NamedElementBuilder() = _$NamedElementBuilder;
+}
+
+abstract class Classifier {} //extends NamedElement {}
 
 abstract class ValueClass extends Classifier
     implements Built<ValueClass, ValueClassBuilder> {
@@ -24,4 +38,4 @@ abstract class ValueClassBuilder
   factory ValueClassBuilder() = _$ValueClassBuilder;
 }
 
-class Property {}
+//abstract class Property extends NamedElement {}
