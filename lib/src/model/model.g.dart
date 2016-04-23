@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T02:29:48.993954Z
+// 2016-04-23T02:31:26.931882Z
 
 part of vcore.model;
 
@@ -22,10 +22,10 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
     return [
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'properties',
-      serializers.serialize(object.properties,
+      'classifiers',
+      serializers.serialize(object.classifiers,
           specifiedType:
-              const FullType(BuiltSet, const [const FullType(Property)])),
+              const FullType(BuiltSet, const [const FullType(Classifier)])),
     ];
   }
 
@@ -50,10 +50,10 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
             result.name = serializers.deserialize(value,
                 specifiedType: const FullType(String));
             break;
-          case 'properties':
-            result.properties.replace(serializers.deserialize(value,
+          case 'classifiers':
+            result.classifiers.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
-                    BuiltSet, const [const FullType(Property)])));
+                    BuiltSet, const [const FullType(Classifier)])));
             break;
         }
       }
@@ -163,10 +163,10 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
 
 class _$Package extends Package {
   final String name;
-  final BuiltSet<Property> properties;
-  _$Package._({this.name, this.properties}) : super._() {
+  final BuiltSet<Classifier> classifiers;
+  _$Package._({this.name, this.classifiers}) : super._() {
     if (name == null) throw new ArgumentError('null name');
-    if (properties == null) throw new ArgumentError('null properties');
+    if (classifiers == null) throw new ArgumentError('null classifiers');
   }
   factory _$Package([updates(PackageBuilder b)]) =>
       (new PackageBuilder()..update(updates)).build();
@@ -175,17 +175,17 @@ class _$Package extends Package {
   _$PackageBuilder toBuilder() => new _$PackageBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! Package) return false;
-    return name == other.name && properties == other.properties;
+    return name == other.name && classifiers == other.classifiers;
   }
 
   int get hashCode {
-    return hashObjects([name, properties]);
+    return hashObjects([name, classifiers]);
   }
 
   String toString() {
     return 'Package {'
         'name=${name.toString()}\n'
-        'properties=${properties.toString()}\n'
+        'classifiers=${classifiers.toString()}\n'
         '}';
   }
 }
@@ -194,7 +194,7 @@ class _$PackageBuilder extends PackageBuilder {
   _$PackageBuilder() : super._();
   void replace(Package other) {
     super.name = other.name;
-    super.properties = other.properties?.toBuilder();
+    super.classifiers = other.classifiers?.toBuilder();
   }
 
   void update(updates(PackageBuilder b)) {
@@ -203,8 +203,8 @@ class _$PackageBuilder extends PackageBuilder {
 
   Package build() {
     if (name == null) throw new ArgumentError('null name');
-    if (properties == null) throw new ArgumentError('null properties');
-    return new _$Package._(name: name, properties: properties?.build());
+    if (classifiers == null) throw new ArgumentError('null classifiers');
+    return new _$Package._(name: name, classifiers: classifiers?.build());
   }
 }
 
