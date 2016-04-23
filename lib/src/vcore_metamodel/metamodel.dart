@@ -45,6 +45,19 @@ ValueClass _createClassifier() {
   return builder.build();
 }
 
+ValueClass _createGenericClassifier() {
+  final builder = new ValueClassBuilder()
+    ..name = 'GenericClassifier'
+    ..isAbstract = true;
+  builder.properties
+    ..add((new PropertyBuilder()
+          ..name = 'genericTypes'
+          ..type = dartString)
+        .build());
+
+  return builder.build();
+}
+
 ValueClass _property;
 ValueClass get property => _property ??= _createProperty();
 
@@ -67,14 +80,20 @@ ValueClass get valueClass => _valueClass ??= _createValueClass();
 ValueClass _createValueClass() {
   final builder = new ValueClassBuilder()..name = 'ValueClass';
   builder.superTypes.add(_classifier);
-  final propertyTypeBuilder = new GenericTypeBuilder()
-    ..base = builtSet
-    ..name = 'BuiltSet<Property>';
-  propertyTypeBuilder.genericTypeValues[builtSet.genericTypes.first] = property;
   builder.properties.add((new PropertyBuilder()
         ..name = 'properties'
-        ..type = propertyTypeBuilder.build())
+        ..type = _createBuiltSet(property))
       .build());
 
   return builder.build();
+}
+
+GenericType _createBuiltSet(ValueClass genericParameter) {
+  final genericTypeBuilder = new GenericTypeBuilder()
+    ..base = builtSet
+    ..name = 'BuiltSet<${genericParameter.name}>';
+  genericTypeBuilder.genericTypeValues[builtSet.genericTypes.first] =
+      genericParameter;
+
+  return genericTypeBuilder.build();
 }
