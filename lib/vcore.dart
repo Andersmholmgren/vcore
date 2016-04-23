@@ -7,5 +7,7 @@
 library vcore;
 
 export 'src/model.dart';
+export 'src/serializers.dart';
+
 
 // TODO: Export any libraries intended for clients of this package.

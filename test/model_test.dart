@@ -6,6 +6,11 @@ import 'package:test/test.dart';
 
 void main() {
   group('A group of tests', () {
-    final ValueClass v = (new ValueClassBuilder()..name = "Schema").build();
+    test('', () {
+      final ValueClass v = (new ValueClassBuilder()..name = "Schema").build();
+      var serialized = serializers.serialize(v);
+      print(serialized);
+
+    }, skip: false);
   });
 }
