@@ -3,6 +3,7 @@ library vcore.model;
 import 'package:built_collection/built_collection.dart';
 import 'package:built_json/built_json.dart';
 import 'package:built_value/built_value.dart';
+import 'package:quiver/iterables.dart';
 
 part 'model.g.dart';
 
@@ -96,6 +97,9 @@ abstract class ValueClass extends GenericClassifier
   String get name;
   BuiltSet<TypeParameter> get genericTypes;
   BuiltSet<Property> get properties;
+  BuiltSet<Property> get allProperties => new BuiltSet<Property>(
+      concat([superTypes.expand((vc) => vc.allProperties), properties]));
+
   BuiltSet<ValueClass> get superTypes;
   bool get isAbstract;
 
