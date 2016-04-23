@@ -41,6 +41,7 @@ abstract class ValueClass extends Classifier
   static final Serializer<ValueClass> serializer = _$valueClassSerializer;
   String get name;
   BuiltSet<Property> get properties;
+  BuiltSet<ValueClass> get superTypes;
 
   ValueClass._();
 
@@ -53,6 +54,7 @@ abstract class ValueClassBuilder /*extends NamedElementBuilder*/
   String name;
   SetBuilder<Property> properties = new SetBuilder<Property>();
 //  SetBuilder<PropertyBuilder> properties = new SetBuilder<PropertyBuilder>();
+  SetBuilder<ValueClass> superTypes = new SetBuilder<ValueClass>();
 
   ValueClassBuilder._();
   factory ValueClassBuilder() = _$ValueClassBuilder;

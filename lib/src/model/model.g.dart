@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T03:03:05.843167Z
+// 2016-04-23T03:09:49.115953Z
 
 part of vcore.model;
 
@@ -77,6 +77,10 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
       serializers.serialize(object.properties,
           specifiedType:
               const FullType(BuiltSet, const [const FullType(Property)])),
+      'superTypes',
+      serializers.serialize(object.superTypes,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(ValueClass)])),
     ];
   }
 
@@ -105,6 +109,11 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
             result.properties.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
                     BuiltSet, const [const FullType(Property)])));
+            break;
+          case 'superTypes':
+            result.superTypes.replace(serializers.deserialize(value,
+                specifiedType: const FullType(
+                    BuiltSet, const [const FullType(ValueClass)])));
             break;
         }
       }
@@ -223,9 +232,11 @@ class _$PackageBuilder extends PackageBuilder {
 class _$ValueClass extends ValueClass {
   final String name;
   final BuiltSet<Property> properties;
-  _$ValueClass._({this.name, this.properties}) : super._() {
+  final BuiltSet<ValueClass> superTypes;
+  _$ValueClass._({this.name, this.properties, this.superTypes}) : super._() {
     if (name == null) throw new ArgumentError('null name');
     if (properties == null) throw new ArgumentError('null properties');
+    if (superTypes == null) throw new ArgumentError('null superTypes');
   }
   factory _$ValueClass([updates(ValueClassBuilder b)]) =>
       (new ValueClassBuilder()..update(updates)).build();
@@ -234,17 +245,20 @@ class _$ValueClass extends ValueClass {
   _$ValueClassBuilder toBuilder() => new _$ValueClassBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! ValueClass) return false;
-    return name == other.name && properties == other.properties;
+    return name == other.name &&
+        properties == other.properties &&
+        superTypes == other.superTypes;
   }
 
   int get hashCode {
-    return hashObjects([name, properties]);
+    return hashObjects([name, properties, superTypes]);
   }
 
   String toString() {
     return 'ValueClass {'
         'name=${name.toString()}\n'
         'properties=${properties.toString()}\n'
+        'superTypes=${superTypes.toString()}\n'
         '}';
   }
 }
@@ -254,6 +268,7 @@ class _$ValueClassBuilder extends ValueClassBuilder {
   void replace(ValueClass other) {
     super.name = other.name;
     super.properties = other.properties?.toBuilder();
+    super.superTypes = other.superTypes?.toBuilder();
   }
 
   void update(updates(ValueClassBuilder b)) {
@@ -263,7 +278,11 @@ class _$ValueClassBuilder extends ValueClassBuilder {
   ValueClass build() {
     if (name == null) throw new ArgumentError('null name');
     if (properties == null) throw new ArgumentError('null properties');
-    return new _$ValueClass._(name: name, properties: properties?.build());
+    if (superTypes == null) throw new ArgumentError('null superTypes');
+    return new _$ValueClass._(
+        name: name,
+        properties: properties?.build(),
+        superTypes: superTypes?.build());
   }
 }
 
