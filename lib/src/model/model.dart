@@ -64,6 +64,7 @@ abstract class TypeParameterBuilder /*extends NamedElementBuilder*/
     implements
         Builder<TypeParameter, TypeParameterBuilder> {
   String name;
+  @nullable
   Classifier bound;
 
   TypeParameterBuilder._();
@@ -119,7 +120,7 @@ abstract class ExternalClass extends GenericClassifier
     implements Built<ExternalClass, ExternalClassBuilder> {
   static final Serializer<ExternalClass> serializer = _$externalClassSerializer;
   String get name;
-  Type get dartType;
+//  Type get dartType;
   BuiltSet<TypeParameter> get genericTypes;
 
   ExternalClass._();
@@ -131,7 +132,7 @@ abstract class ExternalClassBuilder /*extends NamedElementBuilder*/
     implements
         Builder<ExternalClass, ExternalClassBuilder> {
   String name;
-  Type dartType;
+//  Type dartType;
 
   SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
 

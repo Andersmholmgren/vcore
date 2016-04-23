@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T05:08:01.949852Z
+// 2016-04-23T06:00:52.956725Z
 
 part of vcore.model;
 
@@ -259,9 +259,6 @@ class _$ExternalClassSerializer implements StructuredSerializer<ExternalClass> {
     return [
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'dartType',
-      serializers.serialize(object.dartType,
-          specifiedType: const FullType(Type)),
       'genericTypes',
       serializers.serialize(object.genericTypes,
           specifiedType:
@@ -289,10 +286,6 @@ class _$ExternalClassSerializer implements StructuredSerializer<ExternalClass> {
           case 'name':
             result.name = serializers.deserialize(value,
                 specifiedType: const FullType(String));
-            break;
-          case 'dartType':
-            result.dartType = serializers.deserialize(value,
-                specifiedType: const FullType(Type));
             break;
           case 'genericTypes':
             result.genericTypes.replace(serializers.deserialize(value,
@@ -601,11 +594,9 @@ class _$ValueClassBuilder extends ValueClassBuilder {
 
 class _$ExternalClass extends ExternalClass {
   final String name;
-  final Type dartType;
   final BuiltSet<TypeParameter> genericTypes;
-  _$ExternalClass._({this.name, this.dartType, this.genericTypes}) : super._() {
+  _$ExternalClass._({this.name, this.genericTypes}) : super._() {
     if (name == null) throw new ArgumentError('null name');
-    if (dartType == null) throw new ArgumentError('null dartType');
     if (genericTypes == null) throw new ArgumentError('null genericTypes');
   }
   factory _$ExternalClass([updates(ExternalClassBuilder b)]) =>
@@ -616,19 +607,16 @@ class _$ExternalClass extends ExternalClass {
       new _$ExternalClassBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! ExternalClass) return false;
-    return name == other.name &&
-        dartType == other.dartType &&
-        genericTypes == other.genericTypes;
+    return name == other.name && genericTypes == other.genericTypes;
   }
 
   int get hashCode {
-    return hashObjects([name, dartType, genericTypes]);
+    return hashObjects([name, genericTypes]);
   }
 
   String toString() {
     return 'ExternalClass {'
         'name=${name.toString()}\n'
-        'dartType=${dartType.toString()}\n'
         'genericTypes=${genericTypes.toString()}\n'
         '}';
   }
@@ -638,7 +626,6 @@ class _$ExternalClassBuilder extends ExternalClassBuilder {
   _$ExternalClassBuilder() : super._();
   void replace(ExternalClass other) {
     super.name = other.name;
-    super.dartType = other.dartType;
     super.genericTypes = other.genericTypes?.toBuilder();
   }
 
@@ -648,10 +635,9 @@ class _$ExternalClassBuilder extends ExternalClassBuilder {
 
   ExternalClass build() {
     if (name == null) throw new ArgumentError('null name');
-    if (dartType == null) throw new ArgumentError('null dartType');
     if (genericTypes == null) throw new ArgumentError('null genericTypes');
     return new _$ExternalClass._(
-        name: name, dartType: dartType, genericTypes: genericTypes?.build());
+        name: name, genericTypes: genericTypes?.build());
   }
 }
 

@@ -27,7 +27,7 @@ class _ClassifierSerializer implements StructuredSerializer<Classifier> {
   @override
   Iterable serialize(Serializers serializers, Classifier object,
       {FullType specifiedType: FullType.unspecified}) {
-    return serializers.serialize(object);
+    return object != null ? serializers.serialize(object) : [];
   }
 
   @override

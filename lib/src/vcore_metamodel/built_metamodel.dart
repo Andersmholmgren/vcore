@@ -18,7 +18,8 @@ ExternalClass get builtSet => _builtSet ??= _createBuiltSet();
 ExternalClass _createBuiltSet() {
   final builder = new ExternalClassBuilder()
     ..name = 'BuiltSet'
-    ..dartType = BuiltSet;
+//    ..dartType = BuiltSet
+  ;
 
   builder.genericTypes.add((new TypeParameterBuilder()..name = 'E').build());
 

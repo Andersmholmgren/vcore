@@ -17,7 +17,8 @@ ExternalClass get dartString => _dartString ??= _createDartString();
 ExternalClass _createDartString() {
   final builder = new ExternalClassBuilder()
     ..name = 'String'
-    ..dartType = String;
+//    ..dartType = String
+  ;
 
   return builder.build();
 }

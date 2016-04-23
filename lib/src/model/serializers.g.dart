@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T05:53:24.634748Z
+// 2016-04-23T06:00:52.986981Z
 
 part of serializers;
 
@@ -15,7 +15,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
             const FullType(TypeParameter),
             const FullType(Classifier)
           ]),
-          () => new MapBuiler<TypeParameter, Classifier>())
+          () => new MapBuilder<TypeParameter, Classifier>())
       ..add(TypeParameter.serializer)
       ..add(Property.serializer)
       ..add(ValueClass.serializer)
