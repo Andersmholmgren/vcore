@@ -97,6 +97,7 @@ abstract class ValueClass extends GenericClassifier
   BuiltSet<TypeParameter> get genericTypes;
   BuiltSet<Property> get properties;
   BuiltSet<ValueClass> get superTypes;
+  bool get isAbstract;
 
   ValueClass._();
 
@@ -111,6 +112,7 @@ abstract class ValueClassBuilder /*extends NamedElementBuilder*/
   SetBuilder<Property> properties = new SetBuilder<Property>();
 //  SetBuilder<PropertyBuilder> properties = new SetBuilder<PropertyBuilder>();
   SetBuilder<ValueClass> superTypes = new SetBuilder<ValueClass>();
+  bool isAbstract = false;
 
   ValueClassBuilder._();
   factory ValueClassBuilder() = _$ValueClassBuilder;

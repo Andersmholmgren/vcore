@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T06:00:52.956725Z
+// 2016-04-23T22:13:53.635360Z
 
 part of vcore.model;
 
@@ -201,6 +201,9 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
       serializers.serialize(object.superTypes,
           specifiedType:
               const FullType(BuiltSet, const [const FullType(ValueClass)])),
+      'isAbstract',
+      serializers.serialize(object.isAbstract,
+          specifiedType: const FullType(bool)),
     ];
   }
 
@@ -239,6 +242,10 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
             result.superTypes.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
                     BuiltSet, const [const FullType(ValueClass)])));
+            break;
+          case 'isAbstract':
+            result.isAbstract = serializers.deserialize(value,
+                specifiedType: const FullType(bool));
             break;
         }
       }
@@ -526,13 +533,19 @@ class _$ValueClass extends ValueClass {
   final BuiltSet<TypeParameter> genericTypes;
   final BuiltSet<Property> properties;
   final BuiltSet<ValueClass> superTypes;
+  final bool isAbstract;
   _$ValueClass._(
-      {this.name, this.genericTypes, this.properties, this.superTypes})
+      {this.name,
+      this.genericTypes,
+      this.properties,
+      this.superTypes,
+      this.isAbstract})
       : super._() {
     if (name == null) throw new ArgumentError('null name');
     if (genericTypes == null) throw new ArgumentError('null genericTypes');
     if (properties == null) throw new ArgumentError('null properties');
     if (superTypes == null) throw new ArgumentError('null superTypes');
+    if (isAbstract == null) throw new ArgumentError('null isAbstract');
   }
   factory _$ValueClass([updates(ValueClassBuilder b)]) =>
       (new ValueClassBuilder()..update(updates)).build();
@@ -544,11 +557,13 @@ class _$ValueClass extends ValueClass {
     return name == other.name &&
         genericTypes == other.genericTypes &&
         properties == other.properties &&
-        superTypes == other.superTypes;
+        superTypes == other.superTypes &&
+        isAbstract == other.isAbstract;
   }
 
   int get hashCode {
-    return hashObjects([name, genericTypes, properties, superTypes]);
+    return hashObjects(
+        [name, genericTypes, properties, superTypes, isAbstract]);
   }
 
   String toString() {
@@ -557,6 +572,7 @@ class _$ValueClass extends ValueClass {
         'genericTypes=${genericTypes.toString()}\n'
         'properties=${properties.toString()}\n'
         'superTypes=${superTypes.toString()}\n'
+        'isAbstract=${isAbstract.toString()}\n'
         '}';
   }
 }
@@ -568,6 +584,7 @@ class _$ValueClassBuilder extends ValueClassBuilder {
     super.genericTypes = other.genericTypes?.toBuilder();
     super.properties = other.properties?.toBuilder();
     super.superTypes = other.superTypes?.toBuilder();
+    super.isAbstract = other.isAbstract;
   }
 
   void update(updates(ValueClassBuilder b)) {
@@ -579,11 +596,13 @@ class _$ValueClassBuilder extends ValueClassBuilder {
     if (genericTypes == null) throw new ArgumentError('null genericTypes');
     if (properties == null) throw new ArgumentError('null properties');
     if (superTypes == null) throw new ArgumentError('null superTypes');
+    if (isAbstract == null) throw new ArgumentError('null isAbstract');
     return new _$ValueClass._(
         name: name,
         genericTypes: genericTypes?.build(),
         properties: properties?.build(),
-        superTypes: superTypes?.build());
+        superTypes: superTypes?.build(),
+        isAbstract: isAbstract);
   }
 }
 

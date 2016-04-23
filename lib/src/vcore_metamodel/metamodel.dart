@@ -21,7 +21,9 @@ ValueClass _namedElement;
 ValueClass get namedElement => _namedElement ??= _createNamedElement();
 
 ValueClass _createNamedElement() {
-  final builder = new ValueClassBuilder()..name = 'NamedElement';
+  final builder = new ValueClassBuilder()
+    ..name = 'NamedElement'
+    ..isAbstract = true;
   builder.properties
     ..add((new PropertyBuilder()
           ..name = 'name'
@@ -35,7 +37,9 @@ ValueClass _classifier;
 ValueClass get classifier => _classifier ??= _createClassifier();
 
 ValueClass _createClassifier() {
-  final builder = new ValueClassBuilder()..name = 'Classifier';
+  final builder = new ValueClassBuilder()
+    ..name = 'Classifier'
+    ..isAbstract = true;
   builder.superTypes.add(namedElement);
 
   return builder.build();
