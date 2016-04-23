@@ -4,6 +4,7 @@
 import 'package:vcore/vcore.dart';
 import 'package:test/test.dart';
 import 'package:built_collection/built_collection.dart';
+import 'dart:convert';
 
 void main() {
   group('A group of tests', () {
@@ -14,7 +15,8 @@ void main() {
 //              ..add((new PropertyBuilder()..name = 'fred').build())))
 //          .build();
       var serialized = serializers.serialize(vcorePackage);
-      print(serialized);
+      final _json = new JsonEncoder.withIndent(' ');
+      print(_json.convert(serialized));
     }, skip: false);
   });
 }
