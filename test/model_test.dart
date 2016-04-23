@@ -3,14 +3,18 @@
 
 import 'package:vcore/vcore.dart';
 import 'package:test/test.dart';
+import 'package:built_collection/built_collection.dart';
 
 void main() {
   group('A group of tests', () {
     test('', () {
-      final ValueClass v = (new ValueClassBuilder()..name = "Schema").build();
+      final ValueClass v = (new ValueClassBuilder()
+            ..name = "Schema"
+            ..properties = (new SetBuilder<Property>()
+              ..add((new PropertyBuilder()..name = 'fred').build())))
+          .build();
       var serialized = serializers.serialize(v);
       print(serialized);
-
     }, skip: false);
   });
 }

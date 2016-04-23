@@ -37,6 +37,7 @@ abstract class ValueClassBuilder /*extends NamedElementBuilder*/
         Builder<ValueClass, ValueClassBuilder> {
   String name;
   SetBuilder<Property> properties = new SetBuilder<Property>();
+//  SetBuilder<PropertyBuilder> properties = new SetBuilder<PropertyBuilder>();
 
   ValueClassBuilder._();
   factory ValueClassBuilder() = _$ValueClassBuilder;
