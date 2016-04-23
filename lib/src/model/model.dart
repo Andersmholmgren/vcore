@@ -6,9 +6,6 @@ import 'package:built_value/built_value.dart';
 
 part 'model.g.dart';
 
-// Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
-// is governed by a BSD-style license that can be found in the LICENSE file.
-
 abstract class NamedElement {
   String get name;
 }
