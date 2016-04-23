@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T02:25:33.252104Z
+// 2016-04-23T02:29:48.993954Z
 
 part of vcore.model;
 
@@ -8,8 +8,60 @@ part of vcore.model;
 // Target: library vcore.model
 // **************************************************************************
 
+Serializer<Package> _$packageSerializer = new _$PackageSerializer();
 Serializer<ValueClass> _$valueClassSerializer = new _$ValueClassSerializer();
 Serializer<Property> _$propertySerializer = new _$PropertySerializer();
+
+class _$PackageSerializer implements StructuredSerializer<Package> {
+  final Iterable<Type> types = new BuiltList<Type>([Package, _$Package]);
+  final String wireName = 'Package';
+
+  @override
+  Iterable serialize(Serializers serializers, Package object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return [
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'properties',
+      serializers.serialize(object.properties,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(Property)])),
+    ];
+  }
+
+  @override
+  Package deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new PackageBuilder();
+
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
+
+        switch (key as String) {
+          case 'name':
+            result.name = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
+          case 'properties':
+            result.properties.replace(serializers.deserialize(value,
+                specifiedType: const FullType(
+                    BuiltSet, const [const FullType(Property)])));
+            break;
+        }
+      }
+    }
+
+    return result.build();
+  }
+}
 
 class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
   final Iterable<Type> types = new BuiltList<Type>([ValueClass, _$ValueClass]);
@@ -101,6 +153,58 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
     }
 
     return result.build();
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class Package
+// **************************************************************************
+
+class _$Package extends Package {
+  final String name;
+  final BuiltSet<Property> properties;
+  _$Package._({this.name, this.properties}) : super._() {
+    if (name == null) throw new ArgumentError('null name');
+    if (properties == null) throw new ArgumentError('null properties');
+  }
+  factory _$Package([updates(PackageBuilder b)]) =>
+      (new PackageBuilder()..update(updates)).build();
+  Package rebuild(updates(PackageBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+  _$PackageBuilder toBuilder() => new _$PackageBuilder()..replace(this);
+  bool operator ==(other) {
+    if (other is! Package) return false;
+    return name == other.name && properties == other.properties;
+  }
+
+  int get hashCode {
+    return hashObjects([name, properties]);
+  }
+
+  String toString() {
+    return 'Package {'
+        'name=${name.toString()}\n'
+        'properties=${properties.toString()}\n'
+        '}';
+  }
+}
+
+class _$PackageBuilder extends PackageBuilder {
+  _$PackageBuilder() : super._();
+  void replace(Package other) {
+    super.name = other.name;
+    super.properties = other.properties?.toBuilder();
+  }
+
+  void update(updates(PackageBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  Package build() {
+    if (name == null) throw new ArgumentError('null name');
+    if (properties == null) throw new ArgumentError('null properties');
+    return new _$Package._(name: name, properties: properties?.build());
   }
 }
 

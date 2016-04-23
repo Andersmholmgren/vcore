@@ -16,6 +16,27 @@ abstract class NamedElement {
 
 abstract class Classifier implements NamedElement {}
 
+abstract class Package implements NamedElement, Built<Package, PackageBuilder> {
+  static final Serializer<Package> serializer = _$packageSerializer;
+  String get name;
+  BuiltSet<Property> get properties;
+
+  Package._();
+
+  factory Package([updates(PackageBuilder b)]) = _$Package;
+}
+
+abstract class PackageBuilder /*extends NamedElementBuilder*/
+    implements
+        Builder<Package, PackageBuilder> {
+  String name;
+  SetBuilder<Property> properties = new SetBuilder<Property>();
+//  SetBuilder<PropertyBuilder> properties = new SetBuilder<PropertyBuilder>();
+
+  PackageBuilder._();
+  factory PackageBuilder() = _$PackageBuilder;
+}
+
 //abstract class ClassifierBuilder implements NamedElementBuilder {}
 
 abstract class ValueClass extends Classifier
