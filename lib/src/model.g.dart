@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T00:30:39.283772Z
+// 2016-04-23T00:38:08.310975Z
 
 part of vcore.model;
 
@@ -47,5 +47,52 @@ class _$ValueClassBuilder extends ValueClassBuilder {
   ValueClass build() {
     if (name == null) throw new ArgumentError('null name');
     return new _$ValueClass._(name: name);
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class Property
+// **************************************************************************
+
+class _$Property extends Property {
+  final String name;
+  _$Property._({this.name}) : super._() {
+    if (name == null) throw new ArgumentError('null name');
+  }
+  factory _$Property([updates(PropertyBuilder b)]) =>
+      (new PropertyBuilder()..update(updates)).build();
+  Property rebuild(updates(PropertyBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+  _$PropertyBuilder toBuilder() => new _$PropertyBuilder()..replace(this);
+  bool operator ==(other) {
+    if (other is! Property) return false;
+    return name == other.name;
+  }
+
+  int get hashCode {
+    return hashObjects([name]);
+  }
+
+  String toString() {
+    return 'Property {'
+        'name=${name.toString()}\n'
+        '}';
+  }
+}
+
+class _$PropertyBuilder extends PropertyBuilder {
+  _$PropertyBuilder() : super._();
+  void replace(Property other) {
+    super.name = other.name;
+  }
+
+  void update(updates(PropertyBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  Property build() {
+    if (name == null) throw new ArgumentError('null name');
+    return new _$Property._(name: name);
   }
 }

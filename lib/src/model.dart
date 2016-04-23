@@ -30,10 +30,25 @@ abstract class ValueClass extends Classifier
 }
 
 abstract class ValueClassBuilder /*extends NamedElementBuilder*/
-    implements Builder<ValueClass, ValueClassBuilder> {
+    implements
+        Builder<ValueClass, ValueClassBuilder> {
   String name;
   ValueClassBuilder._();
   factory ValueClassBuilder() = _$ValueClassBuilder;
 }
 
-//abstract class Property extends NamedElement {}
+abstract class Property extends NamedElement
+    implements Built<Property, PropertyBuilder> {
+  String get name;
+  Property._();
+
+  factory Property([updates(PropertyBuilder b)]) = _$Property;
+}
+
+abstract class PropertyBuilder /*extends NamedElementBuilder*/
+    implements
+        Builder<Property, PropertyBuilder> {
+  String name;
+  PropertyBuilder._();
+  factory PropertyBuilder() = _$PropertyBuilder;
+}
