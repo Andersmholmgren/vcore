@@ -54,10 +54,6 @@ ValueClass _createProperty() {
 
   builder.properties
     ..add((new PropertyBuilder()
-          ..name = 'name'
-          ..type = dartString)
-        .build())
-    ..add((new PropertyBuilder()
           ..name = 'type'
           ..type = classifier)
         .build());
