@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T03:09:49.115953Z
+// 2016-04-23T03:36:03.729382Z
 
 part of vcore.model;
 
@@ -8,60 +8,11 @@ part of vcore.model;
 // Target: library vcore.model
 // **************************************************************************
 
-Serializer<Package> _$packageSerializer = new _$PackageSerializer();
 Serializer<ValueClass> _$valueClassSerializer = new _$ValueClassSerializer();
+Serializer<ExternalClass> _$externalClassSerializer =
+    new _$ExternalClassSerializer();
 Serializer<Property> _$propertySerializer = new _$PropertySerializer();
-
-class _$PackageSerializer implements StructuredSerializer<Package> {
-  final Iterable<Type> types = new BuiltList<Type>([Package, _$Package]);
-  final String wireName = 'Package';
-
-  @override
-  Iterable serialize(Serializers serializers, Package object,
-      {FullType specifiedType: FullType.unspecified}) {
-    return [
-      'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'classifiers',
-      serializers.serialize(object.classifiers,
-          specifiedType:
-              const FullType(BuiltSet, const [const FullType(Classifier)])),
-    ];
-  }
-
-  @override
-  Package deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
-    final result = new PackageBuilder();
-
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'name':
-            result.name = serializers.deserialize(value,
-                specifiedType: const FullType(String));
-            break;
-          case 'classifiers':
-            result.classifiers.replace(serializers.deserialize(value,
-                specifiedType: const FullType(
-                    BuiltSet, const [const FullType(Classifier)])));
-            break;
-        }
-      }
-    }
-
-    return result.build();
-  }
-}
+Serializer<Package> _$packageSerializer = new _$PackageSerializer();
 
 class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
   final Iterable<Type> types = new BuiltList<Type>([ValueClass, _$ValueClass]);
@@ -73,6 +24,10 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
     return [
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'genericTypes',
+      serializers.serialize(object.genericTypes,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(Classifier)])),
       'properties',
       serializers.serialize(object.properties,
           specifiedType:
@@ -105,6 +60,11 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
             result.name = serializers.deserialize(value,
                 specifiedType: const FullType(String));
             break;
+          case 'genericTypes':
+            result.genericTypes.replace(serializers.deserialize(value,
+                specifiedType: const FullType(
+                    BuiltSet, const [const FullType(Classifier)])));
+            break;
           case 'properties':
             result.properties.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
@@ -114,6 +74,58 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
             result.superTypes.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
                     BuiltSet, const [const FullType(ValueClass)])));
+            break;
+        }
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ExternalClassSerializer implements StructuredSerializer<ExternalClass> {
+  final Iterable<Type> types =
+      new BuiltList<Type>([ExternalClass, _$ExternalClass]);
+  final String wireName = 'ExternalClass';
+
+  @override
+  Iterable serialize(Serializers serializers, ExternalClass object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return [
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'genericTypes',
+      serializers.serialize(object.genericTypes,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(Classifier)])),
+    ];
+  }
+
+  @override
+  ExternalClass deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new ExternalClassBuilder();
+
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
+
+        switch (key as String) {
+          case 'name':
+            result.name = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
+          case 'genericTypes':
+            result.genericTypes.replace(serializers.deserialize(value,
+                specifiedType: const FullType(
+                    BuiltSet, const [const FullType(Classifier)])));
             break;
         }
       }
@@ -172,55 +184,54 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Package
-// **************************************************************************
+class _$PackageSerializer implements StructuredSerializer<Package> {
+  final Iterable<Type> types = new BuiltList<Type>([Package, _$Package]);
+  final String wireName = 'Package';
 
-class _$Package extends Package {
-  final String name;
-  final BuiltSet<Classifier> classifiers;
-  _$Package._({this.name, this.classifiers}) : super._() {
-    if (name == null) throw new ArgumentError('null name');
-    if (classifiers == null) throw new ArgumentError('null classifiers');
-  }
-  factory _$Package([updates(PackageBuilder b)]) =>
-      (new PackageBuilder()..update(updates)).build();
-  Package rebuild(updates(PackageBuilder b)) =>
-      (toBuilder()..update(updates)).build();
-  _$PackageBuilder toBuilder() => new _$PackageBuilder()..replace(this);
-  bool operator ==(other) {
-    if (other is! Package) return false;
-    return name == other.name && classifiers == other.classifiers;
+  @override
+  Iterable serialize(Serializers serializers, Package object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return [
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'classifiers',
+      serializers.serialize(object.classifiers,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(Classifier)])),
+    ];
   }
 
-  int get hashCode {
-    return hashObjects([name, classifiers]);
-  }
+  @override
+  Package deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new PackageBuilder();
 
-  String toString() {
-    return 'Package {'
-        'name=${name.toString()}\n'
-        'classifiers=${classifiers.toString()}\n'
-        '}';
-  }
-}
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
 
-class _$PackageBuilder extends PackageBuilder {
-  _$PackageBuilder() : super._();
-  void replace(Package other) {
-    super.name = other.name;
-    super.classifiers = other.classifiers?.toBuilder();
-  }
+        switch (key as String) {
+          case 'name':
+            result.name = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
+          case 'classifiers':
+            result.classifiers.replace(serializers.deserialize(value,
+                specifiedType: const FullType(
+                    BuiltSet, const [const FullType(Classifier)])));
+            break;
+        }
+      }
+    }
 
-  void update(updates(PackageBuilder b)) {
-    if (updates != null) updates(this);
-  }
-
-  Package build() {
-    if (name == null) throw new ArgumentError('null name');
-    if (classifiers == null) throw new ArgumentError('null classifiers');
-    return new _$Package._(name: name, classifiers: classifiers?.build());
+    return result.build();
   }
 }
 
@@ -231,10 +242,14 @@ class _$PackageBuilder extends PackageBuilder {
 
 class _$ValueClass extends ValueClass {
   final String name;
+  final BuiltSet<Classifier> genericTypes;
   final BuiltSet<Property> properties;
   final BuiltSet<ValueClass> superTypes;
-  _$ValueClass._({this.name, this.properties, this.superTypes}) : super._() {
+  _$ValueClass._(
+      {this.name, this.genericTypes, this.properties, this.superTypes})
+      : super._() {
     if (name == null) throw new ArgumentError('null name');
+    if (genericTypes == null) throw new ArgumentError('null genericTypes');
     if (properties == null) throw new ArgumentError('null properties');
     if (superTypes == null) throw new ArgumentError('null superTypes');
   }
@@ -246,17 +261,19 @@ class _$ValueClass extends ValueClass {
   bool operator ==(other) {
     if (other is! ValueClass) return false;
     return name == other.name &&
+        genericTypes == other.genericTypes &&
         properties == other.properties &&
         superTypes == other.superTypes;
   }
 
   int get hashCode {
-    return hashObjects([name, properties, superTypes]);
+    return hashObjects([name, genericTypes, properties, superTypes]);
   }
 
   String toString() {
     return 'ValueClass {'
         'name=${name.toString()}\n'
+        'genericTypes=${genericTypes.toString()}\n'
         'properties=${properties.toString()}\n'
         'superTypes=${superTypes.toString()}\n'
         '}';
@@ -267,6 +284,7 @@ class _$ValueClassBuilder extends ValueClassBuilder {
   _$ValueClassBuilder() : super._();
   void replace(ValueClass other) {
     super.name = other.name;
+    super.genericTypes = other.genericTypes?.toBuilder();
     super.properties = other.properties?.toBuilder();
     super.superTypes = other.superTypes?.toBuilder();
   }
@@ -277,12 +295,68 @@ class _$ValueClassBuilder extends ValueClassBuilder {
 
   ValueClass build() {
     if (name == null) throw new ArgumentError('null name');
+    if (genericTypes == null) throw new ArgumentError('null genericTypes');
     if (properties == null) throw new ArgumentError('null properties');
     if (superTypes == null) throw new ArgumentError('null superTypes');
     return new _$ValueClass._(
         name: name,
+        genericTypes: genericTypes?.build(),
         properties: properties?.build(),
         superTypes: superTypes?.build());
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class ExternalClass
+// **************************************************************************
+
+class _$ExternalClass extends ExternalClass {
+  final String name;
+  final BuiltSet<Classifier> genericTypes;
+  _$ExternalClass._({this.name, this.genericTypes}) : super._() {
+    if (name == null) throw new ArgumentError('null name');
+    if (genericTypes == null) throw new ArgumentError('null genericTypes');
+  }
+  factory _$ExternalClass([updates(ExternalClassBuilder b)]) =>
+      (new ExternalClassBuilder()..update(updates)).build();
+  ExternalClass rebuild(updates(ExternalClassBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+  _$ExternalClassBuilder toBuilder() =>
+      new _$ExternalClassBuilder()..replace(this);
+  bool operator ==(other) {
+    if (other is! ExternalClass) return false;
+    return name == other.name && genericTypes == other.genericTypes;
+  }
+
+  int get hashCode {
+    return hashObjects([name, genericTypes]);
+  }
+
+  String toString() {
+    return 'ExternalClass {'
+        'name=${name.toString()}\n'
+        'genericTypes=${genericTypes.toString()}\n'
+        '}';
+  }
+}
+
+class _$ExternalClassBuilder extends ExternalClassBuilder {
+  _$ExternalClassBuilder() : super._();
+  void replace(ExternalClass other) {
+    super.name = other.name;
+    super.genericTypes = other.genericTypes?.toBuilder();
+  }
+
+  void update(updates(ExternalClassBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  ExternalClass build() {
+    if (name == null) throw new ArgumentError('null name');
+    if (genericTypes == null) throw new ArgumentError('null genericTypes');
+    return new _$ExternalClass._(
+        name: name, genericTypes: genericTypes?.build());
   }
 }
 
@@ -335,5 +409,57 @@ class _$PropertyBuilder extends PropertyBuilder {
     if (name == null) throw new ArgumentError('null name');
     if (type == null) throw new ArgumentError('null type');
     return new _$Property._(name: name, type: type);
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class Package
+// **************************************************************************
+
+class _$Package extends Package {
+  final String name;
+  final BuiltSet<Classifier> classifiers;
+  _$Package._({this.name, this.classifiers}) : super._() {
+    if (name == null) throw new ArgumentError('null name');
+    if (classifiers == null) throw new ArgumentError('null classifiers');
+  }
+  factory _$Package([updates(PackageBuilder b)]) =>
+      (new PackageBuilder()..update(updates)).build();
+  Package rebuild(updates(PackageBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+  _$PackageBuilder toBuilder() => new _$PackageBuilder()..replace(this);
+  bool operator ==(other) {
+    if (other is! Package) return false;
+    return name == other.name && classifiers == other.classifiers;
+  }
+
+  int get hashCode {
+    return hashObjects([name, classifiers]);
+  }
+
+  String toString() {
+    return 'Package {'
+        'name=${name.toString()}\n'
+        'classifiers=${classifiers.toString()}\n'
+        '}';
+  }
+}
+
+class _$PackageBuilder extends PackageBuilder {
+  _$PackageBuilder() : super._();
+  void replace(Package other) {
+    super.name = other.name;
+    super.classifiers = other.classifiers?.toBuilder();
+  }
+
+  void update(updates(PackageBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  Package build() {
+    if (name == null) throw new ArgumentError('null name');
+    if (classifiers == null) throw new ArgumentError('null classifiers');
+    return new _$Package._(name: name, classifiers: classifiers?.build());
   }
 }
