@@ -6,8 +6,8 @@
 /// More dartdocs go here.
 library vcore;
 
-export 'src/model.dart';
-export 'src/serializers.dart';
+export 'package:vcore/src/model/model.dart';
+export 'package:vcore/src/model/serializers.dart';
 
 
 // TODO: Export any libraries intended for clients of this package.
