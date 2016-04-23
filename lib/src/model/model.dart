@@ -15,7 +15,28 @@ abstract class NamedElement {
 //}
 
 abstract class Classifier implements NamedElement {
-  BuiltSet<Classifier> get genericTypes;
+  BuiltSet<TypeParameter> get genericTypes;
+}
+
+abstract class TypeParameter
+    implements NamedElement, Built<TypeParameter, TypeParameterBuilder> {
+  static final Serializer<TypeParameter> serializer = _$typeParameterSerializer;
+  String get name;
+  Classifier get bound;
+
+  TypeParameter._();
+
+  factory TypeParameter([updates(TypeParameterBuilder b)]) = _$TypeParameter;
+}
+
+abstract class TypeParameterBuilder /*extends NamedElementBuilder*/
+    implements
+        Builder<TypeParameter, TypeParameterBuilder> {
+  String name;
+  Classifier bound;
+
+  TypeParameterBuilder._();
+  factory TypeParameterBuilder() = _$TypeParameterBuilder;
 }
 
 //abstract class ClassifierBuilder implements NamedElementBuilder {}
@@ -24,7 +45,7 @@ abstract class ValueClass extends Classifier
     implements Built<ValueClass, ValueClassBuilder> {
   static final Serializer<ValueClass> serializer = _$valueClassSerializer;
   String get name;
-  BuiltSet<Classifier> get genericTypes;
+  BuiltSet<TypeParameter> get genericTypes;
   BuiltSet<Property> get properties;
   BuiltSet<ValueClass> get superTypes;
 
@@ -37,7 +58,7 @@ abstract class ValueClassBuilder /*extends NamedElementBuilder*/
     implements
         Builder<ValueClass, ValueClassBuilder> {
   String name;
-  SetBuilder<Classifier> genericTypes = new SetBuilder<Classifier>();
+  SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
   SetBuilder<Property> properties = new SetBuilder<Property>();
 //  SetBuilder<PropertyBuilder> properties = new SetBuilder<PropertyBuilder>();
   SetBuilder<ValueClass> superTypes = new SetBuilder<ValueClass>();
@@ -50,7 +71,8 @@ abstract class ExternalClass extends Classifier
     implements Built<ExternalClass, ExternalClassBuilder> {
   static final Serializer<ExternalClass> serializer = _$externalClassSerializer;
   String get name;
-  BuiltSet<Classifier> get genericTypes;
+  Type get dartType;
+  BuiltSet<TypeParameter> get genericTypes;
 
   ExternalClass._();
 
@@ -61,7 +83,9 @@ abstract class ExternalClassBuilder /*extends NamedElementBuilder*/
     implements
         Builder<ExternalClass, ExternalClassBuilder> {
   String name;
-  SetBuilder<Classifier> genericTypes = new SetBuilder<Classifier>();
+  Type dartType;
+
+  SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
 
   ExternalClassBuilder._();
   factory ExternalClassBuilder() = _$ExternalClassBuilder;

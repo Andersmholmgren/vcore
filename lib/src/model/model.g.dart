@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T03:36:03.729382Z
+// 2016-04-23T04:12:43.341364Z
 
 part of vcore.model;
 
@@ -8,11 +8,63 @@ part of vcore.model;
 // Target: library vcore.model
 // **************************************************************************
 
+Serializer<TypeParameter> _$typeParameterSerializer =
+    new _$TypeParameterSerializer();
 Serializer<ValueClass> _$valueClassSerializer = new _$ValueClassSerializer();
 Serializer<ExternalClass> _$externalClassSerializer =
     new _$ExternalClassSerializer();
 Serializer<Property> _$propertySerializer = new _$PropertySerializer();
 Serializer<Package> _$packageSerializer = new _$PackageSerializer();
+
+class _$TypeParameterSerializer implements StructuredSerializer<TypeParameter> {
+  final Iterable<Type> types =
+      new BuiltList<Type>([TypeParameter, _$TypeParameter]);
+  final String wireName = 'TypeParameter';
+
+  @override
+  Iterable serialize(Serializers serializers, TypeParameter object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return [
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'bound',
+      serializers.serialize(object.bound,
+          specifiedType: const FullType(Classifier)),
+    ];
+  }
+
+  @override
+  TypeParameter deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new TypeParameterBuilder();
+
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
+
+        switch (key as String) {
+          case 'name':
+            result.name = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
+          case 'bound':
+            result.bound = serializers.deserialize(value,
+                specifiedType: const FullType(Classifier));
+            break;
+        }
+      }
+    }
+
+    return result.build();
+  }
+}
 
 class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
   final Iterable<Type> types = new BuiltList<Type>([ValueClass, _$ValueClass]);
@@ -27,7 +79,7 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
       'genericTypes',
       serializers.serialize(object.genericTypes,
           specifiedType:
-              const FullType(BuiltSet, const [const FullType(Classifier)])),
+              const FullType(BuiltSet, const [const FullType(TypeParameter)])),
       'properties',
       serializers.serialize(object.properties,
           specifiedType:
@@ -63,7 +115,7 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
           case 'genericTypes':
             result.genericTypes.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
-                    BuiltSet, const [const FullType(Classifier)])));
+                    BuiltSet, const [const FullType(TypeParameter)])));
             break;
           case 'properties':
             result.properties.replace(serializers.deserialize(value,
@@ -94,10 +146,13 @@ class _$ExternalClassSerializer implements StructuredSerializer<ExternalClass> {
     return [
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'dartType',
+      serializers.serialize(object.dartType,
+          specifiedType: const FullType(Type)),
       'genericTypes',
       serializers.serialize(object.genericTypes,
           specifiedType:
-              const FullType(BuiltSet, const [const FullType(Classifier)])),
+              const FullType(BuiltSet, const [const FullType(TypeParameter)])),
     ];
   }
 
@@ -122,10 +177,14 @@ class _$ExternalClassSerializer implements StructuredSerializer<ExternalClass> {
             result.name = serializers.deserialize(value,
                 specifiedType: const FullType(String));
             break;
+          case 'dartType':
+            result.dartType = serializers.deserialize(value,
+                specifiedType: const FullType(Type));
+            break;
           case 'genericTypes':
             result.genericTypes.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
-                    BuiltSet, const [const FullType(Classifier)])));
+                    BuiltSet, const [const FullType(TypeParameter)])));
             break;
         }
       }
@@ -237,12 +296,65 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
+// Target: abstract class TypeParameter
+// **************************************************************************
+
+class _$TypeParameter extends TypeParameter {
+  final String name;
+  final Classifier bound;
+  _$TypeParameter._({this.name, this.bound}) : super._() {
+    if (name == null) throw new ArgumentError('null name');
+    if (bound == null) throw new ArgumentError('null bound');
+  }
+  factory _$TypeParameter([updates(TypeParameterBuilder b)]) =>
+      (new TypeParameterBuilder()..update(updates)).build();
+  TypeParameter rebuild(updates(TypeParameterBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+  _$TypeParameterBuilder toBuilder() =>
+      new _$TypeParameterBuilder()..replace(this);
+  bool operator ==(other) {
+    if (other is! TypeParameter) return false;
+    return name == other.name && bound == other.bound;
+  }
+
+  int get hashCode {
+    return hashObjects([name, bound]);
+  }
+
+  String toString() {
+    return 'TypeParameter {'
+        'name=${name.toString()}\n'
+        'bound=${bound.toString()}\n'
+        '}';
+  }
+}
+
+class _$TypeParameterBuilder extends TypeParameterBuilder {
+  _$TypeParameterBuilder() : super._();
+  void replace(TypeParameter other) {
+    super.name = other.name;
+    super.bound = other.bound;
+  }
+
+  void update(updates(TypeParameterBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  TypeParameter build() {
+    if (name == null) throw new ArgumentError('null name');
+    if (bound == null) throw new ArgumentError('null bound');
+    return new _$TypeParameter._(name: name, bound: bound);
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
 // Target: abstract class ValueClass
 // **************************************************************************
 
 class _$ValueClass extends ValueClass {
   final String name;
-  final BuiltSet<Classifier> genericTypes;
+  final BuiltSet<TypeParameter> genericTypes;
   final BuiltSet<Property> properties;
   final BuiltSet<ValueClass> superTypes;
   _$ValueClass._(
@@ -313,9 +425,11 @@ class _$ValueClassBuilder extends ValueClassBuilder {
 
 class _$ExternalClass extends ExternalClass {
   final String name;
-  final BuiltSet<Classifier> genericTypes;
-  _$ExternalClass._({this.name, this.genericTypes}) : super._() {
+  final Type dartType;
+  final BuiltSet<TypeParameter> genericTypes;
+  _$ExternalClass._({this.name, this.dartType, this.genericTypes}) : super._() {
     if (name == null) throw new ArgumentError('null name');
+    if (dartType == null) throw new ArgumentError('null dartType');
     if (genericTypes == null) throw new ArgumentError('null genericTypes');
   }
   factory _$ExternalClass([updates(ExternalClassBuilder b)]) =>
@@ -326,16 +440,19 @@ class _$ExternalClass extends ExternalClass {
       new _$ExternalClassBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! ExternalClass) return false;
-    return name == other.name && genericTypes == other.genericTypes;
+    return name == other.name &&
+        dartType == other.dartType &&
+        genericTypes == other.genericTypes;
   }
 
   int get hashCode {
-    return hashObjects([name, genericTypes]);
+    return hashObjects([name, dartType, genericTypes]);
   }
 
   String toString() {
     return 'ExternalClass {'
         'name=${name.toString()}\n'
+        'dartType=${dartType.toString()}\n'
         'genericTypes=${genericTypes.toString()}\n'
         '}';
   }
@@ -345,6 +462,7 @@ class _$ExternalClassBuilder extends ExternalClassBuilder {
   _$ExternalClassBuilder() : super._();
   void replace(ExternalClass other) {
     super.name = other.name;
+    super.dartType = other.dartType;
     super.genericTypes = other.genericTypes?.toBuilder();
   }
 
@@ -354,9 +472,10 @@ class _$ExternalClassBuilder extends ExternalClassBuilder {
 
   ExternalClass build() {
     if (name == null) throw new ArgumentError('null name');
+    if (dartType == null) throw new ArgumentError('null dartType');
     if (genericTypes == null) throw new ArgumentError('null genericTypes');
     return new _$ExternalClass._(
-        name: name, genericTypes: genericTypes?.build());
+        name: name, dartType: dartType, genericTypes: genericTypes?.build());
   }
 }
 
