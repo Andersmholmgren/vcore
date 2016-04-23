@@ -6,7 +6,9 @@ import 'package:built_value/built_value.dart';
 
 part 'model.g.dart';
 
-abstract class NamedElement {
+abstract class ModelElement {}
+
+abstract class NamedElement implements ModelElement {
   String get name;
 }
 
