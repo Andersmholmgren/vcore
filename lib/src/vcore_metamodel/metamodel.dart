@@ -12,6 +12,8 @@ Package _createPackage() {
   packageBuilder.classifiers
     ..add(namedElement)
     ..add(classifier)
+    ..add(typeParameter)
+    ..add(genericClassifier)
     ..add(property)
     ..add(valueClass);
   return packageBuilder.build();
@@ -45,14 +47,35 @@ ValueClass _createClassifier() {
   return builder.build();
 }
 
+ValueClass _typeParameter;
+ValueClass get typeParameter => _typeParameter ??= _createTypeParameter();
+
+ValueClass _createTypeParameter() {
+  final builder = new ValueClassBuilder()
+    ..name = 'TypeParameter';
+  builder.superTypes.add(namedElement);
+  builder.properties
+    ..add((new PropertyBuilder()
+          ..name = 'bound'
+          ..type = classifier)
+        .build());
+
+  return builder.build();
+}
+
+ValueClass _genericClassifier;
+ValueClass get genericClassifier =>
+    _genericClassifier ??= _createGenericClassifier();
+
 ValueClass _createGenericClassifier() {
   final builder = new ValueClassBuilder()
     ..name = 'GenericClassifier'
     ..isAbstract = true;
+  builder.superTypes.add(namedElement);
   builder.properties
     ..add((new PropertyBuilder()
           ..name = 'genericTypes'
-          ..type = dartString)
+          ..type = _createBuiltSet(typeParameter))
         .build());
 
   return builder.build();
@@ -79,7 +102,7 @@ ValueClass get valueClass => _valueClass ??= _createValueClass();
 
 ValueClass _createValueClass() {
   final builder = new ValueClassBuilder()..name = 'ValueClass';
-  builder.superTypes.add(_classifier);
+  builder.superTypes.add(genericClassifier);
   builder.properties.add((new PropertyBuilder()
         ..name = 'properties'
         ..type = _createBuiltSet(property))
