@@ -22,6 +22,7 @@ abstract class TypeParameter
     implements NamedElement, Built<TypeParameter, TypeParameterBuilder> {
   static final Serializer<TypeParameter> serializer = _$typeParameterSerializer;
   String get name;
+  @nullable
   Classifier get bound;
 
   TypeParameter._();

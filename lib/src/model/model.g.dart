@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T04:12:43.341364Z
+// 2016-04-23T04:22:23.986156Z
 
 part of vcore.model;
 
@@ -304,7 +304,6 @@ class _$TypeParameter extends TypeParameter {
   final Classifier bound;
   _$TypeParameter._({this.name, this.bound}) : super._() {
     if (name == null) throw new ArgumentError('null name');
-    if (bound == null) throw new ArgumentError('null bound');
   }
   factory _$TypeParameter([updates(TypeParameterBuilder b)]) =>
       (new TypeParameterBuilder()..update(updates)).build();
@@ -342,7 +341,6 @@ class _$TypeParameterBuilder extends TypeParameterBuilder {
 
   TypeParameter build() {
     if (name == null) throw new ArgumentError('null name');
-    if (bound == null) throw new ArgumentError('null bound');
     return new _$TypeParameter._(name: name, bound: bound);
   }
 }

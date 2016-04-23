@@ -15,9 +15,9 @@ ExternalClass _builtBuiltSet;
 ExternalClass get builtBuiltSet => _builtBuiltSet ??= _createBuiltBuiltSet();
 
 ExternalClass _createBuiltBuiltSet() {
-  final builder = new ExternalClassBuilder()..name = 'BuiltSet'
-//    ..genericTypes
-  ;
+  final builder = new ExternalClassBuilder()..name = 'BuiltSet';
+
+  builder.genericTypes.add((new TypeParameterBuilder()..name = 'E').build());
 
   return builder.build();
 }
