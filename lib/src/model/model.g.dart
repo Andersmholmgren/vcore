@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T04:22:23.986156Z
+// 2016-04-23T05:08:01.949852Z
 
 part of vcore.model;
 
@@ -8,13 +8,77 @@ part of vcore.model;
 // Target: library vcore.model
 // **************************************************************************
 
+Serializer<GenericType> _$genericTypeSerializer = new _$GenericTypeSerializer();
 Serializer<TypeParameter> _$typeParameterSerializer =
     new _$TypeParameterSerializer();
+Serializer<Property> _$propertySerializer = new _$PropertySerializer();
 Serializer<ValueClass> _$valueClassSerializer = new _$ValueClassSerializer();
 Serializer<ExternalClass> _$externalClassSerializer =
     new _$ExternalClassSerializer();
-Serializer<Property> _$propertySerializer = new _$PropertySerializer();
 Serializer<Package> _$packageSerializer = new _$PackageSerializer();
+
+class _$GenericTypeSerializer implements StructuredSerializer<GenericType> {
+  final Iterable<Type> types =
+      new BuiltList<Type>([GenericType, _$GenericType]);
+  final String wireName = 'GenericType';
+
+  @override
+  Iterable serialize(Serializers serializers, GenericType object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return [
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'base',
+      serializers.serialize(object.base,
+          specifiedType: const FullType(Classifier)),
+      'genericTypeValues',
+      serializers.serialize(object.genericTypeValues,
+          specifiedType: const FullType(BuiltMap, const [
+            const FullType(TypeParameter),
+            const FullType(Classifier)
+          ])),
+    ];
+  }
+
+  @override
+  GenericType deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new GenericTypeBuilder();
+
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
+
+        switch (key as String) {
+          case 'name':
+            result.name = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
+          case 'base':
+            result.base = serializers.deserialize(value,
+                specifiedType: const FullType(Classifier));
+            break;
+          case 'genericTypeValues':
+            result.genericTypeValues.replace(serializers.deserialize(value,
+                specifiedType: const FullType(BuiltMap, const [
+                  const FullType(TypeParameter),
+                  const FullType(Classifier)
+                ])));
+            break;
+        }
+      }
+    }
+
+    return result.build();
+  }
+}
 
 class _$TypeParameterSerializer implements StructuredSerializer<TypeParameter> {
   final Iterable<Type> types =
@@ -56,6 +120,55 @@ class _$TypeParameterSerializer implements StructuredSerializer<TypeParameter> {
             break;
           case 'bound':
             result.bound = serializers.deserialize(value,
+                specifiedType: const FullType(Classifier));
+            break;
+        }
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PropertySerializer implements StructuredSerializer<Property> {
+  final Iterable<Type> types = new BuiltList<Type>([Property, _$Property]);
+  final String wireName = 'Property';
+
+  @override
+  Iterable serialize(Serializers serializers, Property object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return [
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'type',
+      serializers.serialize(object.type,
+          specifiedType: const FullType(Classifier)),
+    ];
+  }
+
+  @override
+  Property deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new PropertyBuilder();
+
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
+
+        switch (key as String) {
+          case 'name':
+            result.name = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
+          case 'type':
+            result.type = serializers.deserialize(value,
                 specifiedType: const FullType(Classifier));
             break;
         }
@@ -194,55 +307,6 @@ class _$ExternalClassSerializer implements StructuredSerializer<ExternalClass> {
   }
 }
 
-class _$PropertySerializer implements StructuredSerializer<Property> {
-  final Iterable<Type> types = new BuiltList<Type>([Property, _$Property]);
-  final String wireName = 'Property';
-
-  @override
-  Iterable serialize(Serializers serializers, Property object,
-      {FullType specifiedType: FullType.unspecified}) {
-    return [
-      'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'type',
-      serializers.serialize(object.type,
-          specifiedType: const FullType(Classifier)),
-    ];
-  }
-
-  @override
-  Property deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
-    final result = new PropertyBuilder();
-
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'name':
-            result.name = serializers.deserialize(value,
-                specifiedType: const FullType(String));
-            break;
-          case 'type':
-            result.type = serializers.deserialize(value,
-                specifiedType: const FullType(Classifier));
-            break;
-        }
-      }
-    }
-
-    return result.build();
-  }
-}
-
 class _$PackageSerializer implements StructuredSerializer<Package> {
   final Iterable<Type> types = new BuiltList<Type>([Package, _$Package]);
   final String wireName = 'Package';
@@ -296,6 +360,68 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
+// Target: abstract class GenericType
+// **************************************************************************
+
+class _$GenericType extends GenericType {
+  final String name;
+  final Classifier base;
+  final BuiltMap<TypeParameter, Classifier> genericTypeValues;
+  _$GenericType._({this.name, this.base, this.genericTypeValues}) : super._() {
+    if (name == null) throw new ArgumentError('null name');
+    if (base == null) throw new ArgumentError('null base');
+    if (genericTypeValues == null)
+      throw new ArgumentError('null genericTypeValues');
+  }
+  factory _$GenericType([updates(GenericTypeBuilder b)]) =>
+      (new GenericTypeBuilder()..update(updates)).build();
+  GenericType rebuild(updates(GenericTypeBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+  _$GenericTypeBuilder toBuilder() => new _$GenericTypeBuilder()..replace(this);
+  bool operator ==(other) {
+    if (other is! GenericType) return false;
+    return name == other.name &&
+        base == other.base &&
+        genericTypeValues == other.genericTypeValues;
+  }
+
+  int get hashCode {
+    return hashObjects([name, base, genericTypeValues]);
+  }
+
+  String toString() {
+    return 'GenericType {'
+        'name=${name.toString()}\n'
+        'base=${base.toString()}\n'
+        'genericTypeValues=${genericTypeValues.toString()}\n'
+        '}';
+  }
+}
+
+class _$GenericTypeBuilder extends GenericTypeBuilder {
+  _$GenericTypeBuilder() : super._();
+  void replace(GenericType other) {
+    super.name = other.name;
+    super.base = other.base;
+    super.genericTypeValues = other.genericTypeValues?.toBuilder();
+  }
+
+  void update(updates(GenericTypeBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  GenericType build() {
+    if (name == null) throw new ArgumentError('null name');
+    if (base == null) throw new ArgumentError('null base');
+    if (genericTypeValues == null)
+      throw new ArgumentError('null genericTypeValues');
+    return new _$GenericType._(
+        name: name, base: base, genericTypeValues: genericTypeValues?.build());
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
 // Target: abstract class TypeParameter
 // **************************************************************************
 
@@ -342,6 +468,58 @@ class _$TypeParameterBuilder extends TypeParameterBuilder {
   TypeParameter build() {
     if (name == null) throw new ArgumentError('null name');
     return new _$TypeParameter._(name: name, bound: bound);
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class Property
+// **************************************************************************
+
+class _$Property extends Property {
+  final String name;
+  final Classifier type;
+  _$Property._({this.name, this.type}) : super._() {
+    if (name == null) throw new ArgumentError('null name');
+    if (type == null) throw new ArgumentError('null type');
+  }
+  factory _$Property([updates(PropertyBuilder b)]) =>
+      (new PropertyBuilder()..update(updates)).build();
+  Property rebuild(updates(PropertyBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+  _$PropertyBuilder toBuilder() => new _$PropertyBuilder()..replace(this);
+  bool operator ==(other) {
+    if (other is! Property) return false;
+    return name == other.name && type == other.type;
+  }
+
+  int get hashCode {
+    return hashObjects([name, type]);
+  }
+
+  String toString() {
+    return 'Property {'
+        'name=${name.toString()}\n'
+        'type=${type.toString()}\n'
+        '}';
+  }
+}
+
+class _$PropertyBuilder extends PropertyBuilder {
+  _$PropertyBuilder() : super._();
+  void replace(Property other) {
+    super.name = other.name;
+    super.type = other.type;
+  }
+
+  void update(updates(PropertyBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  Property build() {
+    if (name == null) throw new ArgumentError('null name');
+    if (type == null) throw new ArgumentError('null type');
+    return new _$Property._(name: name, type: type);
   }
 }
 
@@ -474,58 +652,6 @@ class _$ExternalClassBuilder extends ExternalClassBuilder {
     if (genericTypes == null) throw new ArgumentError('null genericTypes');
     return new _$ExternalClass._(
         name: name, dartType: dartType, genericTypes: genericTypes?.build());
-  }
-}
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Property
-// **************************************************************************
-
-class _$Property extends Property {
-  final String name;
-  final Classifier type;
-  _$Property._({this.name, this.type}) : super._() {
-    if (name == null) throw new ArgumentError('null name');
-    if (type == null) throw new ArgumentError('null type');
-  }
-  factory _$Property([updates(PropertyBuilder b)]) =>
-      (new PropertyBuilder()..update(updates)).build();
-  Property rebuild(updates(PropertyBuilder b)) =>
-      (toBuilder()..update(updates)).build();
-  _$PropertyBuilder toBuilder() => new _$PropertyBuilder()..replace(this);
-  bool operator ==(other) {
-    if (other is! Property) return false;
-    return name == other.name && type == other.type;
-  }
-
-  int get hashCode {
-    return hashObjects([name, type]);
-  }
-
-  String toString() {
-    return 'Property {'
-        'name=${name.toString()}\n'
-        'type=${type.toString()}\n'
-        '}';
-  }
-}
-
-class _$PropertyBuilder extends PropertyBuilder {
-  _$PropertyBuilder() : super._();
-  void replace(Property other) {
-    super.name = other.name;
-    super.type = other.type;
-  }
-
-  void update(updates(PropertyBuilder b)) {
-    if (updates != null) updates(this);
-  }
-
-  Property build() {
-    if (name == null) throw new ArgumentError('null name');
-    if (type == null) throw new ArgumentError('null type');
-    return new _$Property._(name: name, type: type);
   }
 }
 
