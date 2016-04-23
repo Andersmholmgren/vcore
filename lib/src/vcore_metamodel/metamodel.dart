@@ -51,13 +51,13 @@ ValueClass _typeParameter;
 ValueClass get typeParameter => _typeParameter ??= _createTypeParameter();
 
 ValueClass _createTypeParameter() {
-  final builder = new ValueClassBuilder()
-    ..name = 'TypeParameter';
+  final builder = new ValueClassBuilder()..name = 'TypeParameter';
   builder.superTypes.add(namedElement);
   builder.properties
     ..add((new PropertyBuilder()
           ..name = 'bound'
-          ..type = classifier)
+          ..type = classifier
+          ..isNullable = true)
         .build());
 
   return builder.build();

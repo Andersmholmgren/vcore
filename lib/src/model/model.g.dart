@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T22:13:53.635360Z
+// 2016-04-23T22:52:08.158883Z
 
 part of vcore.model;
 
@@ -143,6 +143,9 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
       'type',
       serializers.serialize(object.type,
           specifiedType: const FullType(Classifier)),
+      'isNullable',
+      serializers.serialize(object.isNullable,
+          specifiedType: const FullType(bool)),
     ];
   }
 
@@ -170,6 +173,10 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
           case 'type':
             result.type = serializers.deserialize(value,
                 specifiedType: const FullType(Classifier));
+            break;
+          case 'isNullable':
+            result.isNullable = serializers.deserialize(value,
+                specifiedType: const FullType(bool));
             break;
         }
       }
@@ -479,9 +486,11 @@ class _$TypeParameterBuilder extends TypeParameterBuilder {
 class _$Property extends Property {
   final String name;
   final Classifier type;
-  _$Property._({this.name, this.type}) : super._() {
+  final bool isNullable;
+  _$Property._({this.name, this.type, this.isNullable}) : super._() {
     if (name == null) throw new ArgumentError('null name');
     if (type == null) throw new ArgumentError('null type');
+    if (isNullable == null) throw new ArgumentError('null isNullable');
   }
   factory _$Property([updates(PropertyBuilder b)]) =>
       (new PropertyBuilder()..update(updates)).build();
@@ -490,17 +499,20 @@ class _$Property extends Property {
   _$PropertyBuilder toBuilder() => new _$PropertyBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! Property) return false;
-    return name == other.name && type == other.type;
+    return name == other.name &&
+        type == other.type &&
+        isNullable == other.isNullable;
   }
 
   int get hashCode {
-    return hashObjects([name, type]);
+    return hashObjects([name, type, isNullable]);
   }
 
   String toString() {
     return 'Property {'
         'name=${name.toString()}\n'
         'type=${type.toString()}\n'
+        'isNullable=${isNullable.toString()}\n'
         '}';
   }
 }
@@ -510,6 +522,7 @@ class _$PropertyBuilder extends PropertyBuilder {
   void replace(Property other) {
     super.name = other.name;
     super.type = other.type;
+    super.isNullable = other.isNullable;
   }
 
   void update(updates(PropertyBuilder b)) {
@@ -519,7 +532,8 @@ class _$PropertyBuilder extends PropertyBuilder {
   Property build() {
     if (name == null) throw new ArgumentError('null name');
     if (type == null) throw new ArgumentError('null type');
-    return new _$Property._(name: name, type: type);
+    if (isNullable == null) throw new ArgumentError('null isNullable');
+    return new _$Property._(name: name, type: type, isNullable: isNullable);
   }
 }
 
