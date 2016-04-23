@@ -8,8 +8,11 @@ Package _vcorePackage;
 
 Package _createPackage() {
   final packageBuilder = new PackageBuilder()..name = 'vcore';
-  final classifiers = packageBuilder.classifiers;
-  classifiers..add(namedElement)..add(valueClass);
+  packageBuilder.classifiers
+    ..add(namedElement)
+    ..add(classifier)
+    ..add(property)
+    ..add(valueClass);
   return packageBuilder.build();
 }
 
@@ -33,6 +36,26 @@ ValueClass get classifier => _classifier ??= _createClassifier();
 ValueClass _createClassifier() {
   final builder = new ValueClassBuilder()..name = 'Classifier';
   builder.superTypes.add(namedElement);
+
+  return builder.build();
+}
+
+ValueClass _property;
+ValueClass get property => _property ??= _createProperty();
+
+ValueClass _createProperty() {
+  final builder = new ValueClassBuilder()..name = 'Property';
+  builder.superTypes.add(namedElement);
+
+  builder.properties
+    ..add((new PropertyBuilder()
+          ..name = 'name'
+          ..type = dartString)
+        .build())
+    ..add((new PropertyBuilder()
+          ..name = 'type'
+          ..type = classifier)
+        .build());
 
   return builder.build();
 }

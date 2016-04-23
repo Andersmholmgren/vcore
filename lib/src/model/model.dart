@@ -40,7 +40,24 @@ abstract class TypeParameterBuilder /*extends NamedElementBuilder*/
   factory TypeParameterBuilder() = _$TypeParameterBuilder;
 }
 
-//abstract class ClassifierBuilder implements NamedElementBuilder {}
+abstract class Property extends NamedElement
+    implements Built<Property, PropertyBuilder> {
+  static final Serializer<Property> serializer = _$propertySerializer;
+  String get name;
+  Classifier get type;
+  Property._();
+
+  factory Property([updates(PropertyBuilder b)]) = _$Property;
+}
+
+abstract class PropertyBuilder /*extends NamedElementBuilder*/
+    implements
+        Builder<Property, PropertyBuilder> {
+  String name;
+  Classifier type;
+  PropertyBuilder._();
+  factory PropertyBuilder() = _$PropertyBuilder;
+}
 
 abstract class ValueClass extends Classifier
     implements Built<ValueClass, ValueClassBuilder> {
@@ -90,25 +107,6 @@ abstract class ExternalClassBuilder /*extends NamedElementBuilder*/
 
   ExternalClassBuilder._();
   factory ExternalClassBuilder() = _$ExternalClassBuilder;
-}
-
-abstract class Property extends NamedElement
-    implements Built<Property, PropertyBuilder> {
-  static final Serializer<Property> serializer = _$propertySerializer;
-  String get name;
-  Classifier get type;
-  Property._();
-
-  factory Property([updates(PropertyBuilder b)]) = _$Property;
-}
-
-abstract class PropertyBuilder /*extends NamedElementBuilder*/
-    implements
-        Builder<Property, PropertyBuilder> {
-  String name;
-  Classifier type;
-  PropertyBuilder._();
-  factory PropertyBuilder() = _$PropertyBuilder;
 }
 
 abstract class Package implements NamedElement, Built<Package, PackageBuilder> {
