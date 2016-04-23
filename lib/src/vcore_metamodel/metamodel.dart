@@ -8,7 +8,7 @@ Package _createPackage() {
 
   final packageBuilder = new PackageBuilder()..name='vcore';
   final classifiers = packageBuilder.classifiers;
-  classifiers..add(_createValueClass())..add(_createValueClass());
+  classifiers..add(_createNamedElementClass())..add(_createValueClass());
   return packageBuilder.build();
 }
 

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T02:31:26.931882Z
+// 2016-04-23T03:03:05.843167Z
 
 part of vcore.model;
 
@@ -124,6 +124,9 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
     return [
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'type',
+      serializers.serialize(object.type,
+          specifiedType: const FullType(Classifier)),
     ];
   }
 
@@ -147,6 +150,10 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
           case 'name':
             result.name = serializers.deserialize(value,
                 specifiedType: const FullType(String));
+            break;
+          case 'type':
+            result.type = serializers.deserialize(value,
+                specifiedType: const FullType(Classifier));
             break;
         }
       }
@@ -267,8 +274,10 @@ class _$ValueClassBuilder extends ValueClassBuilder {
 
 class _$Property extends Property {
   final String name;
-  _$Property._({this.name}) : super._() {
+  final Classifier type;
+  _$Property._({this.name, this.type}) : super._() {
     if (name == null) throw new ArgumentError('null name');
+    if (type == null) throw new ArgumentError('null type');
   }
   factory _$Property([updates(PropertyBuilder b)]) =>
       (new PropertyBuilder()..update(updates)).build();
@@ -277,16 +286,17 @@ class _$Property extends Property {
   _$PropertyBuilder toBuilder() => new _$PropertyBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! Property) return false;
-    return name == other.name;
+    return name == other.name && type == other.type;
   }
 
   int get hashCode {
-    return hashObjects([name]);
+    return hashObjects([name, type]);
   }
 
   String toString() {
     return 'Property {'
         'name=${name.toString()}\n'
+        'type=${type.toString()}\n'
         '}';
   }
 }
@@ -295,6 +305,7 @@ class _$PropertyBuilder extends PropertyBuilder {
   _$PropertyBuilder() : super._();
   void replace(Property other) {
     super.name = other.name;
+    super.type = other.type;
   }
 
   void update(updates(PropertyBuilder b)) {
@@ -303,6 +314,7 @@ class _$PropertyBuilder extends PropertyBuilder {
 
   Property build() {
     if (name == null) throw new ArgumentError('null name');
-    return new _$Property._(name: name);
+    if (type == null) throw new ArgumentError('null type');
+    return new _$Property._(name: name, type: type);
   }
 }

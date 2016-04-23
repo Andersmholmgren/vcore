@@ -62,6 +62,7 @@ abstract class Property extends NamedElement
     implements Built<Property, PropertyBuilder> {
   static final Serializer<Property> serializer = _$propertySerializer;
   String get name;
+  Classifier get type;
   Property._();
 
   factory Property([updates(PropertyBuilder b)]) = _$Property;
@@ -71,6 +72,7 @@ abstract class PropertyBuilder /*extends NamedElementBuilder*/
     implements
         Builder<Property, PropertyBuilder> {
   String name;
+  Classifier type;
   PropertyBuilder._();
   factory PropertyBuilder() = _$PropertyBuilder;
 }
