@@ -1,6 +1,6 @@
 library vcore.model;
 
-//import 'package:built_collection/built_collection.dart';
+import 'package:built_collection/built_collection.dart';
 //import 'package:built_json/built_json.dart';
 import 'package:built_value/built_value.dart';
 
@@ -24,6 +24,8 @@ abstract class ClassifierBuilder implements NamedElementBuilder {}
 abstract class ValueClass extends Classifier
     implements Built<ValueClass, ValueClassBuilder> {
   String get name;
+  BuiltSet<Property> get properties;
+
   ValueClass._();
 
   factory ValueClass([updates(ValueClassBuilder b)]) = _$ValueClass;
@@ -33,6 +35,8 @@ abstract class ValueClassBuilder /*extends NamedElementBuilder*/
     implements
         Builder<ValueClass, ValueClassBuilder> {
   String name;
+  SetBuilder<Property> properties;
+
   ValueClassBuilder._();
   factory ValueClassBuilder() = _$ValueClassBuilder;
 }

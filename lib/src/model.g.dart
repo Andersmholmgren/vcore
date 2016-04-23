@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T00:38:08.310975Z
+// 2016-04-23T00:40:16.569798Z
 
 part of vcore.model;
 
@@ -10,8 +10,10 @@ part of vcore.model;
 
 class _$ValueClass extends ValueClass {
   final String name;
-  _$ValueClass._({this.name}) : super._() {
+  final BuiltSet<Property> properties;
+  _$ValueClass._({this.name, this.properties}) : super._() {
     if (name == null) throw new ArgumentError('null name');
+    if (properties == null) throw new ArgumentError('null properties');
   }
   factory _$ValueClass([updates(ValueClassBuilder b)]) =>
       (new ValueClassBuilder()..update(updates)).build();
@@ -20,16 +22,17 @@ class _$ValueClass extends ValueClass {
   _$ValueClassBuilder toBuilder() => new _$ValueClassBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! ValueClass) return false;
-    return name == other.name;
+    return name == other.name && properties == other.properties;
   }
 
   int get hashCode {
-    return hashObjects([name]);
+    return hashObjects([name, properties]);
   }
 
   String toString() {
     return 'ValueClass {'
         'name=${name.toString()}\n'
+        'properties=${properties.toString()}\n'
         '}';
   }
 }
@@ -38,6 +41,7 @@ class _$ValueClassBuilder extends ValueClassBuilder {
   _$ValueClassBuilder() : super._();
   void replace(ValueClass other) {
     super.name = other.name;
+    super.properties = other.properties?.toBuilder();
   }
 
   void update(updates(ValueClassBuilder b)) {
@@ -46,7 +50,8 @@ class _$ValueClassBuilder extends ValueClassBuilder {
 
   ValueClass build() {
     if (name == null) throw new ArgumentError('null name');
-    return new _$ValueClass._(name: name);
+    if (properties == null) throw new ArgumentError('null properties');
+    return new _$ValueClass._(name: name, properties: properties?.build());
   }
 }
 
