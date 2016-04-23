@@ -10,13 +10,13 @@ abstract class NamedElement {
   String get name;
 }
 
-abstract class NamedElementBuilder {
-  String name;
-}
+//abstract class NamedElementBuilder {
+//  String name;
+//}
 
 abstract class Classifier implements NamedElement {}
 
-abstract class ClassifierBuilder implements NamedElementBuilder {}
+//abstract class ClassifierBuilder implements NamedElementBuilder {}
 
 abstract class ValueClass extends Classifier
     implements Built<ValueClass, ValueClassBuilder> {
