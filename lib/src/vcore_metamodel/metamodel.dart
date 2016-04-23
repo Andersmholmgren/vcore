@@ -1,6 +1,7 @@
 import 'package:vcore/src/model/model.dart';
 
 import 'coredart_metamodel.dart';
+import 'built_metamodel.dart';
 
 Package get vcorePackage => _vcorePackage ??= _createPackage();
 
@@ -66,5 +67,8 @@ ValueClass get valueClass => _valueClass ??= _createValueClass();
 ValueClass _createValueClass() {
   final builder = new ValueClassBuilder()..name = 'ValueClass';
   builder.superTypes.add(_classifier);
-//  builder.properties.add()
+  builder.properties.add((new PropertyBuilder()
+        ..name = 'properties'
+        ..type = builtSet)
+      .build());
 }

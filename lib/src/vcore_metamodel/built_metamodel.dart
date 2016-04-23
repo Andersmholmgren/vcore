@@ -7,14 +7,14 @@ Package _builtPackage;
 Package _createPackage() {
   final packageBuilder = new PackageBuilder()..name = 'built';
   final classifiers = packageBuilder.classifiers;
-  classifiers..add(builtBuiltSet);
+  classifiers..add(builtSet);
   return packageBuilder.build();
 }
 
-ExternalClass _builtBuiltSet;
-ExternalClass get builtBuiltSet => _builtBuiltSet ??= _createBuiltBuiltSet();
+ExternalClass _builtSet;
+ExternalClass get builtSet => _builtSet ??= _createBuiltSet();
 
-ExternalClass _createBuiltBuiltSet() {
+ExternalClass _createBuiltSet() {
   final builder = new ExternalClassBuilder()..name = 'BuiltSet';
 
   builder.genericTypes.add((new TypeParameterBuilder()..name = 'E').build());
