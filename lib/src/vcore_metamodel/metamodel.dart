@@ -67,8 +67,12 @@ ValueClass get valueClass => _valueClass ??= _createValueClass();
 ValueClass _createValueClass() {
   final builder = new ValueClassBuilder()..name = 'ValueClass';
   builder.superTypes.add(_classifier);
+  final propertyTypeBuilder = new GenericTypeBuilder()..base = builtSet;
+  propertyTypeBuilder.genericTypeValues[builtSet.genericTypes.first] = property;
   builder.properties.add((new PropertyBuilder()
         ..name = 'properties'
-        ..type = builtSet)
+        ..type = propertyTypeBuilder.build())
       .build());
+
+  return builder.build();
 }
