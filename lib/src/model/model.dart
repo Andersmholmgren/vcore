@@ -16,7 +16,9 @@ abstract class NamedElement implements ModelElement {
 //  String name;
 //}
 
-abstract class Classifier implements NamedElement {}
+abstract class Classifier implements NamedElement {
+//  static final Serializer<Classifier> serializer = _classifierSerializer;
+}
 
 abstract class GenericClassifier implements Classifier {
   BuiltSet<TypeParameter> get genericTypes;

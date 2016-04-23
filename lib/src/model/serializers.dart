@@ -11,4 +11,28 @@ part 'serializers.g.dart';
 /// Declare a top level [Serializers] field called
 /// serializers. The built_json code generator will provide the
 /// implementation. You usually only need to do this once per project.
-Serializers serializers = _$serializers;
+Serializers serializers =
+    (_$serializers.toBuilder()..add(_classifierSerializer)).build();
+
+//final x = new SerializersBuilder()..;
+final _ClassifierSerializer _classifierSerializer = new _ClassifierSerializer();
+
+class _ClassifierSerializer implements StructuredSerializer<Classifier> {
+  @override
+  Classifier deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    return serializers.deserialize(serialized);
+  }
+
+  @override
+  Iterable serialize(Serializers serializers, Classifier object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return serializers.serialize(object);
+  }
+
+  @override
+  Iterable<Type> get types => [Classifier];
+
+  @override
+  String get wireName => 'Classifier';
+}
