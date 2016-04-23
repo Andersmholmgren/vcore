@@ -8,12 +8,12 @@ import 'package:built_collection/built_collection.dart';
 void main() {
   group('A group of tests', () {
     test('', () {
-      final ValueClass v = (new ValueClassBuilder()
+      final ValueClass jsonSchema = (new ValueClassBuilder()
             ..name = "Schema"
             ..properties = (new SetBuilder<Property>()
               ..add((new PropertyBuilder()..name = 'fred').build())))
           .build();
-      var serialized = serializers.serialize(v);
+      var serialized = serializers.serialize(jsonSchema);
       print(serialized);
     }, skip: false);
   });
