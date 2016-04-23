@@ -1,7 +1,108 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T00:40:16.569798Z
+// 2016-04-23T00:51:18.965890Z
 
 part of vcore.model;
+
+// **************************************************************************
+// Generator: BuiltJsonGenerator
+// Target: library vcore.model
+// **************************************************************************
+
+Serializer<ValueClass> _$valueClassSerializer = new _$ValueClassSerializer();
+Serializer<Property> _$propertySerializer = new _$PropertySerializer();
+
+class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
+  final Iterable<Type> types = new BuiltList<Type>([ValueClass, _$ValueClass]);
+  final String wireName = 'ValueClass';
+
+  @override
+  Iterable serialize(Serializers serializers, ValueClass object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return [
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'properties',
+      serializers.serialize(object.properties,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(Property)])),
+    ];
+  }
+
+  @override
+  ValueClass deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new ValueClassBuilder();
+
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
+
+        switch (key as String) {
+          case 'name':
+            result.name = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
+          case 'properties':
+            result.properties.replace(serializers.deserialize(value,
+                specifiedType: const FullType(
+                    BuiltSet, const [const FullType(Property)])));
+            break;
+        }
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PropertySerializer implements StructuredSerializer<Property> {
+  final Iterable<Type> types = new BuiltList<Type>([Property, _$Property]);
+  final String wireName = 'Property';
+
+  @override
+  Iterable serialize(Serializers serializers, Property object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return [
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+    ];
+  }
+
+  @override
+  Property deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new PropertyBuilder();
+
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
+
+        switch (key as String) {
+          case 'name':
+            result.name = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
+        }
+      }
+    }
+
+    return result.build();
+  }
+}
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
