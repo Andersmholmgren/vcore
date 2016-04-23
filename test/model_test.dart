@@ -5,5 +5,7 @@ import 'package:vcore/vcore.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('A group of tests', () {});
+  group('A group of tests', () {
+    final ValueClass v = (new ValueClassBuilder()..name = "Schema").build();
+  });
 }
