@@ -143,10 +143,15 @@ ValueClass get valueClass => _valueClass ??= _createValueClass();
 ValueClass _createValueClass() {
   final builder = new ValueClassBuilder()..name = 'ValueClass';
   builder.superTypes.add(genericClassifier);
-  builder.properties.add((new PropertyBuilder()
-        ..name = 'properties'
-        ..type = _createBuiltSet(property))
-      .build());
+  builder.properties
+    ..add((new PropertyBuilder()
+          ..name = 'properties'
+          ..type = _createBuiltSet(property))
+        .build())
+    ..add((new PropertyBuilder()
+          ..name = 'isAbstract'
+          ..type = dartBool)
+        .build());
 
   return builder.build();
 }
