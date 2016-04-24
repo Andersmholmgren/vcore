@@ -7,7 +7,9 @@ import 'package:quiver/iterables.dart';
 
 part 'model.g.dart';
 
-abstract class ModelElement {}
+abstract class ModelElement {
+  String get docComment;
+}
 
 abstract class NamedElement implements ModelElement {
   String get name;
@@ -100,9 +102,9 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
   factory PropertyBuilder() = _$PropertyBuilder;
 }
 
-// ouch. This is needed as currently have an issue when creating meta model
-// where ValueClass has a field of type ValueClass but that instance doesn't
-// exist yet
+/// ouch. This is needed as currently have an issue when creating meta model
+/// where ValueClass has a field of type ValueClass but that instance doesn't
+/// exist yet
 abstract class ValuableClass implements GenericClassifier {
   BuiltSet<Property> get properties;
   BuiltSet<Property> get allProperties;
@@ -113,6 +115,8 @@ abstract class ValueClass
     implements Built<ValueClass, ValueClassBuilder>, ValuableClass {
   static final Serializer<ValueClass> serializer = _$valueClassSerializer;
 
+  @nullable
+  String get docComment;
   String get name;
   BuiltSet<TypeParameter> get genericTypes;
   BuiltSet<Property> get properties;
@@ -128,6 +132,8 @@ abstract class ValueClass
 
 abstract class ValueClassBuilder
     implements Builder<ValueClass, ValueClassBuilder> {
+  @nullable
+  String docComment;
   String name;
   SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
   SetBuilder<Property> properties = new SetBuilder<Property>();

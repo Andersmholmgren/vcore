@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-24T04:52:09.955170Z
+// 2016-04-24T05:20:16.541054Z
 
 part of vcore.model;
 
@@ -208,6 +208,9 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
   Iterable serialize(Serializers serializers, ValueClass object,
       {FullType specifiedType: FullType.unspecified}) {
     return [
+      'docComment',
+      serializers.serialize(object.docComment,
+          specifiedType: const FullType(String)),
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
       'genericTypes',
@@ -218,13 +221,13 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
       serializers.serialize(object.properties,
           specifiedType:
               const FullType(BuiltSet, const [const FullType(Property)])),
+      'isAbstract',
+      serializers.serialize(object.isAbstract,
+          specifiedType: const FullType(bool)),
       'superTypes',
       serializers.serialize(object.superTypes,
           specifiedType:
               const FullType(BuiltSet, const [const FullType(ValuableClass)])),
-      'isAbstract',
-      serializers.serialize(object.isAbstract,
-          specifiedType: const FullType(bool)),
     ];
   }
 
@@ -245,6 +248,10 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
         expectingKey = true;
 
         switch (key as String) {
+          case 'docComment':
+            result.docComment = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
           case 'name':
             result.name = serializers.deserialize(value,
                 specifiedType: const FullType(String));
@@ -259,14 +266,14 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
                 specifiedType: const FullType(
                     BuiltSet, const [const FullType(Property)])));
             break;
+          case 'isAbstract':
+            result.isAbstract = serializers.deserialize(value,
+                specifiedType: const FullType(bool));
+            break;
           case 'superTypes':
             result.superTypes.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
                     BuiltSet, const [const FullType(ValuableClass)])));
-            break;
-          case 'isAbstract':
-            result.isAbstract = serializers.deserialize(value,
-                specifiedType: const FullType(bool));
             break;
         }
       }
@@ -577,23 +584,25 @@ class _$PropertyBuilder extends PropertyBuilder {
 // **************************************************************************
 
 class _$ValueClass extends ValueClass {
+  final String docComment;
   final String name;
   final BuiltSet<TypeParameter> genericTypes;
   final BuiltSet<Property> properties;
-  final BuiltSet<ValuableClass> superTypes;
   final bool isAbstract;
+  final BuiltSet<ValuableClass> superTypes;
   _$ValueClass._(
-      {this.name,
+      {this.docComment,
+      this.name,
       this.genericTypes,
       this.properties,
-      this.superTypes,
-      this.isAbstract})
+      this.isAbstract,
+      this.superTypes})
       : super._() {
     if (name == null) throw new ArgumentError('null name');
     if (genericTypes == null) throw new ArgumentError('null genericTypes');
     if (properties == null) throw new ArgumentError('null properties');
-    if (superTypes == null) throw new ArgumentError('null superTypes');
     if (isAbstract == null) throw new ArgumentError('null isAbstract');
+    if (superTypes == null) throw new ArgumentError('null superTypes');
   }
   factory _$ValueClass([updates(ValueClassBuilder b)]) =>
       (new ValueClassBuilder()..update(updates)).build();
@@ -602,25 +611,27 @@ class _$ValueClass extends ValueClass {
   _$ValueClassBuilder toBuilder() => new _$ValueClassBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! ValueClass) return false;
-    return name == other.name &&
+    return docComment == other.docComment &&
+        name == other.name &&
         genericTypes == other.genericTypes &&
         properties == other.properties &&
-        superTypes == other.superTypes &&
-        isAbstract == other.isAbstract;
+        isAbstract == other.isAbstract &&
+        superTypes == other.superTypes;
   }
 
   int get hashCode {
     return hashObjects(
-        [name, genericTypes, properties, superTypes, isAbstract]);
+        [docComment, name, genericTypes, properties, isAbstract, superTypes]);
   }
 
   String toString() {
     return 'ValueClass {'
+        'docComment=${docComment.toString()}\n'
         'name=${name.toString()}\n'
         'genericTypes=${genericTypes.toString()}\n'
         'properties=${properties.toString()}\n'
-        'superTypes=${superTypes.toString()}\n'
         'isAbstract=${isAbstract.toString()}\n'
+        'superTypes=${superTypes.toString()}\n'
         '}';
   }
 }
@@ -628,11 +639,12 @@ class _$ValueClass extends ValueClass {
 class _$ValueClassBuilder extends ValueClassBuilder {
   _$ValueClassBuilder() : super._();
   void replace(ValueClass other) {
+    super.docComment = other.docComment;
     super.name = other.name;
     super.genericTypes = other.genericTypes?.toBuilder();
     super.properties = other.properties?.toBuilder();
-    super.superTypes = other.superTypes?.toBuilder();
     super.isAbstract = other.isAbstract;
+    super.superTypes = other.superTypes?.toBuilder();
   }
 
   void update(updates(ValueClassBuilder b)) {
@@ -643,14 +655,15 @@ class _$ValueClassBuilder extends ValueClassBuilder {
     if (name == null) throw new ArgumentError('null name');
     if (genericTypes == null) throw new ArgumentError('null genericTypes');
     if (properties == null) throw new ArgumentError('null properties');
-    if (superTypes == null) throw new ArgumentError('null superTypes');
     if (isAbstract == null) throw new ArgumentError('null isAbstract');
+    if (superTypes == null) throw new ArgumentError('null superTypes');
     return new _$ValueClass._(
+        docComment: docComment,
         name: name,
         genericTypes: genericTypes?.build(),
         properties: properties?.build(),
-        superTypes: superTypes?.build(),
-        isAbstract: isAbstract);
+        isAbstract: isAbstract,
+        superTypes: superTypes?.build());
   }
 }
 
