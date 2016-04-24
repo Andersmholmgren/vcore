@@ -3,11 +3,11 @@ import 'package:vcore/src/model/model.dart';
 import 'coredart_metamodel.dart';
 import 'built_metamodel.dart';
 
-Package get vcorePackage => _vcorePackage ??= _createPackage();
+Package get vcorePackage => _vcorePackage ??= _createVCorePackage();
 
 Package _vcorePackage;
 
-Package _createPackage() {
+Package _createVCorePackage() {
   final packageBuilder = new PackageBuilder()..name = 'vcore';
   packageBuilder.classifiers
     ..add(namedElement)
@@ -17,7 +17,8 @@ Package _createPackage() {
     ..add(genericType)
     ..add(property)
     ..add(valueClass)
-    ..add(externalClass);
+    ..add(externalClass)
+    ..add(package);
   return packageBuilder.build();
 }
 
@@ -143,6 +144,20 @@ ValueClass get externalClass => _externalClass ??= _createExternalClass();
 ValueClass _createExternalClass() {
   final builder = new ValueClassBuilder()..name = 'ExternalClass';
   builder.superTypes.add(genericClassifier);
+
+  return builder.build();
+}
+
+ValueClass _package;
+ValueClass get package => _package ??= _createPackage();
+
+ValueClass _createPackage() {
+  final builder = new ValueClassBuilder()..name = 'Package';
+  builder.superTypes.add(namedElement);
+  builder.properties.add((new PropertyBuilder()
+        ..name = 'classifiers'
+        ..type = _createBuiltSet(classifier))
+      .build());
 
   return builder.build();
 }
