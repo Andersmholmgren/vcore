@@ -1,19 +1,13 @@
 # vcore
 
-A library for Dart developers. It is awesome.
-
+a meta model for for [libraries_for_object_oriented_dart](https://github.com/google/built_value.dart/blob/master/libraries_for_object_oriented_dart.md#libraries-for-object-oriented-dart). It is similar to a simplified [EMOF and ECORE](https://en.wikipedia.org/wiki/Meta-Object_Facility) and is intended for modelling primarily `BuiltValue`
+ 
 ## Usage
 
-A simple usage example:
-
-    import 'package:vcore/vcore.dart';
-
-    main() {
-      var awesome = new Awesome();
-    }
+TODO
 
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: http://example.com/issues/replaceme
+[tracker]: https://github.com/Andersmholmgren/vcore/issues
