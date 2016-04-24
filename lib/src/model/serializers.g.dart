@@ -15,7 +15,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
             const FullType(TypeParameter),
             const FullType(Classifier)
           ]),
-          () => new MapBuiler<TypeParameter, Classifier>())
+          () => new MapBuilder<TypeParameter, Classifier>())
       ..add(TypeParameter.serializer)
       ..add(Property.serializer)
       ..add(ValueClass.serializer)
