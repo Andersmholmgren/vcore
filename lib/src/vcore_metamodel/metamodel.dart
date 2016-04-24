@@ -171,6 +171,7 @@ ValueClass _createValueClass() {
         .build())
     ..add((new PropertyBuilder()
           ..name = 'superTypes'
+          // TODO: super type MUST be ValueClass but that blows up atm
           ..type = _createBuiltSet(genericClassifier))
         .build())
     ..add((new PropertyBuilder()
