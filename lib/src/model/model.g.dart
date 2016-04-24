@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-24T05:20:16.541054Z
+// 2016-04-24T05:30:02.638860Z
 
 part of vcore.model;
 
@@ -26,6 +26,9 @@ class _$GenericTypeSerializer implements StructuredSerializer<GenericType> {
   Iterable serialize(Serializers serializers, GenericType object,
       {FullType specifiedType: FullType.unspecified}) {
     return [
+      'docComment',
+      serializers.serialize(object.docComment,
+          specifiedType: const FullType(String)),
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
       'base',
@@ -57,6 +60,10 @@ class _$GenericTypeSerializer implements StructuredSerializer<GenericType> {
         expectingKey = true;
 
         switch (key as String) {
+          case 'docComment':
+            result.docComment = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
           case 'name':
             result.name = serializers.deserialize(value,
                 specifiedType: const FullType(String));
@@ -89,6 +96,9 @@ class _$TypeParameterSerializer implements StructuredSerializer<TypeParameter> {
   Iterable serialize(Serializers serializers, TypeParameter object,
       {FullType specifiedType: FullType.unspecified}) {
     return [
+      'docComment',
+      serializers.serialize(object.docComment,
+          specifiedType: const FullType(String)),
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
       'bound',
@@ -114,6 +124,10 @@ class _$TypeParameterSerializer implements StructuredSerializer<TypeParameter> {
         expectingKey = true;
 
         switch (key as String) {
+          case 'docComment':
+            result.docComment = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
           case 'name':
             result.name = serializers.deserialize(value,
                 specifiedType: const FullType(String));
@@ -138,6 +152,9 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
   Iterable serialize(Serializers serializers, Property object,
       {FullType specifiedType: FullType.unspecified}) {
     return [
+      'docComment',
+      serializers.serialize(object.docComment,
+          specifiedType: const FullType(String)),
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
       'type',
@@ -172,6 +189,10 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
         expectingKey = true;
 
         switch (key as String) {
+          case 'docComment':
+            result.docComment = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
           case 'name':
             result.name = serializers.deserialize(value,
                 specifiedType: const FullType(String));
@@ -292,6 +313,9 @@ class _$ExternalClassSerializer implements StructuredSerializer<ExternalClass> {
   Iterable serialize(Serializers serializers, ExternalClass object,
       {FullType specifiedType: FullType.unspecified}) {
     return [
+      'docComment',
+      serializers.serialize(object.docComment,
+          specifiedType: const FullType(String)),
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
       'genericTypes',
@@ -318,6 +342,10 @@ class _$ExternalClassSerializer implements StructuredSerializer<ExternalClass> {
         expectingKey = true;
 
         switch (key as String) {
+          case 'docComment':
+            result.docComment = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
           case 'name':
             result.name = serializers.deserialize(value,
                 specifiedType: const FullType(String));
@@ -343,6 +371,9 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
   Iterable serialize(Serializers serializers, Package object,
       {FullType specifiedType: FullType.unspecified}) {
     return [
+      'docComment',
+      serializers.serialize(object.docComment,
+          specifiedType: const FullType(String)),
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
       'classifiers',
@@ -369,6 +400,10 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
         expectingKey = true;
 
         switch (key as String) {
+          case 'docComment':
+            result.docComment = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
           case 'name':
             result.name = serializers.deserialize(value,
                 specifiedType: const FullType(String));
@@ -392,10 +427,13 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
 // **************************************************************************
 
 class _$GenericType extends GenericType {
+  final String docComment;
   final String name;
   final Classifier base;
   final BuiltMap<TypeParameter, Classifier> genericTypeValues;
-  _$GenericType._({this.name, this.base, this.genericTypeValues}) : super._() {
+  _$GenericType._(
+      {this.docComment, this.name, this.base, this.genericTypeValues})
+      : super._() {
     if (name == null) throw new ArgumentError('null name');
     if (base == null) throw new ArgumentError('null base');
     if (genericTypeValues == null)
@@ -408,17 +446,19 @@ class _$GenericType extends GenericType {
   _$GenericTypeBuilder toBuilder() => new _$GenericTypeBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! GenericType) return false;
-    return name == other.name &&
+    return docComment == other.docComment &&
+        name == other.name &&
         base == other.base &&
         genericTypeValues == other.genericTypeValues;
   }
 
   int get hashCode {
-    return hashObjects([name, base, genericTypeValues]);
+    return hashObjects([docComment, name, base, genericTypeValues]);
   }
 
   String toString() {
     return 'GenericType {'
+        'docComment=${docComment.toString()}\n'
         'name=${name.toString()}\n'
         'base=${base.toString()}\n'
         'genericTypeValues=${genericTypeValues.toString()}\n'
@@ -429,6 +469,7 @@ class _$GenericType extends GenericType {
 class _$GenericTypeBuilder extends GenericTypeBuilder {
   _$GenericTypeBuilder() : super._();
   void replace(GenericType other) {
+    super.docComment = other.docComment;
     super.name = other.name;
     super.base = other.base;
     super.genericTypeValues = other.genericTypeValues?.toBuilder();
@@ -444,7 +485,10 @@ class _$GenericTypeBuilder extends GenericTypeBuilder {
     if (genericTypeValues == null)
       throw new ArgumentError('null genericTypeValues');
     return new _$GenericType._(
-        name: name, base: base, genericTypeValues: genericTypeValues?.build());
+        docComment: docComment,
+        name: name,
+        base: base,
+        genericTypeValues: genericTypeValues?.build());
   }
 }
 
@@ -454,9 +498,10 @@ class _$GenericTypeBuilder extends GenericTypeBuilder {
 // **************************************************************************
 
 class _$TypeParameter extends TypeParameter {
+  final String docComment;
   final String name;
   final Classifier bound;
-  _$TypeParameter._({this.name, this.bound}) : super._() {
+  _$TypeParameter._({this.docComment, this.name, this.bound}) : super._() {
     if (name == null) throw new ArgumentError('null name');
   }
   factory _$TypeParameter([updates(TypeParameterBuilder b)]) =>
@@ -467,15 +512,18 @@ class _$TypeParameter extends TypeParameter {
       new _$TypeParameterBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! TypeParameter) return false;
-    return name == other.name && bound == other.bound;
+    return docComment == other.docComment &&
+        name == other.name &&
+        bound == other.bound;
   }
 
   int get hashCode {
-    return hashObjects([name, bound]);
+    return hashObjects([docComment, name, bound]);
   }
 
   String toString() {
     return 'TypeParameter {'
+        'docComment=${docComment.toString()}\n'
         'name=${name.toString()}\n'
         'bound=${bound.toString()}\n'
         '}';
@@ -485,6 +533,7 @@ class _$TypeParameter extends TypeParameter {
 class _$TypeParameterBuilder extends TypeParameterBuilder {
   _$TypeParameterBuilder() : super._();
   void replace(TypeParameter other) {
+    super.docComment = other.docComment;
     super.name = other.name;
     super.bound = other.bound;
   }
@@ -495,7 +544,8 @@ class _$TypeParameterBuilder extends TypeParameterBuilder {
 
   TypeParameter build() {
     if (name == null) throw new ArgumentError('null name');
-    return new _$TypeParameter._(name: name, bound: bound);
+    return new _$TypeParameter._(
+        docComment: docComment, name: name, bound: bound);
   }
 }
 
@@ -505,13 +555,15 @@ class _$TypeParameterBuilder extends TypeParameterBuilder {
 // **************************************************************************
 
 class _$Property extends Property {
+  final String docComment;
   final String name;
   final Classifier type;
   final bool isNullable;
   final Object defaultValue;
   final String derivedExpression;
   _$Property._(
-      {this.name,
+      {this.docComment,
+      this.name,
       this.type,
       this.isNullable,
       this.defaultValue,
@@ -528,7 +580,8 @@ class _$Property extends Property {
   _$PropertyBuilder toBuilder() => new _$PropertyBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! Property) return false;
-    return name == other.name &&
+    return docComment == other.docComment &&
+        name == other.name &&
         type == other.type &&
         isNullable == other.isNullable &&
         defaultValue == other.defaultValue &&
@@ -537,11 +590,12 @@ class _$Property extends Property {
 
   int get hashCode {
     return hashObjects(
-        [name, type, isNullable, defaultValue, derivedExpression]);
+        [docComment, name, type, isNullable, defaultValue, derivedExpression]);
   }
 
   String toString() {
     return 'Property {'
+        'docComment=${docComment.toString()}\n'
         'name=${name.toString()}\n'
         'type=${type.toString()}\n'
         'isNullable=${isNullable.toString()}\n'
@@ -554,6 +608,7 @@ class _$Property extends Property {
 class _$PropertyBuilder extends PropertyBuilder {
   _$PropertyBuilder() : super._();
   void replace(Property other) {
+    super.docComment = other.docComment;
     super.name = other.name;
     super.type = other.type;
     super.isNullable = other.isNullable;
@@ -570,6 +625,7 @@ class _$PropertyBuilder extends PropertyBuilder {
     if (type == null) throw new ArgumentError('null type');
     if (isNullable == null) throw new ArgumentError('null isNullable');
     return new _$Property._(
+        docComment: docComment,
         name: name,
         type: type,
         isNullable: isNullable,
@@ -673,9 +729,11 @@ class _$ValueClassBuilder extends ValueClassBuilder {
 // **************************************************************************
 
 class _$ExternalClass extends ExternalClass {
+  final String docComment;
   final String name;
   final BuiltSet<TypeParameter> genericTypes;
-  _$ExternalClass._({this.name, this.genericTypes}) : super._() {
+  _$ExternalClass._({this.docComment, this.name, this.genericTypes})
+      : super._() {
     if (name == null) throw new ArgumentError('null name');
     if (genericTypes == null) throw new ArgumentError('null genericTypes');
   }
@@ -687,15 +745,18 @@ class _$ExternalClass extends ExternalClass {
       new _$ExternalClassBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! ExternalClass) return false;
-    return name == other.name && genericTypes == other.genericTypes;
+    return docComment == other.docComment &&
+        name == other.name &&
+        genericTypes == other.genericTypes;
   }
 
   int get hashCode {
-    return hashObjects([name, genericTypes]);
+    return hashObjects([docComment, name, genericTypes]);
   }
 
   String toString() {
     return 'ExternalClass {'
+        'docComment=${docComment.toString()}\n'
         'name=${name.toString()}\n'
         'genericTypes=${genericTypes.toString()}\n'
         '}';
@@ -705,6 +766,7 @@ class _$ExternalClass extends ExternalClass {
 class _$ExternalClassBuilder extends ExternalClassBuilder {
   _$ExternalClassBuilder() : super._();
   void replace(ExternalClass other) {
+    super.docComment = other.docComment;
     super.name = other.name;
     super.genericTypes = other.genericTypes?.toBuilder();
   }
@@ -717,7 +779,9 @@ class _$ExternalClassBuilder extends ExternalClassBuilder {
     if (name == null) throw new ArgumentError('null name');
     if (genericTypes == null) throw new ArgumentError('null genericTypes');
     return new _$ExternalClass._(
-        name: name, genericTypes: genericTypes?.build());
+        docComment: docComment,
+        name: name,
+        genericTypes: genericTypes?.build());
   }
 }
 
@@ -727,9 +791,10 @@ class _$ExternalClassBuilder extends ExternalClassBuilder {
 // **************************************************************************
 
 class _$Package extends Package {
+  final String docComment;
   final String name;
   final BuiltSet<Classifier> classifiers;
-  _$Package._({this.name, this.classifiers}) : super._() {
+  _$Package._({this.docComment, this.name, this.classifiers}) : super._() {
     if (name == null) throw new ArgumentError('null name');
     if (classifiers == null) throw new ArgumentError('null classifiers');
   }
@@ -740,15 +805,18 @@ class _$Package extends Package {
   _$PackageBuilder toBuilder() => new _$PackageBuilder()..replace(this);
   bool operator ==(other) {
     if (other is! Package) return false;
-    return name == other.name && classifiers == other.classifiers;
+    return docComment == other.docComment &&
+        name == other.name &&
+        classifiers == other.classifiers;
   }
 
   int get hashCode {
-    return hashObjects([name, classifiers]);
+    return hashObjects([docComment, name, classifiers]);
   }
 
   String toString() {
     return 'Package {'
+        'docComment=${docComment.toString()}\n'
         'name=${name.toString()}\n'
         'classifiers=${classifiers.toString()}\n'
         '}';
@@ -758,6 +826,7 @@ class _$Package extends Package {
 class _$PackageBuilder extends PackageBuilder {
   _$PackageBuilder() : super._();
   void replace(Package other) {
+    super.docComment = other.docComment;
     super.name = other.name;
     super.classifiers = other.classifiers?.toBuilder();
   }
@@ -769,6 +838,7 @@ class _$PackageBuilder extends PackageBuilder {
   Package build() {
     if (name == null) throw new ArgumentError('null name');
     if (classifiers == null) throw new ArgumentError('null classifiers');
-    return new _$Package._(name: name, classifiers: classifiers?.build());
+    return new _$Package._(
+        docComment: docComment, name: name, classifiers: classifiers?.build());
   }
 }
