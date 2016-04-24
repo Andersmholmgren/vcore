@@ -31,7 +31,12 @@ ValueClass _createModelElement() {
   final builder = new ValueClassBuilder()
     ..name = 'ModelElement'
     ..isAbstract = true;
-
+  builder.properties
+    ..add((new PropertyBuilder()
+          ..name = 'docComment'
+          ..type = dartString
+          ..isNullable = true)
+        .build());
   return builder.build();
 }
 
@@ -159,7 +164,11 @@ ValueClass get valuableClass => _valuableClass ??= _createValuableClass();
 ValueClass _createValuableClass() {
   final builder = new ValueClassBuilder()
     ..name = 'ValuableClass'
-    ..isAbstract = true;
+    ..isAbstract = true
+    ..docComment =
+        '''ouch. This is needed as currently have an issue when creating meta model
+where ValueClass has a field of type ValueClass but that instance doesn't
+exist yet''';
   builder.superTypes.add(genericClassifier);
   builder.properties
     ..add((new PropertyBuilder()
