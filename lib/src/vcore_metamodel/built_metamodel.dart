@@ -16,10 +16,11 @@ ExternalClass _builtSet;
 ExternalClass get builtSet => _builtSet ??= _createBuiltSet();
 
 ExternalClass _createBuiltSet() {
-  return new ExternalClass.build(
-      name: 'BuiltSet',
-      genericTypes: new SetBuilder<TypeParameter>()
-        ..add(new TypeParameter.build(name: 'E')));
+  final builder = new ExternalClassBuilder()..name = 'BuiltSet';
+
+  builder.genericTypes.add(new TypeParameter((b) => b..name = 'E'));
+
+  return builder.build();
 }
 
 ExternalClass _builtMap;
