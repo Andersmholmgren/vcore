@@ -131,30 +131,26 @@ ValueClass _createProperty() {
   builder.superTypes.add(namedElement);
 
   builder.properties
-    ..add((new PropertyBuilder()
-          ..name = 'type'
-          ..type = classifier)
-        .build())
-    ..add((new PropertyBuilder()
-          ..name = 'isNullable'
-          ..type = dartBool
-          ..defaultValue = false)
-        .build())
-    ..add((new PropertyBuilder()
-          ..name = 'defaultValue'
-          ..type = dartObject
-          ..isNullable = true)
-        .build())
-    ..add((new PropertyBuilder()
-          ..name = 'derivedExpression'
-          ..type = dartString
-          ..isNullable = true)
-        .build())
-    ..add((new PropertyBuilder()
-          ..name = 'isDerived'
-          ..type = dartBool
-          ..derivedExpression = 'derivedExpression != null')
-        .build());
+    ..add(new Property((b) => b
+      ..name = 'type'
+      ..type = classifier))
+    ..add(new Property((b) => b
+      ..name = 'isNullable'
+      ..type = dartBool
+      ..defaultValue = false))
+    ..add(new Property((b) => b
+      ..name = 'defaultValue'
+      ..type = dartObject
+      ..isNullable = true))
+    ..add(new Property((b) => b
+      ..name = 'derivedExpression'
+      ..type = dartString
+      ..isNullable = true))
+    ..add(new Property((b) => b
+      ..name = 'isDerived'
+      ..type = dartBool
+      ..derivedExpression = 'derivedExpression != null'));
+
   return builder.build();
 }
 
