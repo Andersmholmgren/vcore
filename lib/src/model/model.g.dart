@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-24T05:30:02.638860Z
+// 2016-04-24T05:43:15.359299Z
 
 part of vcore.model;
 
@@ -69,8 +69,8 @@ class _$GenericTypeSerializer implements StructuredSerializer<GenericType> {
                 specifiedType: const FullType(String));
             break;
           case 'base':
-            result.base = serializers.deserialize(value,
-                specifiedType: const FullType(Classifier));
+            result.base.replace(serializers.deserialize(value,
+                specifiedType: const FullType(Classifier)));
             break;
           case 'genericTypeValues':
             result.genericTypeValues.replace(serializers.deserialize(value,
@@ -133,8 +133,8 @@ class _$TypeParameterSerializer implements StructuredSerializer<TypeParameter> {
                 specifiedType: const FullType(String));
             break;
           case 'bound':
-            result.bound = serializers.deserialize(value,
-                specifiedType: const FullType(Classifier));
+            result.bound.replace(serializers.deserialize(value,
+                specifiedType: const FullType(Classifier)));
             break;
         }
       }
@@ -198,8 +198,8 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
                 specifiedType: const FullType(String));
             break;
           case 'type':
-            result.type = serializers.deserialize(value,
-                specifiedType: const FullType(Classifier));
+            result.type.replace(serializers.deserialize(value,
+                specifiedType: const FullType(Classifier)));
             break;
           case 'isNullable':
             result.isNullable = serializers.deserialize(value,
@@ -426,213 +426,24 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
 // Target: abstract class GenericType
 // **************************************************************************
 
-class _$GenericType extends GenericType {
-  final String docComment;
-  final String name;
-  final Classifier base;
-  final BuiltMap<TypeParameter, Classifier> genericTypeValues;
-  _$GenericType._(
-      {this.docComment, this.name, this.base, this.genericTypeValues})
-      : super._() {
-    if (name == null) throw new ArgumentError('null name');
-    if (base == null) throw new ArgumentError('null base');
-    if (genericTypeValues == null)
-      throw new ArgumentError('null genericTypeValues');
-  }
-  factory _$GenericType([updates(GenericTypeBuilder b)]) =>
-      (new GenericTypeBuilder()..update(updates)).build();
-  GenericType rebuild(updates(GenericTypeBuilder b)) =>
-      (toBuilder()..update(updates)).build();
-  _$GenericTypeBuilder toBuilder() => new _$GenericTypeBuilder()..replace(this);
-  bool operator ==(other) {
-    if (other is! GenericType) return false;
-    return docComment == other.docComment &&
-        name == other.name &&
-        base == other.base &&
-        genericTypeValues == other.genericTypeValues;
-  }
-
-  int get hashCode {
-    return hashObjects([docComment, name, base, genericTypeValues]);
-  }
-
-  String toString() {
-    return 'GenericType {'
-        'docComment=${docComment.toString()}\n'
-        'name=${name.toString()}\n'
-        'base=${base.toString()}\n'
-        'genericTypeValues=${genericTypeValues.toString()}\n'
-        '}';
-  }
-}
-
-class _$GenericTypeBuilder extends GenericTypeBuilder {
-  _$GenericTypeBuilder() : super._();
-  void replace(GenericType other) {
-    super.docComment = other.docComment;
-    super.name = other.name;
-    super.base = other.base;
-    super.genericTypeValues = other.genericTypeValues?.toBuilder();
-  }
-
-  void update(updates(GenericTypeBuilder b)) {
-    if (updates != null) updates(this);
-  }
-
-  GenericType build() {
-    if (name == null) throw new ArgumentError('null name');
-    if (base == null) throw new ArgumentError('null base');
-    if (genericTypeValues == null)
-      throw new ArgumentError('null genericTypeValues');
-    return new _$GenericType._(
-        docComment: docComment,
-        name: name,
-        base: base,
-        genericTypeValues: genericTypeValues?.build());
-  }
-}
+// Error: Please make changes to use built_value.
+// TODO: Make builder field base have type Classifier
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
 // Target: abstract class TypeParameter
 // **************************************************************************
 
-class _$TypeParameter extends TypeParameter {
-  final String docComment;
-  final String name;
-  final Classifier bound;
-  _$TypeParameter._({this.docComment, this.name, this.bound}) : super._() {
-    if (name == null) throw new ArgumentError('null name');
-  }
-  factory _$TypeParameter([updates(TypeParameterBuilder b)]) =>
-      (new TypeParameterBuilder()..update(updates)).build();
-  TypeParameter rebuild(updates(TypeParameterBuilder b)) =>
-      (toBuilder()..update(updates)).build();
-  _$TypeParameterBuilder toBuilder() =>
-      new _$TypeParameterBuilder()..replace(this);
-  bool operator ==(other) {
-    if (other is! TypeParameter) return false;
-    return docComment == other.docComment &&
-        name == other.name &&
-        bound == other.bound;
-  }
-
-  int get hashCode {
-    return hashObjects([docComment, name, bound]);
-  }
-
-  String toString() {
-    return 'TypeParameter {'
-        'docComment=${docComment.toString()}\n'
-        'name=${name.toString()}\n'
-        'bound=${bound.toString()}\n'
-        '}';
-  }
-}
-
-class _$TypeParameterBuilder extends TypeParameterBuilder {
-  _$TypeParameterBuilder() : super._();
-  void replace(TypeParameter other) {
-    super.docComment = other.docComment;
-    super.name = other.name;
-    super.bound = other.bound;
-  }
-
-  void update(updates(TypeParameterBuilder b)) {
-    if (updates != null) updates(this);
-  }
-
-  TypeParameter build() {
-    if (name == null) throw new ArgumentError('null name');
-    return new _$TypeParameter._(
-        docComment: docComment, name: name, bound: bound);
-  }
-}
+// Error: Please make changes to use built_value.
+// TODO: Make builder field bound have type Classifier
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
 // Target: abstract class Property
 // **************************************************************************
 
-class _$Property extends Property {
-  final String docComment;
-  final String name;
-  final Classifier type;
-  final bool isNullable;
-  final Object defaultValue;
-  final String derivedExpression;
-  _$Property._(
-      {this.docComment,
-      this.name,
-      this.type,
-      this.isNullable,
-      this.defaultValue,
-      this.derivedExpression})
-      : super._() {
-    if (name == null) throw new ArgumentError('null name');
-    if (type == null) throw new ArgumentError('null type');
-    if (isNullable == null) throw new ArgumentError('null isNullable');
-  }
-  factory _$Property([updates(PropertyBuilder b)]) =>
-      (new PropertyBuilder()..update(updates)).build();
-  Property rebuild(updates(PropertyBuilder b)) =>
-      (toBuilder()..update(updates)).build();
-  _$PropertyBuilder toBuilder() => new _$PropertyBuilder()..replace(this);
-  bool operator ==(other) {
-    if (other is! Property) return false;
-    return docComment == other.docComment &&
-        name == other.name &&
-        type == other.type &&
-        isNullable == other.isNullable &&
-        defaultValue == other.defaultValue &&
-        derivedExpression == other.derivedExpression;
-  }
-
-  int get hashCode {
-    return hashObjects(
-        [docComment, name, type, isNullable, defaultValue, derivedExpression]);
-  }
-
-  String toString() {
-    return 'Property {'
-        'docComment=${docComment.toString()}\n'
-        'name=${name.toString()}\n'
-        'type=${type.toString()}\n'
-        'isNullable=${isNullable.toString()}\n'
-        'defaultValue=${defaultValue.toString()}\n'
-        'derivedExpression=${derivedExpression.toString()}\n'
-        '}';
-  }
-}
-
-class _$PropertyBuilder extends PropertyBuilder {
-  _$PropertyBuilder() : super._();
-  void replace(Property other) {
-    super.docComment = other.docComment;
-    super.name = other.name;
-    super.type = other.type;
-    super.isNullable = other.isNullable;
-    super.defaultValue = other.defaultValue;
-    super.derivedExpression = other.derivedExpression;
-  }
-
-  void update(updates(PropertyBuilder b)) {
-    if (updates != null) updates(this);
-  }
-
-  Property build() {
-    if (name == null) throw new ArgumentError('null name');
-    if (type == null) throw new ArgumentError('null type');
-    if (isNullable == null) throw new ArgumentError('null isNullable');
-    return new _$Property._(
-        docComment: docComment,
-        name: name,
-        type: type,
-        isNullable: isNullable,
-        defaultValue: defaultValue,
-        derivedExpression: derivedExpression);
-  }
-}
+// Error: Please make changes to use built_value.
+// TODO: Make builder field type have type Classifier
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
