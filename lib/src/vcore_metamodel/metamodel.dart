@@ -14,6 +14,7 @@ Package _createPackage() {
     ..add(classifier)
     ..add(typeParameter)
     ..add(genericClassifier)
+    ..add(genericType)
     ..add(property)
     ..add(valueClass);
   return packageBuilder.build();
