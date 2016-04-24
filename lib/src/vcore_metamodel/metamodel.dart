@@ -143,6 +143,11 @@ ValueClass _createProperty() {
           ..name = 'derivedExpression'
           ..type = dartString
           ..isNullable = true)
+        .build())
+    ..add((new PropertyBuilder()
+          ..name = 'isDerived'
+          ..type = dartBool
+          ..derivedExpression = 'derivedExpression != null')
         .build());
   return builder.build();
 }
