@@ -7,18 +7,17 @@ Package _dartPackage;
 Package _createPackage() {
   final packageBuilder = new PackageBuilder()..name = 'dart';
   final classifiers = packageBuilder.classifiers;
-  classifiers..add(dartString);
+  classifiers..add(dartString)..add(dartBool);
   return packageBuilder.build();
 }
 
 ExternalClass _dartString;
 ExternalClass get dartString => _dartString ??= _createDartString();
+ExternalClass _createDartString() => _ec('String');
 
-ExternalClass _createDartString() {
-  final builder = new ExternalClassBuilder()
-    ..name = 'String'
-//    ..dartType = String
-  ;
+ExternalClass _dartBool;
+ExternalClass get dartBool => _dartBool ??= _createDartBool();
+ExternalClass _createDartBool() => _ec('bool');
 
-  return builder.build();
-}
+ExternalClass _ec(String name) =>
+    (new ExternalClassBuilder()..name = name).build();

@@ -114,6 +114,10 @@ ValueClass _createProperty() {
     ..add((new PropertyBuilder()
           ..name = 'type'
           ..type = classifier)
+        .build())
+    ..add((new PropertyBuilder()
+          ..name = 'isNullable'
+          ..type = dartBool)
         .build());
 
   return builder.build();
