@@ -32,11 +32,10 @@ ValueClass _createModelElement() {
     ..name = 'ModelElement'
     ..isAbstract = true;
   builder.properties
-    ..add((new PropertyBuilder()
-          ..name = 'docComment'
-          ..type = dartString
-          ..isNullable = true)
-        .build());
+    ..add(new Property((b) => b
+      ..name = 'docComment'
+      ..type = dartString
+      ..isNullable = true));
   return builder.build();
 }
 
@@ -49,10 +48,9 @@ ValueClass _createNamedElement() {
     ..isAbstract = true;
   builder.superTypes.add(modelElement);
   builder.properties
-    ..add((new PropertyBuilder()
-          ..name = 'name'
-          ..type = dartString)
-        .build());
+    ..add(new Property((b) => b
+      ..name = 'name'
+      ..type = dartString));
 
   return builder.build();
 }
@@ -76,11 +74,10 @@ ValueClass _createTypeParameter() {
   final builder = new ValueClassBuilder()..name = 'TypeParameter';
   builder.superTypes.add(namedElement);
   builder.properties
-    ..add((new PropertyBuilder()
-          ..name = 'bound'
-          ..type = classifier
-          ..isNullable = true)
-        .build());
+    ..add(new Property((b) => b
+      ..name = 'bound'
+      ..type = classifier
+      ..isNullable = true));
 
   return builder.build();
 }
@@ -95,10 +92,9 @@ ValueClass _createGenericClassifier() {
     ..isAbstract = true;
   builder.superTypes.add(classifier);
   builder.properties
-    ..add((new PropertyBuilder()
-          ..name = 'genericTypes'
-          ..type = _createBuiltSet(typeParameter))
-        .build());
+    ..add(new Property((b) => b
+      ..name = 'genericTypes'
+      ..type = _createBuiltSet(typeParameter)));
 
   return builder.build();
 }
@@ -111,14 +107,12 @@ ValueClass _createGenericType() {
   builder.superTypes.add(classifier);
 
   builder.properties
-    ..add((new PropertyBuilder()
-          ..name = 'base'
-          ..type = classifier)
-        .build())
-    ..add((new PropertyBuilder()
-          ..name = 'genericTypeValues'
-          ..type = _createBuiltMap(typeParameter, classifier))
-        .build());
+    ..add(new Property((b) => b
+      ..name = 'base'
+      ..type = classifier))
+    ..add(new Property((b) => b
+      ..name = 'genericTypeValues'
+      ..type = _createBuiltMap(typeParameter, classifier)));
 
   return builder.build();
 }
@@ -167,21 +161,18 @@ where ValueClass has a field of type ValueClass but that instance doesn't
 exist yet''';
   builder.superTypes.add(genericClassifier);
   builder.properties
-    ..add((new PropertyBuilder()
-          ..name = 'properties'
-          ..type = _createBuiltSet(property))
-        .build())
-    ..add((new PropertyBuilder()
-          ..name = 'allProperties'
-          ..type = _createBuiltSet(property)
-          ..derivedExpression = '''new BuiltSet<Property>(
-    concat([superTypes.expand((vc) => vc.allProperties), properties]))''')
-        .build())
-    ..add((new PropertyBuilder()
-          ..name = 'isAbstract'
-          ..type = dartBool
-          ..defaultValue = false)
-        .build());
+    ..add(new Property((b) => b
+      ..name = 'properties'
+      ..type = _createBuiltSet(property)))
+    ..add(new Property((b) => b
+      ..name = 'allProperties'
+      ..type = _createBuiltSet(property)
+      ..derivedExpression = '''new BuiltSet<Property>(
+    concat([superTypes.expand((vc) => vc.allProperties), properties]))'''))
+    ..add(new Property((b) => b
+      ..name = 'isAbstract'
+      ..type = dartBool
+      ..defaultValue = false));
   return builder.build();
 }
 
@@ -192,11 +183,10 @@ ValueClass _createValueClass() {
   final builder = new ValueClassBuilder()..name = 'ValueClass';
   builder.superTypes.add(valuableClass);
   builder.properties
-    ..add((new PropertyBuilder()
-          ..name = 'superTypes'
-          // yuck: super type should be ValueClass but that blows up atm
-          ..type = _createBuiltSet(valuableClass))
-        .build());
+    ..add(new Property((b) => b
+      ..name = 'superTypes'
+      // yuck: super type should be ValueClass but that blows up atm
+      ..type = _createBuiltSet(valuableClass)));
   return builder.build();
 }
 
@@ -216,10 +206,9 @@ ValueClass get package => _package ??= _createPackage();
 ValueClass _createPackage() {
   final builder = new ValueClassBuilder()..name = 'Package';
   builder.superTypes.add(namedElement);
-  builder.properties.add((new PropertyBuilder()
-        ..name = 'classifiers'
-        ..type = _createBuiltSet(classifier))
-      .build());
+  builder.properties.add(new Property((b) => b
+    ..name = 'classifiers'
+    ..type = _createBuiltSet(classifier)));
 
   return builder.build();
 }
