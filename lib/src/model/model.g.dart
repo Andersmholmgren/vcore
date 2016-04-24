@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-23T22:52:08.158883Z
+// 2016-04-24T01:17:02.151264Z
 
 part of vcore.model;
 
@@ -146,6 +146,9 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
       'isNullable',
       serializers.serialize(object.isNullable,
           specifiedType: const FullType(bool)),
+      'defaultValue',
+      serializers.serialize(object.defaultValue,
+          specifiedType: FullType.unspecified),
     ];
   }
 
@@ -177,6 +180,10 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
           case 'isNullable':
             result.isNullable = serializers.deserialize(value,
                 specifiedType: const FullType(bool));
+            break;
+          case 'defaultValue':
+            result.defaultValue = serializers.deserialize(value,
+                specifiedType: FullType.unspecified);
             break;
         }
       }
@@ -487,10 +494,13 @@ class _$Property extends Property {
   final String name;
   final Classifier type;
   final bool isNullable;
-  _$Property._({this.name, this.type, this.isNullable}) : super._() {
+  final Object defaultValue;
+  _$Property._({this.name, this.type, this.isNullable, this.defaultValue})
+      : super._() {
     if (name == null) throw new ArgumentError('null name');
     if (type == null) throw new ArgumentError('null type');
     if (isNullable == null) throw new ArgumentError('null isNullable');
+    if (defaultValue == null) throw new ArgumentError('null defaultValue');
   }
   factory _$Property([updates(PropertyBuilder b)]) =>
       (new PropertyBuilder()..update(updates)).build();
@@ -501,11 +511,12 @@ class _$Property extends Property {
     if (other is! Property) return false;
     return name == other.name &&
         type == other.type &&
-        isNullable == other.isNullable;
+        isNullable == other.isNullable &&
+        defaultValue == other.defaultValue;
   }
 
   int get hashCode {
-    return hashObjects([name, type, isNullable]);
+    return hashObjects([name, type, isNullable, defaultValue]);
   }
 
   String toString() {
@@ -513,6 +524,7 @@ class _$Property extends Property {
         'name=${name.toString()}\n'
         'type=${type.toString()}\n'
         'isNullable=${isNullable.toString()}\n'
+        'defaultValue=${defaultValue.toString()}\n'
         '}';
   }
 }
@@ -523,6 +535,7 @@ class _$PropertyBuilder extends PropertyBuilder {
     super.name = other.name;
     super.type = other.type;
     super.isNullable = other.isNullable;
+    super.defaultValue = other.defaultValue;
   }
 
   void update(updates(PropertyBuilder b)) {
@@ -533,7 +546,12 @@ class _$PropertyBuilder extends PropertyBuilder {
     if (name == null) throw new ArgumentError('null name');
     if (type == null) throw new ArgumentError('null type');
     if (isNullable == null) throw new ArgumentError('null isNullable');
-    return new _$Property._(name: name, type: type, isNullable: isNullable);
+    if (defaultValue == null) throw new ArgumentError('null defaultValue');
+    return new _$Property._(
+        name: name,
+        type: type,
+        isNullable: isNullable,
+        defaultValue: defaultValue);
   }
 }
 

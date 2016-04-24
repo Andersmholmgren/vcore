@@ -131,7 +131,8 @@ ValueClass _createProperty() {
         .build())
     ..add((new PropertyBuilder()
           ..name = 'isNullable'
-          ..type = dartBool)
+          ..type = dartBool
+          ..defaultValue = false)
         .build());
 
   return builder.build();
@@ -150,7 +151,8 @@ ValueClass _createValueClass() {
         .build())
     ..add((new PropertyBuilder()
           ..name = 'isAbstract'
-          ..type = dartBool)
+          ..type = dartBool
+          ..defaultValue = false)
         .build());
 
   return builder.build();

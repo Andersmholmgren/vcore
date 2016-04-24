@@ -70,6 +70,8 @@ abstract class Property extends NamedElement
   String get name;
   Classifier get type;
   bool get isNullable;
+  @nullable
+  Object get defaultValue;
   Property._();
 
   factory Property([updates(PropertyBuilder b)]) = _$Property;
@@ -79,6 +81,8 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
   String name;
   Classifier type;
   bool isNullable = false;
+  @nullable
+  Object defaultValue;
   PropertyBuilder._();
   factory PropertyBuilder() = _$PropertyBuilder;
 }
