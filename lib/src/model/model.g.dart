@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-24T01:22:14.400617Z
+// 2016-04-24T01:39:04.592410Z
 
 part of vcore.model;
 
@@ -149,6 +149,9 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
       'defaultValue',
       serializers.serialize(object.defaultValue,
           specifiedType: FullType.unspecified),
+      'derivedExpression',
+      serializers.serialize(object.derivedExpression,
+          specifiedType: const FullType(String)),
     ];
   }
 
@@ -184,6 +187,10 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
           case 'defaultValue':
             result.defaultValue = serializers.deserialize(value,
                 specifiedType: FullType.unspecified);
+            break;
+          case 'derivedExpression':
+            result.derivedExpression = serializers.deserialize(value,
+                specifiedType: const FullType(String));
             break;
         }
       }
@@ -495,7 +502,13 @@ class _$Property extends Property {
   final Classifier type;
   final bool isNullable;
   final Object defaultValue;
-  _$Property._({this.name, this.type, this.isNullable, this.defaultValue})
+  final String derivedExpression;
+  _$Property._(
+      {this.name,
+      this.type,
+      this.isNullable,
+      this.defaultValue,
+      this.derivedExpression})
       : super._() {
     if (name == null) throw new ArgumentError('null name');
     if (type == null) throw new ArgumentError('null type');
@@ -511,11 +524,13 @@ class _$Property extends Property {
     return name == other.name &&
         type == other.type &&
         isNullable == other.isNullable &&
-        defaultValue == other.defaultValue;
+        defaultValue == other.defaultValue &&
+        derivedExpression == other.derivedExpression;
   }
 
   int get hashCode {
-    return hashObjects([name, type, isNullable, defaultValue]);
+    return hashObjects(
+        [name, type, isNullable, defaultValue, derivedExpression]);
   }
 
   String toString() {
@@ -524,6 +539,7 @@ class _$Property extends Property {
         'type=${type.toString()}\n'
         'isNullable=${isNullable.toString()}\n'
         'defaultValue=${defaultValue.toString()}\n'
+        'derivedExpression=${derivedExpression.toString()}\n'
         '}';
   }
 }
@@ -535,6 +551,7 @@ class _$PropertyBuilder extends PropertyBuilder {
     super.type = other.type;
     super.isNullable = other.isNullable;
     super.defaultValue = other.defaultValue;
+    super.derivedExpression = other.derivedExpression;
   }
 
   void update(updates(PropertyBuilder b)) {
@@ -549,7 +566,8 @@ class _$PropertyBuilder extends PropertyBuilder {
         name: name,
         type: type,
         isNullable: isNullable,
-        defaultValue: defaultValue);
+        defaultValue: defaultValue,
+        derivedExpression: derivedExpression);
   }
 }
 

@@ -72,6 +72,12 @@ abstract class Property
   bool get isNullable;
   @nullable
   Object get defaultValue;
+
+  @nullable
+  String get derivedExpression;
+
+  bool get isDerived => derivedExpression != null;
+
   Property._();
 
   factory Property([updates(PropertyBuilder b)]) = _$Property;
@@ -83,6 +89,9 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
   bool isNullable = false;
   @nullable
   Object defaultValue;
+  @nullable
+  String derivedExpression;
+
   PropertyBuilder._();
   factory PropertyBuilder() = _$PropertyBuilder;
 }
