@@ -15,7 +15,7 @@ ExternalClass _builtSet;
 ExternalClass get builtSet => _builtSet ??= _createBuiltSet();
 
 ExternalClass _createBuiltSet() {
-  return new ExternalClass((sb) => sb
+  return new ExternalClass((cb) => cb
     ..name = 'BuiltSet'
     ..genericTypes.add(new TypeParameter((b) => b..name = 'E')));
 }
@@ -24,7 +24,7 @@ ExternalClass _builtMap;
 ExternalClass get builtMap => _builtMap ??= _createBuiltMap();
 
 ExternalClass _createBuiltMap() {
-  return new ExternalClass((sb) => sb
+  return new ExternalClass((cb) => cb
     ..name = 'BuiltMap'
     ..genericTypes.add(new TypeParameter((b) => b..name = 'K'))
     ..genericTypes.add(new TypeParameter((b) => b..name = 'V')));
