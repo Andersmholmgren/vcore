@@ -96,8 +96,15 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
   factory PropertyBuilder() = _$PropertyBuilder;
 }
 
+// ouch. This is needed as
+abstract class ValuableClass implements GenericClassifier {
+  BuiltSet<Property> get properties;
+  BuiltSet<Property> get allProperties;
+  bool get isAbstract;
+}
+
 abstract class ValueClass
-    implements Built<ValueClass, ValueClassBuilder>, GenericClassifier {
+    implements Built<ValueClass, ValueClassBuilder>, ValuableClass {
   static final Serializer<ValueClass> serializer = _$valueClassSerializer;
   String get name;
   BuiltSet<TypeParameter> get genericTypes;
@@ -105,7 +112,7 @@ abstract class ValueClass
   BuiltSet<Property> get allProperties => new BuiltSet<Property>(
       concat([superTypes.expand((vc) => vc.allProperties), properties]));
 
-  BuiltSet<ValueClass> get superTypes;
+  BuiltSet<ValuableClass> get superTypes;
   bool get isAbstract;
 
   ValueClass._();
@@ -118,7 +125,7 @@ abstract class ValueClassBuilder
   String name;
   SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
   SetBuilder<Property> properties = new SetBuilder<Property>();
-  SetBuilder<ValueClass> superTypes = new SetBuilder<ValueClass>();
+  SetBuilder<ValuableClass> superTypes = new SetBuilder<ValuableClass>();
   bool isAbstract = false;
 
   ValueClassBuilder._();
@@ -139,7 +146,7 @@ abstract class ExternalClass
       {String name, SetBuilder<TypeParameter> genericTypes}) {
     return (new ExternalClassBuilder()
           ..name = name
-          ..genericTypes = genericTypes??new SetBuilder<TypeParameter>())
+          ..genericTypes = genericTypes ?? new SetBuilder<TypeParameter>())
         .build();
   }
 }

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-24T01:39:04.592410Z
+// 2016-04-24T04:52:09.955170Z
 
 part of vcore.model;
 
@@ -221,7 +221,7 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
       'superTypes',
       serializers.serialize(object.superTypes,
           specifiedType:
-              const FullType(BuiltSet, const [const FullType(ValueClass)])),
+              const FullType(BuiltSet, const [const FullType(ValuableClass)])),
       'isAbstract',
       serializers.serialize(object.isAbstract,
           specifiedType: const FullType(bool)),
@@ -262,7 +262,7 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
           case 'superTypes':
             result.superTypes.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
-                    BuiltSet, const [const FullType(ValueClass)])));
+                    BuiltSet, const [const FullType(ValuableClass)])));
             break;
           case 'isAbstract':
             result.isAbstract = serializers.deserialize(value,
@@ -580,7 +580,7 @@ class _$ValueClass extends ValueClass {
   final String name;
   final BuiltSet<TypeParameter> genericTypes;
   final BuiltSet<Property> properties;
-  final BuiltSet<ValueClass> superTypes;
+  final BuiltSet<ValuableClass> superTypes;
   final bool isAbstract;
   _$ValueClass._(
       {this.name,
