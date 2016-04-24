@@ -81,6 +81,28 @@ ValueClass _createGenericClassifier() {
   return builder.build();
 }
 
+ValueClass _genericType;
+ValueClass get genericType => _genericType ??= _createGenericType();
+
+ValueClass _createGenericType() {
+  final builder = new ValueClassBuilder()
+    ..name = 'GenericType'
+    ..isAbstract = true;
+  builder.superTypes.add(classifier);
+
+  builder.properties
+    ..add((new PropertyBuilder()
+          ..name = 'base'
+          ..type = classifier)
+        .build())
+    ..add((new PropertyBuilder()
+          ..name = 'genericTypeValues'
+          ..type = _createBuiltMap(typeParameter, classifier))
+        .build());
+
+  return builder.build();
+}
+
 ValueClass _property;
 ValueClass get property => _property ??= _createProperty();
 
@@ -117,6 +139,18 @@ GenericType _createBuiltSet(ValueClass genericParameter) {
     ..name = 'BuiltSet<${genericParameter.name}>';
   genericTypeBuilder.genericTypeValues[builtSet.genericTypes.first] =
       genericParameter;
+
+  return genericTypeBuilder.build();
+}
+
+GenericType _createBuiltMap(ValueClass fromParameter, ValueClass toParameter) {
+  final genericTypeBuilder = new GenericTypeBuilder()
+    ..base = builtMap
+    ..name = 'BuiltMap<${fromParameter.name}, ${toParameter.name}>';
+  genericTypeBuilder.genericTypeValues[builtMap.genericTypes.first] =
+      fromParameter;
+  genericTypeBuilder.genericTypeValues[builtMap.genericTypes.last] =
+    toParameter;
 
   return genericTypeBuilder.build();
 }
