@@ -23,5 +23,4 @@ ExternalClass _dartBool;
 ExternalClass get dartBool => _dartBool ??= _createDartBool();
 ExternalClass _createDartBool() => _ec('bool');
 
-ExternalClass _ec(String name) =>
-    (new ExternalClassBuilder()..name = name).build();
+ExternalClass _ec(String name) => new ExternalClass.build(name: name);

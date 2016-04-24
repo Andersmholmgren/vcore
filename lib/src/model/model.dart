@@ -134,6 +134,14 @@ abstract class ExternalClass
   ExternalClass._();
 
   factory ExternalClass([updates(ExternalClassBuilder b)]) = _$ExternalClass;
+
+  factory ExternalClass.build(
+      {String name, SetBuilder<TypeParameter> genericTypes}) {
+    return (new ExternalClassBuilder()
+          ..name = name
+          ..genericTypes = genericTypes)
+        .build();
+  }
 }
 
 abstract class ExternalClassBuilder
