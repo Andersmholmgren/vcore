@@ -16,7 +16,8 @@ Package _createPackage() {
     ..add(genericClassifier)
     ..add(genericType)
     ..add(property)
-    ..add(valueClass);
+    ..add(valueClass)
+    ..add(externalClass);
   return packageBuilder.build();
 }
 
@@ -128,6 +129,16 @@ ValueClass _createValueClass() {
         ..name = 'properties'
         ..type = _createBuiltSet(property))
       .build());
+
+  return builder.build();
+}
+
+ValueClass _externalClass;
+ValueClass get externalClass => _externalClass ??= _createExternalClass();
+
+ValueClass _createExternalClass() {
+  final builder = new ValueClassBuilder()..name = 'ExternalClass';
+  builder.superTypes.add(genericClassifier);
 
   return builder.build();
 }
