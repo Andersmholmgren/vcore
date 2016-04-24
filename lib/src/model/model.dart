@@ -13,13 +13,7 @@ abstract class NamedElement implements ModelElement {
   String get name;
 }
 
-//abstract class NamedElementBuilder {
-//  String name;
-//}
-
-abstract class Classifier implements NamedElement {
-//  static final Serializer<Classifier> serializer = _classifierSerializer;
-}
+abstract class Classifier implements NamedElement {}
 
 abstract class GenericClassifier implements Classifier {
   BuiltSet<TypeParameter> get genericTypes;
@@ -37,9 +31,8 @@ abstract class GenericType
   factory GenericType([updates(GenericTypeBuilder b)]) = _$GenericType;
 }
 
-abstract class GenericTypeBuilder /*extends NamedElementBuilder*/
-    implements
-        Builder<GenericType, GenericTypeBuilder> {
+abstract class GenericTypeBuilder
+    implements Builder<GenericType, GenericTypeBuilder> {
   String name;
   Classifier base;
   MapBuilder<TypeParameter, Classifier> genericTypeValues =
@@ -61,9 +54,8 @@ abstract class TypeParameter
   factory TypeParameter([updates(TypeParameterBuilder b)]) = _$TypeParameter;
 }
 
-abstract class TypeParameterBuilder /*extends NamedElementBuilder*/
-    implements
-        Builder<TypeParameter, TypeParameterBuilder> {
+abstract class TypeParameterBuilder
+    implements Builder<TypeParameter, TypeParameterBuilder> {
   String name;
   @nullable
   Classifier bound;
@@ -83,9 +75,7 @@ abstract class Property extends NamedElement
   factory Property([updates(PropertyBuilder b)]) = _$Property;
 }
 
-abstract class PropertyBuilder /*extends NamedElementBuilder*/
-    implements
-        Builder<Property, PropertyBuilder> {
+abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
   String name;
   Classifier type;
   bool isNullable = false;
@@ -110,13 +100,11 @@ abstract class ValueClass extends GenericClassifier
   factory ValueClass([updates(ValueClassBuilder b)]) = _$ValueClass;
 }
 
-abstract class ValueClassBuilder /*extends NamedElementBuilder*/
-    implements
-        Builder<ValueClass, ValueClassBuilder> {
+abstract class ValueClassBuilder
+    implements Builder<ValueClass, ValueClassBuilder> {
   String name;
   SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
   SetBuilder<Property> properties = new SetBuilder<Property>();
-//  SetBuilder<PropertyBuilder> properties = new SetBuilder<PropertyBuilder>();
   SetBuilder<ValueClass> superTypes = new SetBuilder<ValueClass>();
   bool isAbstract = false;
 
@@ -128,7 +116,6 @@ abstract class ExternalClass extends GenericClassifier
     implements Built<ExternalClass, ExternalClassBuilder> {
   static final Serializer<ExternalClass> serializer = _$externalClassSerializer;
   String get name;
-//  Type get dartType;
   BuiltSet<TypeParameter> get genericTypes;
 
   ExternalClass._();
@@ -136,11 +123,9 @@ abstract class ExternalClass extends GenericClassifier
   factory ExternalClass([updates(ExternalClassBuilder b)]) = _$ExternalClass;
 }
 
-abstract class ExternalClassBuilder /*extends NamedElementBuilder*/
-    implements
-        Builder<ExternalClass, ExternalClassBuilder> {
+abstract class ExternalClassBuilder
+    implements Builder<ExternalClass, ExternalClassBuilder> {
   String name;
-//  Type dartType;
 
   SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
 
@@ -164,5 +149,4 @@ abstract class PackageBuilder implements Builder<Package, PackageBuilder> {
 
   PackageBuilder._();
   factory PackageBuilder() = _$PackageBuilder;
-
 }
