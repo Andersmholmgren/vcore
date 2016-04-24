@@ -20,7 +20,7 @@ abstract class GenericClassifier implements Classifier {
 }
 
 abstract class GenericType
-    implements Classifier, Built<GenericType, GenericTypeBuilder> {
+    implements Built<GenericType, GenericTypeBuilder>, Classifier {
   static final Serializer<GenericType> serializer = _$genericTypeSerializer;
   String get name;
   Classifier get base;
@@ -43,7 +43,7 @@ abstract class GenericTypeBuilder
 }
 
 abstract class TypeParameter
-    implements NamedElement, Built<TypeParameter, TypeParameterBuilder> {
+    implements Built<TypeParameter, TypeParameterBuilder>, NamedElement {
   static final Serializer<TypeParameter> serializer = _$typeParameterSerializer;
   String get name;
   @nullable
@@ -64,8 +64,8 @@ abstract class TypeParameterBuilder
   factory TypeParameterBuilder() = _$TypeParameterBuilder;
 }
 
-abstract class Property extends NamedElement
-    implements Built<Property, PropertyBuilder> {
+abstract class Property
+    implements Built<Property, PropertyBuilder>, NamedElement {
   static final Serializer<Property> serializer = _$propertySerializer;
   String get name;
   Classifier get type;
@@ -87,8 +87,8 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
   factory PropertyBuilder() = _$PropertyBuilder;
 }
 
-abstract class ValueClass extends GenericClassifier
-    implements Built<ValueClass, ValueClassBuilder> {
+abstract class ValueClass
+    implements Built<ValueClass, ValueClassBuilder>, GenericClassifier {
   static final Serializer<ValueClass> serializer = _$valueClassSerializer;
   String get name;
   BuiltSet<TypeParameter> get genericTypes;
@@ -116,8 +116,8 @@ abstract class ValueClassBuilder
   factory ValueClassBuilder() = _$ValueClassBuilder;
 }
 
-abstract class ExternalClass extends GenericClassifier
-    implements Built<ExternalClass, ExternalClassBuilder> {
+abstract class ExternalClass
+    implements Built<ExternalClass, ExternalClassBuilder>, GenericClassifier {
   static final Serializer<ExternalClass> serializer = _$externalClassSerializer;
   String get name;
   BuiltSet<TypeParameter> get genericTypes;
@@ -137,7 +137,7 @@ abstract class ExternalClassBuilder
   factory ExternalClassBuilder() = _$ExternalClassBuilder;
 }
 
-abstract class Package implements NamedElement, Built<Package, PackageBuilder> {
+abstract class Package implements Built<Package, PackageBuilder>, NamedElement {
   static final Serializer<Package> serializer = _$packageSerializer;
   String get name;
   BuiltSet<Classifier> get classifiers;
