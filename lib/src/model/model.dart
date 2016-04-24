@@ -164,4 +164,5 @@ abstract class PackageBuilder implements Builder<Package, PackageBuilder> {
 
   PackageBuilder._();
   factory PackageBuilder() = _$PackageBuilder;
+
 }

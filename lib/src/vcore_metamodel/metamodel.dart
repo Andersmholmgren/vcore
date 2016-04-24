@@ -10,6 +10,7 @@ Package _vcorePackage;
 Package _createVCorePackage() {
   final packageBuilder = new PackageBuilder()..name = 'vcore';
   packageBuilder.classifiers
+    ..add(modelElement)
     ..add(namedElement)
     ..add(classifier)
     ..add(typeParameter)
@@ -22,6 +23,17 @@ Package _createVCorePackage() {
   return packageBuilder.build();
 }
 
+ValueClass _modelElement;
+ValueClass get modelElement => _modelElement ??= _createModelElement();
+
+ValueClass _createModelElement() {
+  final builder = new ValueClassBuilder()
+    ..name = 'ModelElement'
+    ..isAbstract = true;
+
+  return builder.build();
+}
+
 ValueClass _namedElement;
 ValueClass get namedElement => _namedElement ??= _createNamedElement();
 
@@ -29,6 +41,7 @@ ValueClass _createNamedElement() {
   final builder = new ValueClassBuilder()
     ..name = 'NamedElement'
     ..isAbstract = true;
+  builder.superTypes.add(modelElement);
   builder.properties
     ..add((new PropertyBuilder()
           ..name = 'name'
