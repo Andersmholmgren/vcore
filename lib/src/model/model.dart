@@ -96,7 +96,9 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
   factory PropertyBuilder() = _$PropertyBuilder;
 }
 
-// ouch. This is needed as
+// ouch. This is needed as currently have an issue when creating meta model
+// where ValueClass has a field of type ValueClass but that instance doesn't
+// exist yet
 abstract class ValuableClass implements GenericClassifier {
   BuiltSet<Property> get properties;
   BuiltSet<Property> get allProperties;
