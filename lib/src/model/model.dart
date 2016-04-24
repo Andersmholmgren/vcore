@@ -8,6 +8,7 @@ import 'package:quiver/iterables.dart';
 part 'model.g.dart';
 
 abstract class ModelElement {
+  @nullable
   String get docComment;
 }
 
@@ -25,6 +26,8 @@ abstract class GenericType
     implements Built<GenericType, GenericTypeBuilder>, Classifier {
   static final Serializer<GenericType> serializer = _$genericTypeSerializer;
 
+  @nullable
+  String get docComment;
   String get name;
   Classifier get base;
   BuiltMap<TypeParameter, Classifier> get genericTypeValues;
@@ -36,6 +39,8 @@ abstract class GenericType
 
 abstract class GenericTypeBuilder
     implements Builder<GenericType, GenericTypeBuilder> {
+  @nullable
+  String docComment;
   String name;
   Classifier base;
   MapBuilder<TypeParameter, Classifier> genericTypeValues =
@@ -50,6 +55,8 @@ abstract class TypeParameter
     implements Built<TypeParameter, TypeParameterBuilder>, NamedElement {
   static final Serializer<TypeParameter> serializer = _$typeParameterSerializer;
 
+  @nullable
+  String get docComment;
   String get name;
   @nullable
   Classifier get bound;
@@ -61,6 +68,8 @@ abstract class TypeParameter
 
 abstract class TypeParameterBuilder
     implements Builder<TypeParameter, TypeParameterBuilder> {
+  @nullable
+  String docComment;
   String name;
   @nullable
   Classifier bound;
@@ -74,6 +83,8 @@ abstract class Property
     implements Built<Property, PropertyBuilder>, NamedElement {
   static final Serializer<Property> serializer = _$propertySerializer;
 
+  @nullable
+  String get docComment;
   String get name;
   Classifier get type;
   bool get isNullable;
@@ -89,6 +100,8 @@ abstract class Property
 }
 
 abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
+  @nullable
+  String docComment;
   String name;
   Classifier type;
   bool isNullable = false;
@@ -149,6 +162,8 @@ abstract class ExternalClass
     implements Built<ExternalClass, ExternalClassBuilder>, GenericClassifier {
   static final Serializer<ExternalClass> serializer = _$externalClassSerializer;
 
+  @nullable
+  String get docComment;
   String get name;
   BuiltSet<TypeParameter> get genericTypes;
 
@@ -167,6 +182,8 @@ abstract class ExternalClass
 
 abstract class ExternalClassBuilder
     implements Builder<ExternalClass, ExternalClassBuilder> {
+  @nullable
+  String docComment;
   String name;
   SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
 
@@ -178,6 +195,8 @@ abstract class ExternalClassBuilder
 abstract class Package implements Built<Package, PackageBuilder>, NamedElement {
   static final Serializer<Package> serializer = _$packageSerializer;
 
+  @nullable
+  String get docComment;
   String get name;
   BuiltSet<Classifier> get classifiers;
 
@@ -187,6 +206,8 @@ abstract class Package implements Built<Package, PackageBuilder>, NamedElement {
 }
 
 abstract class PackageBuilder implements Builder<Package, PackageBuilder> {
+  @nullable
+  String docComment;
   String name;
   SetBuilder<Classifier> classifiers = new SetBuilder<Classifier>();
 
