@@ -155,6 +155,10 @@ ValueClass _createValueClass() {
           ..type = _createBuiltSet(property))
         .build())
     ..add((new PropertyBuilder()
+      ..name = 'superTypes'
+      ..type = _createBuiltSet(genericClassifier))
+      .build())
+    ..add((new PropertyBuilder()
           ..name = 'isAbstract'
           ..type = dartBool
           ..defaultValue = false)
