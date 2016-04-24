@@ -105,8 +105,7 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
 // exist yet
 abstract class ValuableClass implements GenericClassifier {
   BuiltSet<Property> get properties;
-  BuiltSet<Property> get allProperties => new BuiltSet<Property>(
-      concat([superTypes.expand((vc) => vc.allProperties), properties]));
+  BuiltSet<Property> get allProperties;
   bool get isAbstract;
 }
 
