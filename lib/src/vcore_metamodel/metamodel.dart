@@ -85,9 +85,7 @@ ValueClass _genericType;
 ValueClass get genericType => _genericType ??= _createGenericType();
 
 ValueClass _createGenericType() {
-  final builder = new ValueClassBuilder()
-    ..name = 'GenericType'
-    ..isAbstract = true;
+  final builder = new ValueClassBuilder()..name = 'GenericType';
   builder.superTypes.add(classifier);
 
   builder.properties
@@ -150,7 +148,7 @@ GenericType _createBuiltMap(ValueClass fromParameter, ValueClass toParameter) {
   genericTypeBuilder.genericTypeValues[builtMap.genericTypes.first] =
       fromParameter;
   genericTypeBuilder.genericTypeValues[builtMap.genericTypes.last] =
-    toParameter;
+      toParameter;
 
   return genericTypeBuilder.build();
 }
