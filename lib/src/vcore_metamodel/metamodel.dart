@@ -87,7 +87,7 @@ ValueClass _createGenericClassifier() {
   final builder = new ValueClassBuilder()
     ..name = 'GenericClassifier'
     ..isAbstract = true;
-  builder.superTypes.add(namedElement);
+  builder.superTypes.add(classifier);
   builder.properties
     ..add((new PropertyBuilder()
           ..name = 'genericTypes'
