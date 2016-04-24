@@ -35,20 +35,6 @@ abstract class GenericType
   GenericType._();
 
   factory GenericType([updates(GenericTypeBuilder b)]) = _$GenericType;
-
-  factory GenericType.build(
-      {String docComment,
-      String name,
-      Classifier base,
-      MapBuilder<TypeParameter, Classifier> genericTypeValues}) {
-    return (new GenericTypeBuilder()
-          ..docComment = docComment
-          ..name = name
-          ..base = base
-          ..genericTypeValues =
-              genericTypeValues ?? new MapBuilder<TypeParameter, Classifier>())
-        .build();
-  }
 }
 
 abstract class GenericTypeBuilder
@@ -78,15 +64,6 @@ abstract class TypeParameter
   TypeParameter._();
 
   factory TypeParameter([updates(TypeParameterBuilder b)]) = _$TypeParameter;
-
-  factory TypeParameter.build(
-      {String docComment, String name, Classifier bound}) {
-    return (new TypeParameterBuilder()
-          ..docComment = docComment
-          ..name = name
-          ..bound = bound)
-        .build();
-  }
 }
 
 abstract class TypeParameterBuilder
@@ -120,23 +97,6 @@ abstract class Property
   Property._();
 
   factory Property([updates(PropertyBuilder b)]) = _$Property;
-
-  factory Property.build(
-      {String docComment,
-      String name,
-      Classifier type,
-      bool isNullable,
-      Object defaultValue,
-      String derivedExpression}) {
-    return (new PropertyBuilder()
-          ..docComment = docComment
-          ..name = name
-          ..type = type
-          ..isNullable = isNullable ?? false
-          ..defaultValue = defaultValue
-          ..derivedExpression = derivedExpression)
-        .build();
-  }
 }
 
 abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
@@ -181,23 +141,6 @@ abstract class ValueClass
   ValueClass._();
 
   factory ValueClass([updates(ValueClassBuilder b)]) = _$ValueClass;
-
-  factory ValueClass.build(
-      {String docComment,
-      String name,
-      SetBuilder<TypeParameter> genericTypes,
-      SetBuilder<Property> properties,
-      bool isAbstract,
-      SetBuilder<ValuableClass> superTypes}) {
-    return (new ValueClassBuilder()
-          ..docComment = docComment
-          ..name = name
-          ..genericTypes = genericTypes ?? new SetBuilder<TypeParameter>()
-          ..properties = properties ?? new SetBuilder<Property>()
-          ..isAbstract = isAbstract ?? false
-          ..superTypes = superTypes ?? new SetBuilder<ValuableClass>())
-        .build();
-  }
 }
 
 abstract class ValueClassBuilder
@@ -227,17 +170,6 @@ abstract class ExternalClass
   ExternalClass._();
 
   factory ExternalClass([updates(ExternalClassBuilder b)]) = _$ExternalClass;
-
-  factory ExternalClass.build(
-      {String docComment,
-      String name,
-      SetBuilder<TypeParameter> genericTypes}) {
-    return (new ExternalClassBuilder()
-          ..docComment = docComment
-          ..name = name
-          ..genericTypes = genericTypes ?? new SetBuilder<TypeParameter>())
-        .build();
-  }
 }
 
 abstract class ExternalClassBuilder
@@ -263,15 +195,6 @@ abstract class Package implements Built<Package, PackageBuilder>, NamedElement {
   Package._();
 
   factory Package([updates(PackageBuilder b)]) = _$Package;
-
-  factory Package.build(
-      {String docComment, String name, SetBuilder<Classifier> classifiers}) {
-    return (new PackageBuilder()
-          ..docComment = docComment
-          ..name = name
-          ..classifiers = classifiers ?? new SetBuilder<Classifier>())
-        .build();
-  }
 }
 
 abstract class PackageBuilder implements Builder<Package, PackageBuilder> {
