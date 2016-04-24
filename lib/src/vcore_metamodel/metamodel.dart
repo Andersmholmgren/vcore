@@ -168,7 +168,9 @@ ValueClass _createValuableClass() {
         .build())
     ..add((new PropertyBuilder()
           ..name = 'allProperties'
-          ..type = _createBuiltSet(property))
+          ..type = _createBuiltSet(property)
+          ..derivedExpression = '''new BuiltSet<Property>(
+    concat([superTypes.expand((vc) => vc.allProperties), properties]))''')
         .build())
     ..add((new PropertyBuilder()
           ..name = 'isAbstract'
@@ -185,12 +187,6 @@ ValueClass _createValueClass() {
   final builder = new ValueClassBuilder()..name = 'ValueClass';
   builder.superTypes.add(valuableClass);
   builder.properties
-    ..add((new PropertyBuilder()
-          ..name = 'allProperties'
-          ..type = _createBuiltSet(property)
-          ..derivedExpression = '''new BuiltSet<Property>(
-    concat([superTypes.expand((vc) => vc.allProperties), properties]))''')
-        .build())
     ..add((new PropertyBuilder()
           ..name = 'superTypes'
           // yuck: super type should be ValueClass but that blows up atm
