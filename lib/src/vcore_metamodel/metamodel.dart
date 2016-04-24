@@ -152,11 +152,13 @@ ValueClass _createProperty() {
   return builder.build();
 }
 
-ValueClass _valueClass;
-ValueClass get valueClass => _valueClass ??= _createValueClass();
+ValueClass _valuableClass;
+ValueClass get valuableClass => _valuableClass ??= _createValuableClass();
 
-ValueClass _createValueClass() {
-  final builder = new ValueClassBuilder()..name = 'ValueClass';
+ValueClass _createValuableClass() {
+  final builder = new ValueClassBuilder()
+    ..name = 'ValuableClass'
+    ..isAbstract = true;
   builder.superTypes.add(genericClassifier);
   builder.properties
     ..add((new PropertyBuilder()
@@ -165,19 +167,33 @@ ValueClass _createValueClass() {
         .build())
     ..add((new PropertyBuilder()
           ..name = 'allProperties'
+          ..type = _createBuiltSet(property))
+        .build())
+    ..add((new PropertyBuilder()
+          ..name = 'isAbstract'
+          ..type = dartBool
+          ..defaultValue = false)
+        .build());
+  return builder.build();
+}
+
+ValueClass _valueClass;
+ValueClass get valueClass => _valueClass ??= _createValueClass();
+
+ValueClass _createValueClass() {
+  final builder = new ValueClassBuilder()..name = 'ValueClass';
+  builder.superTypes.add(valuableClass);
+  builder.properties
+    ..add((new PropertyBuilder()
+          ..name = 'allProperties'
           ..type = _createBuiltSet(property)
           ..derivedExpression = '''new BuiltSet<Property>(
     concat([superTypes.expand((vc) => vc.allProperties), properties]))''')
         .build())
     ..add((new PropertyBuilder()
           ..name = 'superTypes'
-          // TODO: super type MUST be ValueClass but that blows up atm
-          ..type = _createBuiltSet(genericClassifier))
-        .build())
-    ..add((new PropertyBuilder()
-          ..name = 'isAbstract'
-          ..type = dartBool
-          ..defaultValue = false)
+          // yuck: super type should be ValueClass but that blows up atm
+          ..type = _createBuiltSet(valuableClass))
         .build());
   return builder.build();
 }
