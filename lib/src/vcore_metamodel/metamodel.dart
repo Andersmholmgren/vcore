@@ -178,45 +178,33 @@ ValueClass _createValueClass() {
 ValueClass _externalClass;
 ValueClass get externalClass => _externalClass ??= _createExternalClass();
 
-ValueClass _createExternalClass() {
-  final builder = new ValueClassBuilder()..name = 'ExternalClass';
-  builder.superTypes.add(genericClassifier);
-
-  return builder.build();
-}
+ValueClass _createExternalClass() => new ValueClass((cb) => cb
+  ..name = 'ExternalClass'
+  ..superTypes.add(genericClassifier));
 
 ValueClass _package;
 ValueClass get package => _package ??= _createPackage();
 
 ValueClass _createPackage() {
-  final builder = new ValueClassBuilder()..name = 'Package';
-  builder.superTypes.add(namedElement);
-  builder.properties.add(new Property((b) => b
-    ..name = 'classifiers'
-    ..type = _createBuiltSet(classifier)));
-
-  return builder.build();
+  return new ValueClass((cb) => cb
+    ..name = 'Package'
+    ..superTypes.add(namedElement)
+    ..properties.add(new Property((b) => b
+      ..name = 'classifiers'
+      ..type = _createBuiltSet(classifier))));
 }
 
 GenericType _createBuiltSet(ValueClass genericParameter) {
-  final genericTypeBuilder = new GenericTypeBuilder()
+  return new GenericType((cb) => cb
     ..base = builtSet
-    ..name = 'BuiltSet<${genericParameter.name}>';
-
-  genericTypeBuilder.genericTypeValues[builtSet.genericTypes.first] =
-      genericParameter;
-
-  return genericTypeBuilder.build();
+    ..name = 'BuiltSet<${genericParameter.name}>'
+    ..genericTypeValues[builtSet.genericTypes.first] = genericParameter);
 }
 
 GenericType _createBuiltMap(ValueClass fromParameter, ValueClass toParameter) {
-  final genericTypeBuilder = new GenericTypeBuilder()
+  return new GenericType((cb) => cb
     ..base = builtMap
-    ..name = 'BuiltMap<${fromParameter.name}, ${toParameter.name}>';
-  genericTypeBuilder.genericTypeValues[builtMap.genericTypes.first] =
-      fromParameter;
-  genericTypeBuilder.genericTypeValues[builtMap.genericTypes.last] =
-      toParameter;
-
-  return genericTypeBuilder.build();
+    ..name = 'BuiltMap<${fromParameter.name}, ${toParameter.name}>'
+    ..genericTypeValues[builtMap.genericTypes.first] = fromParameter
+    ..genericTypeValues[builtMap.genericTypes.last] = toParameter);
 }
