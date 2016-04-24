@@ -28,58 +28,49 @@ ValueClass _modelElement;
 ValueClass get modelElement => _modelElement ??= _createModelElement();
 
 ValueClass _createModelElement() {
-  final builder = new ValueClassBuilder()
+  return new ValueClass((cb) => cb
     ..name = 'ModelElement'
-    ..isAbstract = true;
-  builder.properties
-    ..add(new Property((b) => b
+    ..isAbstract = true
+    ..properties.add(new Property((b) => b
       ..name = 'docComment'
       ..type = dartString
-      ..isNullable = true));
-  return builder.build();
+      ..isNullable = true)));
 }
 
 ValueClass _namedElement;
 ValueClass get namedElement => _namedElement ??= _createNamedElement();
 
 ValueClass _createNamedElement() {
-  final builder = new ValueClassBuilder()
+  return new ValueClass((cb) => cb
     ..name = 'NamedElement'
-    ..isAbstract = true;
-  builder.superTypes.add(modelElement);
-  builder.properties
-    ..add(new Property((b) => b
+    ..isAbstract = true
+    ..superTypes.add(modelElement)
+    ..properties.add(new Property((b) => b
       ..name = 'name'
-      ..type = dartString));
-
-  return builder.build();
+      ..type = dartString)));
 }
 
 ValueClass _classifier;
 ValueClass get classifier => _classifier ??= _createClassifier();
 
 ValueClass _createClassifier() {
-  final builder = new ValueClassBuilder()
+  return new ValueClass((cb) => cb
     ..name = 'Classifier'
-    ..isAbstract = true;
-  builder.superTypes.add(namedElement);
-
-  return builder.build();
+    ..isAbstract = true
+    ..superTypes.add(namedElement));
 }
 
 ValueClass _typeParameter;
 ValueClass get typeParameter => _typeParameter ??= _createTypeParameter();
 
 ValueClass _createTypeParameter() {
-  final builder = new ValueClassBuilder()..name = 'TypeParameter';
-  builder.superTypes.add(namedElement);
-  builder.properties
-    ..add(new Property((b) => b
+  return new ValueClass((cb) => cb
+    ..name = 'TypeParameter'
+    ..superTypes.add(namedElement)
+    ..properties.add(new Property((b) => b
       ..name = 'bound'
       ..type = classifier
-      ..isNullable = true));
-
-  return builder.build();
+      ..isNullable = true)));
 }
 
 ValueClass _genericClassifier;
@@ -87,42 +78,37 @@ ValueClass get genericClassifier =>
     _genericClassifier ??= _createGenericClassifier();
 
 ValueClass _createGenericClassifier() {
-  final builder = new ValueClassBuilder()
+  return new ValueClass((cb) => cb
     ..name = 'GenericClassifier'
-    ..isAbstract = true;
-  builder.superTypes.add(classifier);
-  builder.properties
-    ..add(new Property((b) => b
+    ..isAbstract = true
+    ..superTypes.add(classifier)
+    ..properties.add(new Property((b) => b
       ..name = 'genericTypes'
-      ..type = _createBuiltSet(typeParameter)));
-
-  return builder.build();
+      ..type = _createBuiltSet(typeParameter))));
 }
 
 ValueClass _genericType;
 ValueClass get genericType => _genericType ??= _createGenericType();
 
 ValueClass _createGenericType() {
-  final builder = new ValueClassBuilder()..name = 'GenericType';
-  builder.superTypes.add(classifier);
-
-  builder.properties
-    ..add(new Property((b) => b
+  return new ValueClass((cb) => cb
+    ..name = 'GenericType'
+    ..superTypes.add(classifier)
+    ..properties.add(new Property((b) => b
       ..name = 'base'
       ..type = classifier))
-    ..add(new Property((b) => b
+    ..properties.add(new Property((b) => b
       ..name = 'genericTypeValues'
-      ..type = _createBuiltMap(typeParameter, classifier)));
-
-  return builder.build();
+      ..type = _createBuiltMap(typeParameter, classifier))));
 }
 
 ValueClass _property;
 ValueClass get property => _property ??= _createProperty();
 
 ValueClass _createProperty() {
-  final builder = new ValueClassBuilder()..name = 'Property';
-  builder.superTypes.add(namedElement);
+  final builder = new ValueClassBuilder()
+    ..name = 'Property'
+    ..superTypes.add(namedElement);
 
   builder.properties
     ..add(new Property((b) => b
