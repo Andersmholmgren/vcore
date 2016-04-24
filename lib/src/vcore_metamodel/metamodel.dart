@@ -17,6 +17,7 @@ Package _createVCorePackage() {
     ..add(genericType)
     ..add(typeParameter)
     ..add(property)
+    ..add(valuableClass)
     ..add(valueClass)
     ..add(externalClass)
     ..add(package);
