@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-24T01:17:02.151264Z
+// 2016-04-24T01:22:14.400617Z
 
 part of vcore.model;
 
@@ -500,7 +500,6 @@ class _$Property extends Property {
     if (name == null) throw new ArgumentError('null name');
     if (type == null) throw new ArgumentError('null type');
     if (isNullable == null) throw new ArgumentError('null isNullable');
-    if (defaultValue == null) throw new ArgumentError('null defaultValue');
   }
   factory _$Property([updates(PropertyBuilder b)]) =>
       (new PropertyBuilder()..update(updates)).build();
@@ -546,7 +545,6 @@ class _$PropertyBuilder extends PropertyBuilder {
     if (name == null) throw new ArgumentError('null name');
     if (type == null) throw new ArgumentError('null type');
     if (isNullable == null) throw new ArgumentError('null isNullable');
-    if (defaultValue == null) throw new ArgumentError('null defaultValue');
     return new _$Property._(
         name: name,
         type: type,

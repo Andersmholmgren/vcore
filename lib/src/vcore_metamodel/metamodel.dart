@@ -133,6 +133,11 @@ ValueClass _createProperty() {
           ..name = 'isNullable'
           ..type = dartBool
           ..defaultValue = false)
+        .build())
+    ..add((new PropertyBuilder()
+          ..name = 'defaultValue'
+          ..type = dartObject
+          ..isNullable = true)
         .build());
 
   return builder.build();

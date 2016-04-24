@@ -7,9 +7,13 @@ Package _dartPackage;
 Package _createPackage() {
   final packageBuilder = new PackageBuilder()..name = 'dart';
   final classifiers = packageBuilder.classifiers;
-  classifiers..add(dartString)..add(dartBool);
+  classifiers..add(dartObject)..add(dartString)..add(dartBool);
   return packageBuilder.build();
 }
+
+ExternalClass _dartObject;
+ExternalClass get dartObject => _dartObject ??= _createDartObject();
+ExternalClass _createDartObject() => _ec('Object');
 
 ExternalClass _dartString;
 ExternalClass get dartString => _dartString ??= _createDartString();
