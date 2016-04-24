@@ -159,6 +159,12 @@ ValueClass _createValueClass() {
           ..type = _createBuiltSet(property))
         .build())
     ..add((new PropertyBuilder()
+          ..name = 'allProperties'
+          ..type = _createBuiltSet(property)
+          ..derivedExpression = '''new BuiltSet<Property>(
+    concat([superTypes.expand((vc) => vc.allProperties), properties]))''')
+        .build())
+    ..add((new PropertyBuilder()
           ..name = 'superTypes'
           ..type = _createBuiltSet(genericClassifier))
         .build())
@@ -167,7 +173,6 @@ ValueClass _createValueClass() {
           ..type = dartBool
           ..defaultValue = false)
         .build());
-
   return builder.build();
 }
 
