@@ -139,7 +139,7 @@ abstract class ExternalClass
       {String name, SetBuilder<TypeParameter> genericTypes}) {
     return (new ExternalClassBuilder()
           ..name = name
-          ..genericTypes = genericTypes)
+          ..genericTypes = genericTypes??new SetBuilder<TypeParameter>())
         .build();
   }
 }
