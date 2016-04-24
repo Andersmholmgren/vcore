@@ -217,6 +217,7 @@ GenericType _createBuiltSet(ValueClass genericParameter) {
   final genericTypeBuilder = new GenericTypeBuilder()
     ..base = builtSet
     ..name = 'BuiltSet<${genericParameter.name}>';
+
   genericTypeBuilder.genericTypeValues[builtSet.genericTypes.first] =
       genericParameter;
 
