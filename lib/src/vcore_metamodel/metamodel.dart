@@ -138,8 +138,12 @@ ValueClass _createProperty() {
           ..name = 'defaultValue'
           ..type = dartObject
           ..isNullable = true)
+        .build())
+    ..add((new PropertyBuilder()
+          ..name = 'derivedExpression'
+          ..type = dartString
+          ..isNullable = true)
         .build());
-
   return builder.build();
 }
 
@@ -155,9 +159,9 @@ ValueClass _createValueClass() {
           ..type = _createBuiltSet(property))
         .build())
     ..add((new PropertyBuilder()
-      ..name = 'superTypes'
-      ..type = _createBuiltSet(genericClassifier))
-      .build())
+          ..name = 'superTypes'
+          ..type = _createBuiltSet(genericClassifier))
+        .build())
     ..add((new PropertyBuilder()
           ..name = 'isAbstract'
           ..type = dartBool
