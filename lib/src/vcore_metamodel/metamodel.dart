@@ -166,14 +166,13 @@ ValueClass _valueClass;
 ValueClass get valueClass => _valueClass ??= _createValueClass();
 
 ValueClass _createValueClass() {
-  final builder = new ValueClassBuilder()..name = 'ValueClass';
-  builder.superTypes.add(valuableClass);
-  builder.properties
-    ..add(new Property((b) => b
+  return new ValueClass((cb) => cb
+    ..name = 'ValueClass'
+    ..superTypes.add(valuableClass)
+    ..properties.add(new Property((b) => b
       ..name = 'superTypes'
       // yuck: super type should be ValueClass but that blows up atm
-      ..type = _createBuiltSet(valuableClass)));
-  return builder.build();
+      ..type = _createBuiltSet(valuableClass))));
 }
 
 ValueClass _externalClass;
