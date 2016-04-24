@@ -119,8 +119,8 @@ abstract class ValueClass
   BuiltSet<Property> get properties;
   BuiltSet<Property> get allProperties => new BuiltSet<Property>(
       concat([superTypes.expand((vc) => vc.allProperties), properties]));
-  BuiltSet<ValuableClass> get superTypes;
   bool get isAbstract;
+  BuiltSet<ValuableClass> get superTypes;
 
   ValueClass._();
 
@@ -132,8 +132,8 @@ abstract class ValueClassBuilder
   String name;
   SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
   SetBuilder<Property> properties = new SetBuilder<Property>();
-  SetBuilder<ValuableClass> superTypes = new SetBuilder<ValuableClass>();
   bool isAbstract = false;
+  SetBuilder<ValuableClass> superTypes = new SetBuilder<ValuableClass>();
 
   ValueClassBuilder._();
 
