@@ -158,6 +158,32 @@ abstract class ValueClassBuilder
   factory ValueClassBuilder() = _$ValueClassBuilder;
 }
 
+abstract class EnumClass
+    implements Built<EnumClass, EnumClassBuilder>, Classifier {
+  static final Serializer<EnumClass> serializer = _$enumClassSerializer;
+
+  @nullable
+  String get docComment;
+  String get name;
+  BuiltSet<String> get literals;
+
+  EnumClass._();
+
+  factory EnumClass([updates(EnumClassBuilder b)]) = _$EnumClass;
+}
+
+abstract class EnumClassBuilder
+    implements Builder<EnumClass, EnumClassBuilder> {
+  @nullable
+  String docComment;
+  String name;
+  SetBuilder<String> literals = new SetBuilder<String>();
+
+  EnumClassBuilder._();
+
+  factory EnumClassBuilder() = _$EnumClassBuilder;
+}
+
 abstract class ExternalClass
     implements Built<ExternalClass, ExternalClassBuilder>, GenericClassifier {
   static final Serializer<ExternalClass> serializer = _$externalClassSerializer;

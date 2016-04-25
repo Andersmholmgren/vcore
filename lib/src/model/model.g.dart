@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-24T05:45:11.614124Z
+// 2016-04-25T05:57:39.845038Z
 
 part of vcore.model;
 
@@ -13,6 +13,7 @@ Serializer<TypeParameter> _$typeParameterSerializer =
     new _$TypeParameterSerializer();
 Serializer<Property> _$propertySerializer = new _$PropertySerializer();
 Serializer<ValueClass> _$valueClassSerializer = new _$ValueClassSerializer();
+Serializer<EnumClass> _$enumClassSerializer = new _$EnumClassSerializer();
 Serializer<ExternalClass> _$externalClassSerializer =
     new _$ExternalClassSerializer();
 Serializer<Package> _$packageSerializer = new _$PackageSerializer();
@@ -295,6 +296,64 @@ class _$ValueClassSerializer implements StructuredSerializer<ValueClass> {
             result.superTypes.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
                     BuiltSet, const [const FullType(ValuableClass)])));
+            break;
+        }
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$EnumClassSerializer implements StructuredSerializer<EnumClass> {
+  final Iterable<Type> types = new BuiltList<Type>([EnumClass, _$EnumClass]);
+  final String wireName = 'EnumClass';
+
+  @override
+  Iterable serialize(Serializers serializers, EnumClass object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return [
+      'docComment',
+      serializers.serialize(object.docComment,
+          specifiedType: const FullType(String)),
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'literals',
+      serializers.serialize(object.literals,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(String)])),
+    ];
+  }
+
+  @override
+  EnumClass deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new EnumClassBuilder();
+
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
+
+        switch (key as String) {
+          case 'docComment':
+            result.docComment = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
+          case 'name':
+            result.name = serializers.deserialize(value,
+                specifiedType: const FullType(String));
+            break;
+          case 'literals':
+            result.literals.replace(serializers.deserialize(value,
+                specifiedType:
+                    const FullType(BuiltSet, const [const FullType(String)])));
             break;
         }
       }
@@ -720,6 +779,64 @@ class _$ValueClassBuilder extends ValueClassBuilder {
         properties: properties?.build(),
         isAbstract: isAbstract,
         superTypes: superTypes?.build());
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class EnumClass
+// **************************************************************************
+
+class _$EnumClass extends EnumClass {
+  final String docComment;
+  final String name;
+  final BuiltSet<String> literals;
+  _$EnumClass._({this.docComment, this.name, this.literals}) : super._() {
+    if (name == null) throw new ArgumentError('null name');
+    if (literals == null) throw new ArgumentError('null literals');
+  }
+  factory _$EnumClass([updates(EnumClassBuilder b)]) =>
+      (new EnumClassBuilder()..update(updates)).build();
+  EnumClass rebuild(updates(EnumClassBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+  _$EnumClassBuilder toBuilder() => new _$EnumClassBuilder()..replace(this);
+  bool operator ==(other) {
+    if (other is! EnumClass) return false;
+    return docComment == other.docComment &&
+        name == other.name &&
+        literals == other.literals;
+  }
+
+  int get hashCode {
+    return hashObjects([docComment, name, literals]);
+  }
+
+  String toString() {
+    return 'EnumClass {'
+        'docComment=${docComment.toString()}\n'
+        'name=${name.toString()}\n'
+        'literals=${literals.toString()}\n'
+        '}';
+  }
+}
+
+class _$EnumClassBuilder extends EnumClassBuilder {
+  _$EnumClassBuilder() : super._();
+  void replace(EnumClass other) {
+    super.docComment = other.docComment;
+    super.name = other.name;
+    super.literals = other.literals?.toBuilder();
+  }
+
+  void update(updates(EnumClassBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  EnumClass build() {
+    if (name == null) throw new ArgumentError('null name');
+    if (literals == null) throw new ArgumentError('null literals');
+    return new _$EnumClass._(
+        docComment: docComment, name: name, literals: literals?.build());
   }
 }
 

@@ -1,7 +1,7 @@
 import 'package:vcore/src/model/model.dart';
 
-import 'coredart_metamodel.dart';
 import 'built_metamodel.dart';
+import 'coredart_metamodel.dart';
 
 Package get vcorePackage => _vcorePackage ??= _createVCorePackage();
 
@@ -19,6 +19,7 @@ Package _createVCorePackage() {
     ..add(property)
     ..add(valuableClass)
     ..add(valueClass)
+    ..add(enumClass)
     ..add(externalClass)
     ..add(package);
   return packageBuilder.build();
@@ -182,6 +183,18 @@ ValueClass _createExternalClass() => new ValueClass((cb) => cb
   ..name = 'ExternalClass'
   ..superTypes.add(genericClassifier));
 
+ValueClass _enumClass;
+ValueClass get enumClass => _enumClass ??= _createEnumClass();
+
+ValueClass _createEnumClass() {
+  return new ValueClass((cb) => cb
+    ..name = 'EnumClass'
+    ..superTypes.add(classifier)
+    ..properties.add(new Property((b) => b
+      ..name = 'literals'
+      ..type = _createBuiltSet(dartString))));
+}
+
 ValueClass _package;
 ValueClass get package => _package ??= _createPackage();
 
@@ -194,14 +207,14 @@ ValueClass _createPackage() {
       ..type = _createBuiltSet(classifier))));
 }
 
-GenericType _createBuiltSet(ValueClass genericParameter) {
+GenericType _createBuiltSet(Classifier genericParameter) {
   return new GenericType((cb) => cb
     ..base = builtSet
     ..name = 'BuiltSet<${genericParameter.name}>'
     ..genericTypeValues[builtSet.genericTypes.first] = genericParameter);
 }
 
-GenericType _createBuiltMap(ValueClass fromParameter, ValueClass toParameter) {
+GenericType _createBuiltMap(Classifier fromParameter, Classifier toParameter) {
   return new GenericType((cb) => cb
     ..base = builtMap
     ..name = 'BuiltMap<${fromParameter.name}, ${toParameter.name}>'
