@@ -168,27 +168,13 @@ abstract class ValueClassBuilder
   String docComment;
   String name;
   SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
-  BuiltSet<Property> properties;
-
-  SetBuilderBuilder<Property, PropertyBuilder> _properties =
-      new SetBuilderBuilder<Property, PropertyBuilder>();
-
-  void addProperty(PropertyBuilder b) {
-    _properties.add(b);
-  }
-
+  SetBuilder<Property> properties = new SetBuilder<Property>();
   bool isAbstract = false;
-  SetBuilder<ValueClassBuilder> superTypes =
-      new SetBuilder<ValueClassBuilder>();
+  SetBuilder<ValueClass> superTypes = new SetBuilder<ValueClass>();
 
   ValueClassBuilder._();
 
   factory ValueClassBuilder() = _$ValueClassBuilder;
-
-  ValueClass build() {
-    properties = _properties.build();
-    return super.build();
-  }
 }
 
 abstract class EnumClass
@@ -273,19 +259,4 @@ abstract class PackageBuilder implements Builder<Package, PackageBuilder> {
   PackageBuilder._();
 
   factory PackageBuilder() = _$PackageBuilder;
-}
-
-class SetBuilderBuilder<V extends Built<V, B>, B extends Builder<V, B>> {
-  final SetBuilder<B> _setBuilder = new SetBuilder<B>();
-
-  BuiltSet<V> build() =>
-      new BuiltSet<V>(_setBuilder.build().map((b) => b.build()));
-
-  void add(B value) {
-    _setBuilder.add(value);
-  }
-
-  void addAll(Iterable<B> iterable) {
-    _setBuilder.addAll(iterable);
-  }
 }
