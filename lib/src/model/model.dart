@@ -16,14 +16,25 @@ abstract class NamedElement implements ModelElement {
   String get name;
 }
 
-abstract class Classifier implements NamedElement {}
+abstract class Classifier<V extends Classifier<V, B>,
+    B extends ClassifierBuilder<V, B>> implements NamedElement {
+  B toBuilder();
+}
 
-abstract class GenericClassifier implements Classifier {
+abstract class ClassifierBuilder<V extends Classifier<V, B>,
+    B extends ClassifierBuilder<V, B>> {
+  V build();
+}
+
+abstract class GenericClassifier<V extends GenericClassifier<V, B>,
+    B extends ClassifierBuilder<V, B>> implements Classifier<V, B> {
   BuiltSet<TypeParameter> get genericTypes;
 }
 
 abstract class GenericType
-    implements Built<GenericType, GenericTypeBuilder>, Classifier {
+    implements
+        Built<GenericType, GenericTypeBuilder>,
+        Classifier<GenericType, GenericTypeBuilder> {
   static final Serializer<GenericType> serializer = _$genericTypeSerializer;
 
   @nullable
@@ -38,7 +49,9 @@ abstract class GenericType
 }
 
 abstract class GenericTypeBuilder
-    implements Builder<GenericType, GenericTypeBuilder> {
+    implements
+        Builder<GenericType, GenericTypeBuilder>,
+        ClassifierBuilder<GenericType, GenericTypeBuilder> {
   @nullable
   String docComment;
   String name;
@@ -103,7 +116,7 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
   @nullable
   String docComment;
   String name;
-  Classifier type;
+  ClassifierBuilder type;
   bool isNullable = false;
   @nullable
   Object defaultValue;
@@ -118,14 +131,17 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
 /// ouch. This is needed as currently have an issue when creating meta model
 /// where ValueClass has a field of type ValueClass but that instance doesn't
 /// exist yet
-abstract class ValuableClass implements GenericClassifier {
+abstract class ValuableClass<V extends ValuableClass<V, B>,
+    B extends ClassifierBuilder<V, B>> implements GenericClassifier<V, B> {
   BuiltSet<Property> get properties;
   BuiltSet<Property> get allProperties;
   bool get isAbstract;
 }
 
 abstract class ValueClass
-    implements Built<ValueClass, ValueClassBuilder>, ValuableClass {
+    implements
+        Built<ValueClass, ValueClassBuilder>,
+        ValuableClass<ValueClass, ValueClassBuilder> {
   static final Serializer<ValueClass> serializer = _$valueClassSerializer;
 
   @nullable
@@ -144,7 +160,9 @@ abstract class ValueClass
 }
 
 abstract class ValueClassBuilder
-    implements Builder<ValueClass, ValueClassBuilder> {
+    implements
+        Builder<ValueClass, ValueClassBuilder>,
+        ClassifierBuilder<ValueClass, ValueClassBuilder> {
   @nullable
   String docComment;
   String name;
@@ -159,7 +177,9 @@ abstract class ValueClassBuilder
 }
 
 abstract class EnumClass
-    implements Built<EnumClass, EnumClassBuilder>, Classifier {
+    implements
+        Built<EnumClass, EnumClassBuilder>,
+        Classifier<EnumClass, EnumClassBuilder> {
   static final Serializer<EnumClass> serializer = _$enumClassSerializer;
 
   @nullable
@@ -173,7 +193,9 @@ abstract class EnumClass
 }
 
 abstract class EnumClassBuilder
-    implements Builder<EnumClass, EnumClassBuilder> {
+    implements
+        Builder<EnumClass, EnumClassBuilder>,
+        ClassifierBuilder<EnumClass, EnumClassBuilder> {
   @nullable
   String docComment;
   String name;
@@ -185,7 +207,9 @@ abstract class EnumClassBuilder
 }
 
 abstract class ExternalClass
-    implements Built<ExternalClass, ExternalClassBuilder>, GenericClassifier {
+    implements
+        Built<ExternalClass, ExternalClassBuilder>,
+        GenericClassifier<ExternalClass, ExternalClassBuilder> {
   static final Serializer<ExternalClass> serializer = _$externalClassSerializer;
 
   @nullable
@@ -199,7 +223,9 @@ abstract class ExternalClass
 }
 
 abstract class ExternalClassBuilder
-    implements Builder<ExternalClass, ExternalClassBuilder> {
+    implements
+        Builder<ExternalClass, ExternalClassBuilder>,
+        ClassifierBuilder<ExternalClass, ExternalClassBuilder> {
   @nullable
   String docComment;
   String name;

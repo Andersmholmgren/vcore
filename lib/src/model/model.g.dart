@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-25T05:57:39.845038Z
+// 2016-04-29T23:58:23.009479Z
 
 part of vcore.model;
 
@@ -199,8 +199,8 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
                 specifiedType: const FullType(String));
             break;
           case 'type':
-            result.type = serializers.deserialize(value,
-                specifiedType: const FullType(Classifier));
+            result.type.replace(serializers.deserialize(value,
+                specifiedType: const FullType(Classifier)));
             break;
           case 'isNullable':
             result.isNullable = serializers.deserialize(value,
@@ -669,7 +669,7 @@ class _$PropertyBuilder extends PropertyBuilder {
   void replace(Property other) {
     super.docComment = other.docComment;
     super.name = other.name;
-    super.type = other.type;
+    super.type = other.type?.toBuilder();
     super.isNullable = other.isNullable;
     super.defaultValue = other.defaultValue;
     super.derivedExpression = other.derivedExpression;
@@ -686,7 +686,7 @@ class _$PropertyBuilder extends PropertyBuilder {
     return new _$Property._(
         docComment: docComment,
         name: name,
-        type: type,
+        type: type?.build(),
         isNullable: isNullable,
         defaultValue: defaultValue,
         derivedExpression: derivedExpression);
