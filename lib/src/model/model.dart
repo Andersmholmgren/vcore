@@ -25,6 +25,8 @@ abstract class ClassifierBuilder<V extends Classifier<V, B>,
     B extends ClassifierBuilder<V, B>> {
   String name;
   V build();
+  void replace(V value);
+  void update(updates(B builder));
 }
 
 abstract class GenericClassifier<V extends GenericClassifier<V, B>,
@@ -117,6 +119,7 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
   @nullable
   String docComment;
   String name;
+  @nullable
   ClassifierBuilder type;
   bool isNullable = false;
   @nullable
