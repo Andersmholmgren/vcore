@@ -35,7 +35,8 @@ ValueClass _createModelElement() {
     ..properties.add(new Property((b) => b
       ..name = 'docComment'
       ..type = dartString
-      ..isNullable = true)));
+      ..isNullable = true))
+  );
 }
 
 ValueClass _namedElement;
