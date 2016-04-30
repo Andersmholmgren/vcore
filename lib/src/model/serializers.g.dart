@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-30T00:55:23.645110Z
+// 2016-04-30T01:40:32.118479Z
 
 part of serializers;
 
@@ -26,8 +26,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltSet, const [const FullType(Property)]),
           () => new SetBuilder<Property>())
       ..addBuilderFactory(
-          const FullType(BuiltSet, const [const FullType(ValuableClass)]),
-          () => new SetBuilder<ValuableClass>())
+          const FullType(BuiltSet, const [const FullType(ValueClass)]),
+          () => new SetBuilder<ValueClass>())
       ..add(EnumClass.serializer)
       ..addBuilderFactory(
           const FullType(BuiltSet, const [const FullType(String)]),
