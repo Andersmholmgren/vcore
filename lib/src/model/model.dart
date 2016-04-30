@@ -23,6 +23,7 @@ abstract class Classifier<V extends Classifier<V, B>,
 
 abstract class ClassifierBuilder<V extends Classifier<V, B>,
     B extends ClassifierBuilder<V, B>> {
+  String name;
   V build();
 }
 
