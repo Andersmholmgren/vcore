@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-04-30T02:47:51.235917Z
+// 2016-05-01T01:45:25.841406Z
 
 part of vcore.model;
 
@@ -165,8 +165,8 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
       serializers.serialize(object.isNullable,
           specifiedType: const FullType(bool)),
       'defaultValue',
-      object.defaultValue != null ? serializers.serialize(object.defaultValue,
-          specifiedType: FullType.unspecified) : null,
+      serializers.serialize(object.defaultValue,
+          specifiedType: FullType.unspecified),
       'derivedExpression',
       serializers.serialize(object.derivedExpression,
           specifiedType: const FullType(String)),
@@ -776,7 +776,10 @@ class _$ValueClassBuilder extends ValueClassBuilder {
         docComment: docComment,
         name: name,
         genericTypes: genericTypes?.build(),
-        properties: properties?.build(),
+        properties: properties != null
+            ? new SetBuilder<Property>(properties.build().map((v) => v.build()))
+                .build()
+            : null,
         isAbstract: isAbstract,
         superTypes: superTypes?.build());
   }
