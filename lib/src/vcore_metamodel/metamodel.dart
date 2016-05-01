@@ -47,9 +47,9 @@ ValueClass _createNamedElement() {
     ..name = 'NamedElement'
     ..isAbstract = true
     ..superTypes.add(modelElement)
-    ..properties.add(new Property((b) => b
+    ..properties.add(new PropertyBuilder()
       ..name = 'name'
-      ..type = dartString)
+      ..type = dartString.toBuilder()
     )
   );
 }

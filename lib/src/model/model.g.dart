@@ -757,7 +757,10 @@ class _$ValueClassBuilder extends ValueClassBuilder {
     super.docComment = other.docComment;
     super.name = other.name;
     super.genericTypes = other.genericTypes?.toBuilder();
-    super.properties = other.properties?.toBuilder();
+    super.properties = (other.properties != null
+        ? new SetBuilder<PropertyBuilder>(
+            other.properties.map((p) => p.toBuilder()))
+        : null);
     super.isAbstract = other.isAbstract;
     super.superTypes = other.superTypes?.toBuilder();
   }
