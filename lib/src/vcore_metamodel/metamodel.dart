@@ -49,7 +49,9 @@ ValueClass _createNamedElement() {
     ..superTypes.add(modelElement)
     ..properties.add(new Property((b) => b
       ..name = 'name'
-      ..type = dartString)));
+      ..type = dartString)
+    )
+  );
 }
 
 ValueClass _classifier;
