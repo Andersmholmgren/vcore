@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-05-01T01:45:25.841406Z
+// 2016-05-01T01:48:35.424166Z
 
 part of vcore.model;
 
@@ -775,13 +775,19 @@ class _$ValueClassBuilder extends ValueClassBuilder {
     return new _$ValueClass._(
         docComment: docComment,
         name: name,
-        genericTypes: genericTypes?.build(),
+        genericTypes: genericTypes != null
+            ? new SetBuilder<TypeParameter>(
+                genericTypes.build().map((v) => v.build())).build()
+            : null,
         properties: properties != null
             ? new SetBuilder<Property>(properties.build().map((v) => v.build()))
                 .build()
             : null,
         isAbstract: isAbstract,
-        superTypes: superTypes?.build());
+        superTypes: superTypes != null
+            ? new SetBuilder<ValueClass>(
+                superTypes.build().map((v) => v.build())).build()
+            : null);
   }
 }
 

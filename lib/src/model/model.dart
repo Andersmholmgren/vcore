@@ -170,10 +170,12 @@ abstract class ValueClassBuilder
   @nullable
   String docComment;
   String name;
-  SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
+  SetBuilder<TypeParameterBuilder> genericTypes =
+      new SetBuilder<TypeParameterBuilder>();
   SetBuilder<PropertyBuilder> properties = new SetBuilder<PropertyBuilder>();
   bool isAbstract = false;
-  SetBuilder<ValueClass> superTypes = new SetBuilder<ValueClass>();
+  SetBuilder<ValueClassBuilder> superTypes =
+      new SetBuilder<ValueClassBuilder>();
 
   ValueClassBuilder._();
 
