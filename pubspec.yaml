@@ -7,11 +7,13 @@ version: 0.0.1
 dependencies:
   built_collection: "^1.0.0"
   built_json: "^0.0.5"
-  built_value: "^0.0.6"
+  built_value:
+    path: ../built_value.dart/built_value
 #  stuff: ">=0.0.4 <0.1.0"
 dev_dependencies:
   test: ">=0.12.0 <0.13.0"
   built_json_generator: '^0.0.5'
-  built_value_generator: "^0.0.6"
+  built_value_generator:
+    path: ../built_value.dart/built_value_generator
 environment:
   sdk: ">=1.15.0 <2.0.0"
