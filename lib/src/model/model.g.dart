@@ -756,13 +756,19 @@ class _$ValueClassBuilder extends ValueClassBuilder {
   void replace(ValueClass other) {
     super.docComment = other.docComment;
     super.name = other.name;
-    super.genericTypes = other.genericTypes?.toBuilder();
+    super.genericTypes = (other.genericTypes != null
+        ? new SetBuilder<TypeParameterBuilder>(
+            other.genericTypes.map((p) => p.toBuilder()))
+        : null);
     super.properties = (other.properties != null
         ? new SetBuilder<PropertyBuilder>(
             other.properties.map((p) => p.toBuilder()))
         : null);
     super.isAbstract = other.isAbstract;
-    super.superTypes = other.superTypes?.toBuilder();
+    super.superTypes = (other.superTypes != null
+        ? new SetBuilder<ValueClassBuilder>(
+            other.superTypes.map((p) => p.toBuilder()))
+        : null);
   }
 
   void update(updates(ValueClassBuilder b)) {
