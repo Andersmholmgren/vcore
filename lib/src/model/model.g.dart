@@ -775,6 +775,13 @@ class _$ValueClassBuilder extends ValueClassBuilder {
     if (properties == null) throw new ArgumentError('null properties');
     if (isAbstract == null) throw new ArgumentError('null isAbstract');
     if (superTypes == null) throw new ArgumentError('null superTypes');
+
+    print('ZZZ($name) $superTypes');
+    final zzzzz1 =
+        superTypes != null ? superTypes.build().map((v) => v.build()) : [];
+    final zzzzz = new SetBuilder<ValueClass>(zzzzz1).build();
+    print('ZZZ2($name) $zzzzz');
+
     return new _$ValueClass._(
         docComment: docComment,
         name: name,
