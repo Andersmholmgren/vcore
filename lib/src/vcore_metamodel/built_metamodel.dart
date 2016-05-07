@@ -7,7 +7,7 @@ Package _builtPackage;
 Package _createPackage() {
   final packageBuilder = new PackageBuilder()..name = 'built';
   final classifiers = packageBuilder.classifiers;
-  classifiers..add(builtSet)..add(builtMap);
+  classifiers..add(builtSet)..add(builtList)..add(builtMap);
   return packageBuilder.build();
 }
 
@@ -17,6 +17,15 @@ ExternalClass get builtSet => _builtSet ??= _createBuiltSet();
 ExternalClass _createBuiltSet() {
   return new ExternalClass((cb) => cb
     ..name = 'BuiltSet'
+    ..genericTypes.add(new TypeParameter((b) => b..name = 'E')));
+}
+
+ExternalClass _builtList;
+ExternalClass get builtList => _builtList ??= _createBuiltList();
+
+ExternalClass _createBuiltList() {
+  return new ExternalClass((cb) => cb
+    ..name = 'BuiltList'
     ..genericTypes.add(new TypeParameter((b) => b..name = 'E')));
 }
 
