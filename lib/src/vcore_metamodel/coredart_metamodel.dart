@@ -14,7 +14,8 @@ Package _createPackage() {
     ..add(dartNum)
     ..add(dartInt)
     ..add(dartNull)
-    ..add(dartUri);
+    ..add(dartUri)
+    ..add(dartRegExp);
   return packageBuilder.build();
 }
 
@@ -38,5 +39,8 @@ ExternalClass get dartNull => _dartNull ??= _ec('null');
 
 ExternalClass _dartUri;
 ExternalClass get dartUri => _dartUri ??= _ec('Uri');
+
+ExternalClass _dartRegExp;
+ExternalClass get dartRegExp => _dartRegExp ??= _ec('RegExp');
 
 ExternalClass _ec(String name) => new ExternalClass((b) => b..name = name);
