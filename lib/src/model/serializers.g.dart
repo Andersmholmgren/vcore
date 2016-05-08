@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-05-01T01:33:18.655906Z
+// 2016-05-08T04:44:14.035788Z
 
 part of serializers;
 
@@ -39,5 +39,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Package.serializer)
       ..addBuilderFactory(
           const FullType(BuiltSet, const [const FullType(Classifier)]),
-          () => new SetBuilder<Classifier>()))
+          () => new SetBuilder<Classifier>())
+      ..addBuilderFactory(
+          const FullType(BuiltSet, const [const FullType(String)]),
+          () => new SetBuilder<String>()))
     .build();

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-05-01T01:48:35.424166Z
+// 2016-05-08T04:44:14.013215Z
 
 part of vcore.model;
 
@@ -439,6 +439,10 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
       serializers.serialize(object.classifiers,
           specifiedType:
               const FullType(BuiltSet, const [const FullType(Classifier)])),
+      'imports',
+      serializers.serialize(object.imports,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(String)])),
     ];
   }
 
@@ -471,6 +475,11 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
             result.classifiers.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
                     BuiltSet, const [const FullType(Classifier)])));
+            break;
+          case 'imports':
+            result.imports.replace(serializers.deserialize(value,
+                specifiedType:
+                    const FullType(BuiltSet, const [const FullType(String)])));
             break;
         }
       }
@@ -756,19 +765,10 @@ class _$ValueClassBuilder extends ValueClassBuilder {
   void replace(ValueClass other) {
     super.docComment = other.docComment;
     super.name = other.name;
-    super.genericTypes = (other.genericTypes != null
-        ? new SetBuilder<TypeParameterBuilder>(
-            other.genericTypes.map((p) => p.toBuilder()))
-        : null);
-    super.properties = (other.properties != null
-        ? new SetBuilder<PropertyBuilder>(
-            other.properties.map((p) => p.toBuilder()))
-        : null);
+    super.genericTypes = other.genericTypes?.toBuilder();
+    super.properties = other.properties?.toBuilder();
     super.isAbstract = other.isAbstract;
-    super.superTypes = (other.superTypes != null
-        ? new SetBuilder<ValueClassBuilder>(
-            other.superTypes.map((p) => p.toBuilder()))
-        : null);
+    super.superTypes = other.superTypes?.toBuilder();
   }
 
   void update(updates(ValueClassBuilder b)) {
@@ -781,13 +781,6 @@ class _$ValueClassBuilder extends ValueClassBuilder {
     if (properties == null) throw new ArgumentError('null properties');
     if (isAbstract == null) throw new ArgumentError('null isAbstract');
     if (superTypes == null) throw new ArgumentError('null superTypes');
-
-    print('ZZZ($name) $superTypes');
-    final zzzzz1 =
-        superTypes != null ? superTypes.build().map((v) => v.build()) : [];
-    final zzzzz = new SetBuilder<ValueClass>(zzzzz1).build();
-    print('ZZZ2($name) $zzzzz');
-
     return new _$ValueClass._(
         docComment: docComment,
         name: name,
@@ -936,9 +929,12 @@ class _$Package extends Package {
   final String docComment;
   final String name;
   final BuiltSet<Classifier> classifiers;
-  _$Package._({this.docComment, this.name, this.classifiers}) : super._() {
+  final BuiltSet<String> imports;
+  _$Package._({this.docComment, this.name, this.classifiers, this.imports})
+      : super._() {
     if (name == null) throw new ArgumentError('null name');
     if (classifiers == null) throw new ArgumentError('null classifiers');
+    if (imports == null) throw new ArgumentError('null imports');
   }
   factory _$Package([updates(PackageBuilder b)]) =>
       (new PackageBuilder()..update(updates)).build();
@@ -949,11 +945,12 @@ class _$Package extends Package {
     if (other is! Package) return false;
     return docComment == other.docComment &&
         name == other.name &&
-        classifiers == other.classifiers;
+        classifiers == other.classifiers &&
+        imports == other.imports;
   }
 
   int get hashCode {
-    return hashObjects([docComment, name, classifiers]);
+    return hashObjects([docComment, name, classifiers, imports]);
   }
 
   String toString() {
@@ -961,6 +958,7 @@ class _$Package extends Package {
         'docComment=${docComment.toString()}\n'
         'name=${name.toString()}\n'
         'classifiers=${classifiers.toString()}\n'
+        'imports=${imports.toString()}\n'
         '}';
   }
 }
@@ -971,6 +969,7 @@ class _$PackageBuilder extends PackageBuilder {
     super.docComment = other.docComment;
     super.name = other.name;
     super.classifiers = other.classifiers?.toBuilder();
+    super.imports = other.imports?.toBuilder();
   }
 
   void update(updates(PackageBuilder b)) {
@@ -980,7 +979,11 @@ class _$PackageBuilder extends PackageBuilder {
   Package build() {
     if (name == null) throw new ArgumentError('null name');
     if (classifiers == null) throw new ArgumentError('null classifiers');
+    if (imports == null) throw new ArgumentError('null imports');
     return new _$Package._(
-        docComment: docComment, name: name, classifiers: classifiers?.build());
+        docComment: docComment,
+        name: name,
+        classifiers: classifiers?.build(),
+        imports: imports?.build());
   }
 }
