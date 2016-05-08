@@ -13,32 +13,30 @@ Package _createPackage() {
     ..add(dartBool)
     ..add(dartNum)
     ..add(dartInt)
-    ..add(dartNull);
+    ..add(dartNull)
+    ..add(dartUri);
   return packageBuilder.build();
 }
 
 ExternalClass _dartObject;
-ExternalClass get dartObject => _dartObject ??= _createDartObject();
-ExternalClass _createDartObject() => _ec('Object');
+ExternalClass get dartObject => _dartObject ??= _ec('Object');
 
 ExternalClass _dartString;
-ExternalClass get dartString => _dartString ??= _createDartString();
-ExternalClass _createDartString() => _ec('String');
+ExternalClass get dartString => _dartString ??= _ec('String');
 
 ExternalClass _dartBool;
-ExternalClass get dartBool => _dartBool ??= _createDartBool();
-ExternalClass _createDartBool() => _ec('bool');
+ExternalClass get dartBool => _dartBool ??= _ec('bool');
 
 ExternalClass _dartNum;
-ExternalClass get dartNum => _dartNum ??= _createDartNum();
-ExternalClass _createDartNum() => _ec('num');
+ExternalClass get dartNum => _dartNum ??= _ec('num');
 
 ExternalClass _dartInt;
-ExternalClass get dartInt => _dartInt ??= _createDartInt();
-ExternalClass _createDartInt() => _ec('int');
+ExternalClass get dartInt => _dartInt ??= _ec('int');
 
 ExternalClass _dartNull;
-ExternalClass get dartNull => _dartNull ??= _createDartNull();
-ExternalClass _createDartNull() => _ec('null');
+ExternalClass get dartNull => _dartNull ??= _ec('null');
+
+ExternalClass _dartUri;
+ExternalClass get dartUri => _dartUri ??= _ec('Uri');
 
 ExternalClass _ec(String name) => new ExternalClass((b) => b..name = name);
