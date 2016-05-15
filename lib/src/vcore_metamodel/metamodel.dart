@@ -207,7 +207,12 @@ ValueClass _createPackage() {
     ..superTypes.add(namedElement)
     ..properties.add(new Property((b) => b
       ..name = 'classifiers'
-      ..type = _createBuiltSet(classifier))));
+      ..type = _createBuiltSet(classifier)))
+  // TODO: another type loop
+//    ..properties.add(new Property((b) => b
+//      ..name = 'subPackages'
+//      ..type = _createBuiltSet(package)))
+  );
 }
 
 GenericType _createBuiltSet(Classifier genericParameter) {

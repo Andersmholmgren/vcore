@@ -254,6 +254,7 @@ abstract class Package implements Built<Package, PackageBuilder>, NamedElement {
   String get name;
   BuiltSet<Classifier> get classifiers;
   BuiltSet<String> get imports;
+  BuiltSet<Package> get subPackages;
 
   Package._();
 
@@ -266,6 +267,7 @@ abstract class PackageBuilder implements Builder<Package, PackageBuilder> {
   String name;
   SetBuilder<Classifier> classifiers = new SetBuilder<Classifier>();
   SetBuilder<String> imports = new SetBuilder<String>();
+  SetBuilder<Package> subPackages = new SetBuilder<Package>();
 
   PackageBuilder._();
 
