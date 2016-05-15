@@ -4,6 +4,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_json/built_json.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/iterables.dart';
+import 'package:vcore/src/vcore_metamodel/built_metamodel.dart';
 
 part 'model.g.dart';
 
@@ -109,6 +110,9 @@ abstract class Property
   @nullable
   String get derivedExpression;
   bool get isDerived => derivedExpression != null;
+
+  bool get isCollection => type == builtList || type == builtSet;
+  bool get isMap => type == builtMap;
 
   Property._();
 
