@@ -46,7 +46,7 @@ ValueClass _createNamedElement() {
   return new ValueClass((cb) => cb
     ..name = 'NamedElement'
     ..isAbstract = true
-    ..superTypes.add(modelElement)
+    ..superTypes.add(modelElement.toBuilder())
     ..properties.add(new PropertyBuilder()
       ..name = 'name'
       ..type = dartString.toBuilder()
@@ -61,7 +61,7 @@ ValueClass _createClassifier() {
   return new ValueClass((cb) => cb
     ..name = 'Classifier'
     ..isAbstract = true
-    ..superTypes.add(namedElement));
+    ..superTypes.add(namedElement.toBuilder()));
 }
 
 ValueClass _typeParameter;
@@ -70,11 +70,11 @@ ValueClass get typeParameter => _typeParameter ??= _createTypeParameter();
 ValueClass _createTypeParameter() {
   return new ValueClass((cb) => cb
     ..name = 'TypeParameter'
-    ..superTypes.add(namedElement)
-    ..properties.add(new Property((b) => b
+    ..superTypes.add(namedElement.toBuilder())
+    ..properties.add(new PropertyBuilder()
       ..name = 'bound'
-      ..type = classifier
-      ..isNullable = true)));
+      ..type = classifier.toBuilder()
+      ..isNullable = true));
 }
 
 ValueClass _genericClassifier;
@@ -85,10 +85,10 @@ ValueClass _createGenericClassifier() {
   return new ValueClass((cb) => cb
     ..name = 'GenericClassifier'
     ..isAbstract = true
-    ..superTypes.add(classifier)
-    ..properties.add(new Property((b) => b
+    ..superTypes.add(classifier.toBuilder())
+    ..properties.add(new PropertyBuilder()
       ..name = 'genericTypes'
-      ..type = _createBuiltSet(typeParameter))));
+      ..type = _createBuiltSet(typeParameter).toBuilder()));
 }
 
 ValueClass _genericType;
@@ -97,13 +97,13 @@ ValueClass get genericType => _genericType ??= _createGenericType();
 ValueClass _createGenericType() {
   return new ValueClass((cb) => cb
     ..name = 'GenericType'
-    ..superTypes.add(classifier)
-    ..properties.add(new Property((b) => b
+    ..superTypes.add(classifier.toBuilder())
+    ..properties.add(new PropertyBuilder()
       ..name = 'base'
-      ..type = classifier))
-    ..properties.add(new Property((b) => b
+      ..type = classifier.toBuilder())
+    ..properties.add(new PropertyBuilder()
       ..name = 'genericTypeValues'
-      ..type = _createBuiltMap(typeParameter, classifier))));
+      ..type = _createBuiltMap(typeParameter, classifier).toBuilder()));
 }
 
 ValueClass _property;
@@ -112,28 +112,28 @@ ValueClass get property => _property ??= _createProperty();
 ValueClass _createProperty() {
   final builder = new ValueClassBuilder()
     ..name = 'Property'
-    ..superTypes.add(namedElement);
+    ..superTypes.add(namedElement.toBuilder());
 
   builder.properties
-    ..add(new Property((b) => b
+    ..add(new PropertyBuilder()
       ..name = 'type'
-      ..type = classifier))
-    ..add(new Property((b) => b
+      ..type = classifier.toBuilder())
+    ..add(new PropertyBuilder()
       ..name = 'isNullable'
-      ..type = dartBool
-      ..defaultValue = false))
-    ..add(new Property((b) => b
+      ..type = dartBool.toBuilder()
+      ..defaultValue = false)
+    ..add(new PropertyBuilder()
       ..name = 'defaultValue'
-      ..type = dartObject
-      ..isNullable = true))
-    ..add(new Property((b) => b
+      ..type = dartObject.toBuilder()
+      ..isNullable = true)
+    ..add(new PropertyBuilder()
       ..name = 'derivedExpression'
-      ..type = dartString
-      ..isNullable = true))
-    ..add(new Property((b) => b
+      ..type = dartString.toBuilder()
+      ..isNullable = true)
+    ..add(new PropertyBuilder()
       ..name = 'isDerived'
-      ..type = dartBool
-      ..derivedExpression = 'derivedExpression != null'));
+      ..type = dartBool.toBuilder()
+      ..derivedExpression = 'derivedExpression != null');
 
   return builder.build();
 }
@@ -149,20 +149,20 @@ ValueClass _createValuableClass() {
         '''ouch. This is needed as currently have an issue when creating meta model
 where ValueClass has a field of type ValueClass but that instance doesn't
 exist yet''';
-  builder.superTypes.add(genericClassifier);
+  builder.superTypes.add(genericClassifier.toBuilder());
   builder.properties
-    ..add(new Property((b) => b
+    ..add(new PropertyBuilder()
       ..name = 'properties'
-      ..type = _createBuiltSet(property)))
-    ..add(new Property((b) => b
+      ..type = _createBuiltSet(property).toBuilder())
+    ..add(new PropertyBuilder()
       ..name = 'allProperties'
-      ..type = _createBuiltSet(property)
+      ..type = _createBuiltSet(property).toBuilder()
       ..derivedExpression = '''new BuiltSet<Property>(
-    concat([superTypes.expand((vc) => vc.allProperties), properties]))'''))
-    ..add(new Property((b) => b
+    concat([superTypes.expand((vc) => vc.allProperties), properties]))''')
+    ..add(new PropertyBuilder()
       ..name = 'isAbstract'
-      ..type = dartBool
-      ..defaultValue = false));
+      ..type = dartBool.toBuilder()
+      ..defaultValue = false);
   return builder.build();
 }
 
@@ -172,11 +172,11 @@ ValueClass get valueClass => _valueClass ??= _createValueClass();
 ValueClass _createValueClass() {
   return new ValueClass((cb) => cb
     ..name = 'ValueClass'
-    ..superTypes.add(valuableClass)
-    ..properties.add(new Property((b) => b
+    ..superTypes.add(valuableClass.toBuilder())
+    ..properties.add(new PropertyBuilder()
       ..name = 'superTypes'
       // yuck: super type should be ValueClass but that blows up atm
-      ..type = _createBuiltSet(valuableClass))));
+      ..type = _createBuiltSet(valuableClass).toBuilder()));
 }
 
 ValueClass _externalClass;
@@ -184,7 +184,7 @@ ValueClass get externalClass => _externalClass ??= _createExternalClass();
 
 ValueClass _createExternalClass() => new ValueClass((cb) => cb
   ..name = 'ExternalClass'
-  ..superTypes.add(genericClassifier));
+  ..superTypes.add(genericClassifier.toBuilder()));
 
 ValueClass _enumClass;
 ValueClass get enumClass => _enumClass ??= _createEnumClass();
@@ -192,10 +192,10 @@ ValueClass get enumClass => _enumClass ??= _createEnumClass();
 ValueClass _createEnumClass() {
   return new ValueClass((cb) => cb
     ..name = 'EnumClass'
-    ..superTypes.add(classifier)
-    ..properties.add(new Property((b) => b
+    ..superTypes.add(classifier.toBuilder())
+    ..properties.add(new PropertyBuilder()
       ..name = 'literals'
-      ..type = _createBuiltSet(dartString))));
+      ..type = _createBuiltSet(dartString).toBuilder()));
 }
 
 ValueClass _package;
@@ -204,12 +204,12 @@ ValueClass get package => _package ??= _createPackage();
 ValueClass _createPackage() {
   return new ValueClass((cb) => cb
     ..name = 'Package'
-    ..superTypes.add(namedElement)
-    ..properties.add(new Property((b) => b
+    ..superTypes.add(namedElement.toBuilder())
+    ..properties.add(new PropertyBuilder()
       ..name = 'classifiers'
-      ..type = _createBuiltSet(classifier)))
+      ..type = _createBuiltSet(classifier).toBuilder())
   // TODO: another type loop
-//    ..properties.add(new Property((b) => b
+//    ..properties.add(new PropertyBuilder()
 //      ..name = 'subPackages'
 //      ..type = _createBuiltSet(package)))
   );
