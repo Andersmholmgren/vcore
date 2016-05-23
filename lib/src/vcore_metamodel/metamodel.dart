@@ -32,10 +32,10 @@ ValueClass _createModelElement() {
   return new ValueClass((cb) => cb
     ..name = 'ModelElement'
     ..isAbstract = true
-    ..properties.add(new Property((b) => b
+    ..properties.add(new PropertyBuilder()
       ..name = 'docComment'
-      ..type = dartString
-      ..isNullable = true))
+      ..type = dartString.toBuilder()
+      ..isNullable = true)
   );
 }
 
