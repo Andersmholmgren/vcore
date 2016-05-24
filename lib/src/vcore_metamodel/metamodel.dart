@@ -234,7 +234,10 @@ GenericType _createBuiltMap(Classifier fromParameter, Classifier toParameter) {
 Map<Type, Classifier> __typeMap;
 Map<Type, Classifier> get _typeMap => __typeMap ??= _buildTypeMap();
 
-Classifier reflectClassifier(Type type) => _typeMap[type];
+Classifier reflectClassifier(Type type) {
+  print('reflectClassifier $type');
+  return _typeMap[type];
+}
 ValueClass reflectVClass(Type type) => reflectClassifier(type) as ValueClass;
 
 Map<Type, Classifier> _buildTypeMap() {
