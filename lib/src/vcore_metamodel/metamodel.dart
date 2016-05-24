@@ -229,3 +229,29 @@ GenericType _createBuiltMap(Classifier fromParameter, Classifier toParameter) {
     ..genericTypeValues[builtMap.genericTypes.first] = fromParameter
     ..genericTypeValues[builtMap.genericTypes.last] = toParameter);
 }
+
+
+Map<Type, Classifier> __typeMap;
+Map<Type, Classifier> get _typeMap => __typeMap ??= _buildTypeMap();
+
+Classifier reflectClassifier(Type type) => _typeMap[type];
+ValueClass reflectVClass(Type type) => reflectClassifier(type) as ValueClass;
+
+Map<Type, Classifier> _buildTypeMap() {
+  final typeMap = <Type, Classifier>{};
+
+  typeMap[Classifier] = classifier;
+  typeMap[EnumClass] = enumClass;
+  typeMap[ExternalClass] = externalClass;
+  typeMap[GenericClassifier] = genericClassifier;
+  typeMap[GenericType] = genericType;
+  typeMap[ModelElement] = modelElement;
+  typeMap[NamedElement] = namedElement;
+  typeMap[Package] = package;
+  typeMap[Property] = property;
+  typeMap[TypeParameter] = typeParameter;
+  typeMap[ValuableClass] = valueClass;
+  typeMap[ValueClass] = valueClass;
+
+  return typeMap;
+}
