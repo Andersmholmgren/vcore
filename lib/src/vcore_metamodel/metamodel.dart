@@ -208,6 +208,9 @@ ValueClass _createPackage() {
     ..properties.add(new PropertyBuilder()
       ..name = 'classifiers'
       ..type = _createBuiltSet(classifier).toBuilder())
+    ..properties.add(new PropertyBuilder()
+      ..name = 'name'
+      ..type = dartString.toBuilder())
   // TODO: another type loop
 //    ..properties.add(new PropertyBuilder()
 //      ..name = 'subPackages'
