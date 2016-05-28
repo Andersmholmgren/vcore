@@ -10,6 +10,7 @@ dependencies:
   built_value:
     path: ../built_value.dart/built_value
 #  stuff: ">=0.0.4 <0.1.0"
+  option: '>=1.2.0 <2.0.0'
 dev_dependencies:
   test: ">=0.12.0 <0.13.0"
   built_json_generator: '^0.0.5'

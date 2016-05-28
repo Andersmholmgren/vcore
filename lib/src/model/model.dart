@@ -5,6 +5,7 @@ import 'package:built_json/built_json.dart';
 import 'package:built_value/built_value.dart';
 import 'package:quiver/iterables.dart';
 import 'package:vcore/src/vcore_metamodel/built_metamodel.dart';
+import 'package:option/option.dart';
 
 part 'model.g.dart';
 
@@ -161,6 +162,21 @@ abstract class ValueClass
       concat([superTypes.expand((vc) => vc.allProperties), properties]));
   bool get isAbstract;
   BuiltSet<ValueClass> get superTypes;
+
+  Option<Property> lookupPropertyByPath(Iterable<String> path) {
+    if (path.isEmpty) return const None();
+
+    final property = allProperties.firstWhere((p) => p.name == path.first,
+        orElse: () => null);
+
+    if (property == null) return const None();
+
+    if (path.length == 1) return new Some<Property>(property);
+
+    if (property.type is! ValueClass) return const None(); // ouch!!
+
+    return (property.type as ValueClass).lookupPropertyByPath(path.skip(1));
+  }
 
   ValueClass._();
 
