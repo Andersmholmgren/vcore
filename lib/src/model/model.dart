@@ -112,8 +112,11 @@ abstract class Property
   String get derivedExpression;
   bool get isDerived => derivedExpression != null;
 
-  bool get isCollection => type == builtList || type == builtSet;
-  bool get isMap => type == builtMap;
+  Classifier get _rawType => type is GenericType ? type.base : type;
+
+  bool get isCollection => _rawType == builtList || _rawType == builtSet;
+  bool get isMap => _rawType == builtMap;
+  bool get isMultiValued => isCollection || isMap;
 
   Property._();
 
