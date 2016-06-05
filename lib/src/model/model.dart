@@ -20,6 +20,7 @@ abstract class NamedElement implements ModelElement {
 
 abstract class Classifier<V extends Classifier<V, B>,
     B extends ClassifierBuilder<V, B>> implements NamedElement {
+  bool get isAbstract;
   B toBuilder();
 }
 
@@ -46,6 +47,8 @@ abstract class GenericType
   String get docComment;
   String get name;
   Classifier get base;
+  bool get isAbstract => base.isAbstract;
+
   BuiltMap<TypeParameter, Classifier> get genericTypeValues;
 
   GenericType._();
@@ -217,6 +220,7 @@ abstract class EnumClass
   String get docComment;
   String get name;
   BuiltSet<String> get literals;
+  bool get isAbstract => false;
 
   EnumClass._();
 
@@ -247,6 +251,7 @@ abstract class ExternalClass
   String get docComment;
   String get name;
   BuiltSet<TypeParameter> get genericTypes;
+  bool get isAbstract => false;
 
   ExternalClass._();
 
