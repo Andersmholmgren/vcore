@@ -179,8 +179,16 @@ abstract class ValueClass
       _allSuperTypes ??= new BuiltSet<ValueClass>(
           concat([superTypes.expand((vc) => vc.allSuperTypes), superTypes]));
 
-  bool isSubTypeOf(ValueClass other) =>
-      other == this || allSuperTypes.contains(other);
+  bool isSubTypeOf(ValueClass other) {
+    final result = _isSubTypeOf(other);
+    print('$name isSubTypeOf ${other.name} => $result');
+    return result;
+  }
+
+  bool _isSubTypeOf(ValueClass other) =>
+      other.name == name ||
+      // TODO: == not working for some reason
+      allSuperTypes.map((c) => c.name).contains(other.name);
 
 //  bool isAssignableTo(Classifier other) => other is ValueClass &&
 //    name == other.name;
