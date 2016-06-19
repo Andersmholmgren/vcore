@@ -22,6 +22,8 @@ abstract class Classifier<V extends Classifier<V, B>,
     B extends ClassifierBuilder<V, B>> implements NamedElement {
   bool get isAbstract;
   B toBuilder();
+//  // TODO: is name == other.name enough here?
+//  bool isAssignableTo(V other) => name == other.name;
 }
 
 abstract class ClassifierBuilder<V extends Classifier<V, B>,
@@ -164,10 +166,24 @@ abstract class ValueClass
   String get name;
   BuiltSet<TypeParameter> get genericTypes;
   BuiltSet<Property> get properties;
-  BuiltSet<Property> get allProperties => new BuiltSet<Property>(
-      concat([superTypes.expand((vc) => vc.allProperties), properties]));
+
+  BuiltSet<Property> _allProperties;
+  BuiltSet<Property> get allProperties =>
+      _allProperties ??= new BuiltSet<Property>(
+          concat([superTypes.expand((vc) => vc.allProperties), properties]));
+
   bool get isAbstract;
   BuiltSet<ValueClass> get superTypes;
+  BuiltSet<ValueClass> _allSuperTypes;
+  BuiltSet<ValueClass> get allSuperTypes =>
+      _allSuperTypes ??= new BuiltSet<ValueClass>(
+          concat([superTypes.expand((vc) => vc.allSuperTypes), superTypes]));
+
+  bool isSubTypeOf(ValueClass other) =>
+      other == this || allSuperTypes.contains(other);
+
+//  bool isAssignableTo(Classifier other) => other is ValueClass &&
+//    name == other.name;
 
   Option<Property> lookupPropertyByPath(Iterable<String> path) {
     print('---------- $name.lookupPropertyByPath($path)');
