@@ -4,6 +4,7 @@
 build/
 packages
 pubspec.lock
+delme.dart
 
 # Files created by dart2js
 *.dart.js
