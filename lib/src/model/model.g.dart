@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2016-05-08T04:44:14.013215Z
+// 2016-07-03T03:44:04.661320Z
 
 part of vcore.model;
 
@@ -161,6 +161,9 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
       'type',
       serializers.serialize(object.type,
           specifiedType: const FullType(Classifier)),
+      'explicitBuilderType',
+      serializers.serialize(object.explicitBuilderType,
+          specifiedType: const FullType(Classifier)),
       'isNullable',
       serializers.serialize(object.isNullable,
           specifiedType: const FullType(bool)),
@@ -200,6 +203,10 @@ class _$PropertySerializer implements StructuredSerializer<Property> {
             break;
           case 'type':
             result.type.replace(serializers.deserialize(value,
+                specifiedType: const FullType(Classifier)));
+            break;
+          case 'explicitBuilderType':
+            result.explicitBuilderType.replace(serializers.deserialize(value,
                 specifiedType: const FullType(Classifier)));
             break;
           case 'isNullable':
@@ -443,6 +450,10 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
       serializers.serialize(object.imports,
           specifiedType:
               const FullType(BuiltSet, const [const FullType(String)])),
+      'subPackages',
+      serializers.serialize(object.subPackages,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(Package)])),
     ];
   }
 
@@ -480,6 +491,11 @@ class _$PackageSerializer implements StructuredSerializer<Package> {
             result.imports.replace(serializers.deserialize(value,
                 specifiedType:
                     const FullType(BuiltSet, const [const FullType(String)])));
+            break;
+          case 'subPackages':
+            result.subPackages.replace(serializers.deserialize(value,
+                specifiedType:
+                    const FullType(BuiltSet, const [const FullType(Package)])));
             break;
         }
       }
@@ -626,6 +642,7 @@ class _$Property extends Property {
   final String docComment;
   final String name;
   final Classifier type;
+  final Classifier explicitBuilderType;
   final bool isNullable;
   final Object defaultValue;
   final String derivedExpression;
@@ -633,6 +650,7 @@ class _$Property extends Property {
       {this.docComment,
       this.name,
       this.type,
+      this.explicitBuilderType,
       this.isNullable,
       this.defaultValue,
       this.derivedExpression})
@@ -651,14 +669,22 @@ class _$Property extends Property {
     return docComment == other.docComment &&
         name == other.name &&
         type == other.type &&
+        explicitBuilderType == other.explicitBuilderType &&
         isNullable == other.isNullable &&
         defaultValue == other.defaultValue &&
         derivedExpression == other.derivedExpression;
   }
 
   int get hashCode {
-    return hashObjects(
-        [docComment, name, type, isNullable, defaultValue, derivedExpression]);
+    return hashObjects([
+      docComment,
+      name,
+      type,
+      explicitBuilderType,
+      isNullable,
+      defaultValue,
+      derivedExpression
+    ]);
   }
 
   String toString() {
@@ -666,6 +692,7 @@ class _$Property extends Property {
         'docComment=${docComment.toString()}\n'
         'name=${name.toString()}\n'
         'type=${type.toString()}\n'
+        'explicitBuilderType=${explicitBuilderType.toString()}\n'
         'isNullable=${isNullable.toString()}\n'
         'defaultValue=${defaultValue.toString()}\n'
         'derivedExpression=${derivedExpression.toString()}\n'
@@ -679,6 +706,7 @@ class _$PropertyBuilder extends PropertyBuilder {
     super.docComment = other.docComment;
     super.name = other.name;
     super.type = other.type?.toBuilder();
+    super.explicitBuilderType = other.explicitBuilderType?.toBuilder();
     super.isNullable = other.isNullable;
     super.defaultValue = other.defaultValue;
     super.derivedExpression = other.derivedExpression;
@@ -696,6 +724,7 @@ class _$PropertyBuilder extends PropertyBuilder {
         docComment: docComment,
         name: name,
         type: type?.build(),
+        explicitBuilderType: explicitBuilderType?.build(),
         isNullable: isNullable,
         defaultValue: defaultValue,
         derivedExpression: derivedExpression);
@@ -707,101 +736,8 @@ class _$PropertyBuilder extends PropertyBuilder {
 // Target: abstract class ValueClass
 // **************************************************************************
 
-class _$ValueClass extends ValueClass {
-  final String docComment;
-  final String name;
-  final BuiltSet<TypeParameter> genericTypes;
-  final BuiltSet<Property> properties;
-  final bool isAbstract;
-  final BuiltSet<ValueClass> superTypes;
-  _$ValueClass._(
-      {this.docComment,
-      this.name,
-      this.genericTypes,
-      this.properties,
-      this.isAbstract,
-      this.superTypes})
-      : super._() {
-    if (name == null) throw new ArgumentError('null name');
-    if (genericTypes == null) throw new ArgumentError('null genericTypes');
-    if (properties == null) throw new ArgumentError('null properties');
-    if (isAbstract == null) throw new ArgumentError('null isAbstract');
-    if (superTypes == null) throw new ArgumentError('null superTypes');
-  }
-  factory _$ValueClass([updates(ValueClassBuilder b)]) =>
-      (new ValueClassBuilder()..update(updates)).build();
-  ValueClass rebuild(updates(ValueClassBuilder b)) =>
-      (toBuilder()..update(updates)).build();
-  _$ValueClassBuilder toBuilder() => new _$ValueClassBuilder()..replace(this);
-  bool operator ==(other) {
-    if (other is! ValueClass) return false;
-    return docComment == other.docComment &&
-        name == other.name &&
-        genericTypes == other.genericTypes &&
-        properties == other.properties &&
-        isAbstract == other.isAbstract &&
-        superTypes == other.superTypes;
-  }
-
-  int get hashCode {
-    return hashObjects(
-        [docComment, name, genericTypes, properties, isAbstract, superTypes]);
-  }
-
-  String toString() {
-    return 'ValueClass {'
-        'docComment=${docComment.toString()}\n'
-        'name=${name.toString()}\n'
-        'genericTypes=${genericTypes.toString()}\n'
-        'properties=${properties.toString()}\n'
-        'isAbstract=${isAbstract.toString()}\n'
-        'superTypes=${superTypes.toString()}\n'
-        '}';
-  }
-}
-
-class _$ValueClassBuilder extends ValueClassBuilder {
-  _$ValueClassBuilder() : super._();
-  void replace(ValueClass other) {
-    super.docComment = other.docComment;
-    super.name = other.name;
-    super.genericTypes = new SetBuilder<TypeParameterBuilder>(
-        other.genericTypes?.map((tp) => tp.toBuilder()));
-    super.properties = new SetBuilder<PropertyBuilder>(
-        other.properties?.map((tp) => tp.toBuilder()));
-    super.isAbstract = other.isAbstract;
-    super.superTypes = new SetBuilder<ValueClassBuilder>(
-        other.superTypes?.map((tp) => tp.toBuilder()));
-  }
-
-  void update(updates(ValueClassBuilder b)) {
-    if (updates != null) updates(this);
-  }
-
-  ValueClass build() {
-    if (name == null) throw new ArgumentError('null name');
-    if (genericTypes == null) throw new ArgumentError('null genericTypes');
-    if (properties == null) throw new ArgumentError('null properties');
-    if (isAbstract == null) throw new ArgumentError('null isAbstract');
-    if (superTypes == null) throw new ArgumentError('null superTypes');
-    return new _$ValueClass._(
-        docComment: docComment,
-        name: name,
-        genericTypes: genericTypes != null
-            ? new SetBuilder<TypeParameter>(
-                genericTypes.build().map((v) => v.build())).build()
-            : null,
-        properties: properties != null
-            ? new SetBuilder<Property>(properties.build().map((v) => v.build()))
-                .build()
-            : null,
-        isAbstract: isAbstract,
-        superTypes: superTypes != null
-            ? new SetBuilder<ValueClass>(
-                superTypes.build().map((v) => v.build())).build()
-            : null);
-  }
-}
+// Error: Please make changes to use built_value.
+// TODO: Make field _allProperties a getter Make field _allSuperTypes a getter Make builder have exactly these fields: _allProperties, _allSuperTypes, docComment, name, genericTypes, properties, isAbstract, superTypes
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
@@ -933,11 +869,18 @@ class _$Package extends Package {
   final String name;
   final BuiltSet<Classifier> classifiers;
   final BuiltSet<String> imports;
-  _$Package._({this.docComment, this.name, this.classifiers, this.imports})
+  final BuiltSet<Package> subPackages;
+  _$Package._(
+      {this.docComment,
+      this.name,
+      this.classifiers,
+      this.imports,
+      this.subPackages})
       : super._() {
     if (name == null) throw new ArgumentError('null name');
     if (classifiers == null) throw new ArgumentError('null classifiers');
     if (imports == null) throw new ArgumentError('null imports');
+    if (subPackages == null) throw new ArgumentError('null subPackages');
   }
   factory _$Package([updates(PackageBuilder b)]) =>
       (new PackageBuilder()..update(updates)).build();
@@ -949,11 +892,12 @@ class _$Package extends Package {
     return docComment == other.docComment &&
         name == other.name &&
         classifiers == other.classifiers &&
-        imports == other.imports;
+        imports == other.imports &&
+        subPackages == other.subPackages;
   }
 
   int get hashCode {
-    return hashObjects([docComment, name, classifiers, imports]);
+    return hashObjects([docComment, name, classifiers, imports, subPackages]);
   }
 
   String toString() {
@@ -962,6 +906,7 @@ class _$Package extends Package {
         'name=${name.toString()}\n'
         'classifiers=${classifiers.toString()}\n'
         'imports=${imports.toString()}\n'
+        'subPackages=${subPackages.toString()}\n'
         '}';
   }
 }
@@ -973,6 +918,7 @@ class _$PackageBuilder extends PackageBuilder {
     super.name = other.name;
     super.classifiers = other.classifiers?.toBuilder();
     super.imports = other.imports?.toBuilder();
+    super.subPackages = other.subPackages?.toBuilder();
   }
 
   void update(updates(PackageBuilder b)) {
@@ -983,10 +929,12 @@ class _$PackageBuilder extends PackageBuilder {
     if (name == null) throw new ArgumentError('null name');
     if (classifiers == null) throw new ArgumentError('null classifiers');
     if (imports == null) throw new ArgumentError('null imports');
+    if (subPackages == null) throw new ArgumentError('null subPackages');
     return new _$Package._(
         docComment: docComment,
         name: name,
         classifiers: classifiers?.build(),
-        imports: imports?.build());
+        imports: imports?.build(),
+        subPackages: subPackages?.build());
   }
 }

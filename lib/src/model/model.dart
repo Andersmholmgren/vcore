@@ -110,6 +110,13 @@ abstract class Property
   String get docComment;
   String get name;
   Classifier get type;
+
+  // TODO: does it make sense to put builder type on Property
+  // rather than have a separate set of builder properties??
+  @nullable
+  Classifier get explicitBuilderType;
+  Classifier get builderType => explicitBuilderType ?? type;
+
   bool get isNullable;
   @nullable
   Object get defaultValue;
@@ -132,8 +139,10 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
   @nullable
   String docComment;
   String name;
-  @nullable
   ClassifierBuilder type;
+  @nullable
+  ClassifierBuilder explicitBuilderType;
+
   bool isNullable = false;
   @nullable
   Object defaultValue;
@@ -174,6 +183,7 @@ abstract class ValueClass
 
   bool get isAbstract;
   BuiltSet<ValueClass> get superTypes;
+  @nullable
   BuiltSet<ValueClass> _allSuperTypes;
   BuiltSet<ValueClass> get allSuperTypes =>
       _allSuperTypes ??= new BuiltSet<ValueClass>(
