@@ -7,7 +7,7 @@
 library vcore;
 
 export 'package:vcore/src/model/model.dart';
-export 'package:vcore/src/model/serializers.dart';
+//export 'package:vcore/src/model/serializers.dart';
 export 'package:vcore/src/vcore_metamodel/coredart_metamodel.dart';
 export 'package:vcore/src/vcore_metamodel/built_metamodel.dart';
 //export 'package:vcore/src/vcore_metamodel/metamodel.dart';
