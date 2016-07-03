@@ -1,11 +1,10 @@
 library vcore.model;
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_json/built_json.dart';
 import 'package:built_value/built_value.dart';
+import 'package:option/option.dart';
 import 'package:quiver/iterables.dart';
 import 'package:vcore/src/vcore_metamodel/built_metamodel.dart';
-import 'package:option/option.dart';
 
 part 'model.g.dart';
 
@@ -18,33 +17,43 @@ abstract class NamedElement implements ModelElement {
   String get name;
 }
 
-abstract class Classifier<V extends Classifier<V, B>,
-    B extends ClassifierBuilder<V, B>> implements NamedElement {
+abstract class Classifier implements NamedElement {
   bool get isAbstract;
+  ClassifierBuilder toBuilder();
+//  // TODO: is name == other.name enough here?
+//  bool isAssignableTo(V other) => name == other.name;
+}
+
+abstract class ClassifierBuilder {
+  String name;
+  Classifier build();
+//  void replace(Classifier value);
+//  void update(updates(ClassifierBuilder builder));
+}
+
+abstract class TypedClassifier<V extends TypedClassifier<V, B>,
+    B extends TypedClassifierBuilder<V, B>> implements Classifier {
   B toBuilder();
 //  // TODO: is name == other.name enough here?
 //  bool isAssignableTo(V other) => name == other.name;
 }
 
-abstract class ClassifierBuilder<V extends Classifier<V, B>,
-    B extends ClassifierBuilder<V, B>> {
-  String name;
+abstract class TypedClassifierBuilder<V extends TypedClassifier<V, B>,
+    B extends TypedClassifierBuilder<V, B>> implements ClassifierBuilder {
   V build();
   void replace(V value);
   void update(updates(B builder));
 }
 
 abstract class GenericClassifier<V extends GenericClassifier<V, B>,
-    B extends ClassifierBuilder<V, B>> implements Classifier<V, B> {
+    B extends TypedClassifierBuilder<V, B>> implements TypedClassifier<V, B> {
   BuiltSet<TypeParameter> get genericTypes;
 }
 
 abstract class GenericType
     implements
         Built<GenericType, GenericTypeBuilder>,
-        Classifier<GenericType, GenericTypeBuilder> {
-  static final Serializer<GenericType> serializer = _$genericTypeSerializer;
-
+        TypedClassifier<GenericType, GenericTypeBuilder> {
   @nullable
   String get docComment;
   String get name;
@@ -61,7 +70,7 @@ abstract class GenericType
 abstract class GenericTypeBuilder
     implements
         Builder<GenericType, GenericTypeBuilder>,
-        ClassifierBuilder<GenericType, GenericTypeBuilder> {
+        TypedClassifierBuilder<GenericType, GenericTypeBuilder> {
   @nullable
   String docComment;
   String name;
@@ -76,8 +85,6 @@ abstract class GenericTypeBuilder
 
 abstract class TypeParameter
     implements Built<TypeParameter, TypeParameterBuilder>, NamedElement {
-  static final Serializer<TypeParameter> serializer = _$typeParameterSerializer;
-
   @nullable
   String get docComment;
   String get name;
@@ -104,8 +111,6 @@ abstract class TypeParameterBuilder
 
 abstract class Property
     implements Built<Property, PropertyBuilder>, NamedElement {
-  static final Serializer<Property> serializer = _$propertySerializer;
-
   @nullable
   String get docComment;
   String get name;
@@ -124,7 +129,8 @@ abstract class Property
   String get derivedExpression;
   bool get isDerived => derivedExpression != null;
 
-  Classifier get _rawType => type is GenericType ? type.base : type;
+  Classifier get _rawType =>
+      type is GenericType ? (type as GenericType).base : type;
 
   bool get isCollection => _rawType == builtList || _rawType == builtSet;
   bool get isMap => _rawType == builtMap;
@@ -158,7 +164,7 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
 /// where ValueClass has a field of type ValueClass but that instance doesn't
 /// exist yet
 abstract class ValuableClass<V extends ValuableClass<V, B>,
-    B extends ClassifierBuilder<V, B>> implements GenericClassifier<V, B> {
+    B extends TypedClassifierBuilder<V, B>> implements GenericClassifier<V, B> {
   BuiltSet<Property> get properties;
   BuiltSet<Property> get allProperties;
   bool get isAbstract;
@@ -168,8 +174,6 @@ abstract class ValueClass
     implements
         Built<ValueClass, ValueClassBuilder>,
         ValuableClass<ValueClass, ValueClassBuilder> {
-  static final Serializer<ValueClass> serializer = _$valueClassSerializer;
-
   @nullable
   String get docComment;
   String get name;
@@ -228,7 +232,7 @@ abstract class ValueClass
 abstract class ValueClassBuilder
     implements
         Builder<ValueClass, ValueClassBuilder>,
-        ClassifierBuilder<ValueClass, ValueClassBuilder> {
+        TypedClassifierBuilder<ValueClass, ValueClassBuilder> {
   @nullable
   String docComment;
   String name;
@@ -247,9 +251,7 @@ abstract class ValueClassBuilder
 abstract class EnumClass
     implements
         Built<EnumClass, EnumClassBuilder>,
-        Classifier<EnumClass, EnumClassBuilder> {
-  static final Serializer<EnumClass> serializer = _$enumClassSerializer;
-
+        TypedClassifier<EnumClass, EnumClassBuilder> {
   @nullable
   String get docComment;
   String get name;
@@ -264,7 +266,7 @@ abstract class EnumClass
 abstract class EnumClassBuilder
     implements
         Builder<EnumClass, EnumClassBuilder>,
-        ClassifierBuilder<EnumClass, EnumClassBuilder> {
+        TypedClassifierBuilder<EnumClass, EnumClassBuilder> {
   @nullable
   String docComment;
   String name;
@@ -279,8 +281,6 @@ abstract class ExternalClass
     implements
         Built<ExternalClass, ExternalClassBuilder>,
         GenericClassifier<ExternalClass, ExternalClassBuilder> {
-  static final Serializer<ExternalClass> serializer = _$externalClassSerializer;
-
   @nullable
   String get docComment;
   String get name;
@@ -295,7 +295,7 @@ abstract class ExternalClass
 abstract class ExternalClassBuilder
     implements
         Builder<ExternalClass, ExternalClassBuilder>,
-        ClassifierBuilder<ExternalClass, ExternalClassBuilder> {
+        TypedClassifierBuilder<ExternalClass, ExternalClassBuilder> {
   @nullable
   String docComment;
   String name;
@@ -307,8 +307,6 @@ abstract class ExternalClassBuilder
 }
 
 abstract class Package implements Built<Package, PackageBuilder>, NamedElement {
-  static final Serializer<Package> serializer = _$packageSerializer;
-
   @nullable
   String get docComment;
   String get name;
