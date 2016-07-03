@@ -233,11 +233,98 @@ class _$PropertyBuilder extends PropertyBuilder {
 // Target: abstract class ValueClass
 // **************************************************************************
 
-// Error: Please make the following changes to use built_value:
-//
-//        1. Make field _allProperties a getter.
-//        2. Make field _allSuperTypes a getter.
-//        3. Make builder have exactly these fields: _allProperties, _allSuperTypes, docComment, name, genericTypes, properties, isAbstract, superTypes
+class _$ValueClass extends ValueClass {
+  final String docComment;
+  final String name;
+  final BuiltSet<TypeParameter> genericTypes;
+  final BuiltSet<Property> properties;
+  final bool isAbstract;
+  final BuiltSet<ValueClass> superTypes;
+  _$ValueClass._(
+      {this.docComment,
+      this.name,
+      this.genericTypes,
+      this.properties,
+      this.isAbstract,
+      this.superTypes})
+      : super._() {
+    if (name == null) throw new ArgumentError('null name');
+    if (genericTypes == null) throw new ArgumentError('null genericTypes');
+    if (properties == null) throw new ArgumentError('null properties');
+    if (isAbstract == null) throw new ArgumentError('null isAbstract');
+    if (superTypes == null) throw new ArgumentError('null superTypes');
+  }
+  factory _$ValueClass([updates(ValueClassBuilder b)]) =>
+      (new ValueClassBuilder()..update(updates)).build();
+  ValueClass rebuild(updates(ValueClassBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+  _$ValueClassBuilder toBuilder() => new _$ValueClassBuilder()..replace(this);
+  bool operator ==(other) {
+    if (other is! ValueClass) return false;
+    return docComment == other.docComment &&
+        name == other.name &&
+        genericTypes == other.genericTypes &&
+        properties == other.properties &&
+        isAbstract == other.isAbstract &&
+        superTypes == other.superTypes;
+  }
+
+  int get hashCode {
+    return hashObjects(
+        [docComment, name, genericTypes, properties, isAbstract, superTypes]);
+  }
+
+  String toString() {
+    return 'ValueClass {'
+        'docComment=${docComment.toString()}\n'
+        'name=${name.toString()}\n'
+        'genericTypes=${genericTypes.toString()}\n'
+        'properties=${properties.toString()}\n'
+        'isAbstract=${isAbstract.toString()}\n'
+        'superTypes=${superTypes.toString()}\n'
+        '}';
+  }
+}
+
+class _$ValueClassBuilder extends ValueClassBuilder {
+  _$ValueClassBuilder() : super._();
+  void replace(ValueClass other) {
+    super.docComment = other.docComment;
+    super.name = other.name;
+    super.genericTypes = other.genericTypes?.toBuilder();
+    super.properties = other.properties?.toBuilder();
+    super.isAbstract = other.isAbstract;
+    super.superTypes = other.superTypes?.toBuilder();
+  }
+
+  void update(updates(ValueClassBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  ValueClass build() {
+    if (name == null) throw new ArgumentError('null name');
+    if (genericTypes == null) throw new ArgumentError('null genericTypes');
+    if (properties == null) throw new ArgumentError('null properties');
+    if (isAbstract == null) throw new ArgumentError('null isAbstract');
+    if (superTypes == null) throw new ArgumentError('null superTypes');
+    return new _$ValueClass._(
+        docComment: docComment,
+        name: name,
+        genericTypes: genericTypes != null
+            ? new SetBuilder<TypeParameter>(
+                genericTypes.build().map((v) => v.build())).build()
+            : null,
+        properties: properties != null
+            ? new SetBuilder<Property>(properties.build().map((v) => v.build()))
+                .build()
+            : null,
+        isAbstract: isAbstract,
+        superTypes: superTypes != null
+            ? new SetBuilder<ValueClass>(
+                superTypes.build().map((v) => v.build())).build()
+            : null);
+  }
+}
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
