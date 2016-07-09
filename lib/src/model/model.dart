@@ -195,7 +195,7 @@ abstract class ValueClass
 
   bool isSubTypeOf(ValueClass other) {
     final result = _isSubTypeOf(other);
-    print('$name isSubTypeOf ${other.name} => $result');
+//    print('$name isSubTypeOf ${other.name} => $result');
     return result;
   }
 
@@ -208,8 +208,8 @@ abstract class ValueClass
 //    name == other.name;
 
   Option<Property> lookupPropertyByPath(Iterable<String> path) {
-    print('---------- $name.lookupPropertyByPath($path)');
-    print(allProperties.map((p) => p.name).toSet());
+//    print('---------- $name.lookupPropertyByPath($path)');
+//    print(allProperties.map((p) => p.name).toSet());
     if (path.isEmpty) return const None();
 
     final property = allProperties.firstWhere((p) => p.name == path.first,
