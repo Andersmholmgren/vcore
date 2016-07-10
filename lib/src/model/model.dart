@@ -48,6 +48,7 @@ abstract class TypedClassifierBuilder<V extends TypedClassifier<V, B>,
 abstract class GenericClassifier<V extends GenericClassifier<V, B>,
     B extends TypedClassifierBuilder<V, B>> implements TypedClassifier<V, B> {
   BuiltSet<TypeParameter> get genericTypes;
+  bool get isGeneric => genericTypes.isNotEmpty;
 }
 
 abstract class GenericType
@@ -178,6 +179,7 @@ abstract class ValueClass
   String get docComment;
   String get name;
   BuiltSet<TypeParameter> get genericTypes;
+  bool get isGeneric => genericTypes.isNotEmpty;
   BuiltSet<Property> get properties;
 
   BuiltSet<Property> _allProperties;
@@ -286,6 +288,7 @@ abstract class ExternalClass
   String get name;
   BuiltSet<TypeParameter> get genericTypes;
   bool get isAbstract => false;
+  bool get isGeneric => genericTypes.isNotEmpty;
 
   ExternalClass._();
 
