@@ -119,10 +119,21 @@ class TypeName {
 abstract class BuiltBuilderNamingPattern {
   String builderNameFor(String builtName);
   String builtNameFor(String builderName);
+
+  static const BuiltBuilderNamingPattern standard =
+      const _StandardBuiltBuilderNamingPattern();
+
+  static const BuiltBuilderNamingPattern collections =
+      const _CollectionBuiltBuilderNamingPattern();
+
+  static BuiltBuilderNamingPattern patternForBuiltName(String builtName) =>
+      builtName.startsWith('Built') ? collections : standard;
 }
 
 // Foo / FooBuilder
 class _StandardBuiltBuilderNamingPattern implements BuiltBuilderNamingPattern {
+  const _StandardBuiltBuilderNamingPattern();
+
   @override
   String builderNameFor(String builtName) => '${builtName}Builder';
 
@@ -134,6 +145,8 @@ class _StandardBuiltBuilderNamingPattern implements BuiltBuilderNamingPattern {
 // BuiltFoo / FooBuilder
 class _CollectionBuiltBuilderNamingPattern
     implements BuiltBuilderNamingPattern {
+  const _CollectionBuiltBuilderNamingPattern();
+
   @override
   String builderNameFor(String builtName) =>
       '${builtName.substring('Built'.length)}Builder';
@@ -152,5 +165,4 @@ main() {
 
   print(col.builderNameFor('BuiltMap'));
   print(col.builtNameFor('ListBuilder'));
-
 }
