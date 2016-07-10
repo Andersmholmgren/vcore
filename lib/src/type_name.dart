@@ -117,6 +117,12 @@ class TypeName {
 //}
 
 abstract class BuiltBuilderNamingPattern {
+  static List<String> _knownCollectionBuilderNames = [
+    'ListBuilder',
+    'SetBuilder',
+    'MapBuilder'
+  ];
+
   const BuiltBuilderNamingPattern();
 
   String builderNameFor(String builtName);
@@ -142,6 +148,11 @@ abstract class BuiltBuilderNamingPattern {
 
   static BuiltBuilderNamingPattern patternForBuiltName(String builtName) =>
       builtName.startsWith('Built') ? collections : standard;
+
+  static BuiltBuilderNamingPattern patternForBuilderName(String builderName) =>
+      _knownCollectionBuilderNames.contains(builderName)
+          ? collections
+          : standard;
 }
 
 // Foo / FooBuilder
@@ -173,7 +184,7 @@ class _CollectionBuiltBuilderNamingPattern extends BuiltBuilderNamingPattern {
 
   @override
   bool isBuiltName(String name) =>
-      name.startsWith('Built') && !isBuilderName(name);
+      name?.startsWith('Built') && !isBuilderName(name);
 }
 
 main() {
