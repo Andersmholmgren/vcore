@@ -13,3 +13,4 @@ export 'package:vcore/src/vcore_metamodel/built_metamodel.dart';
 //export 'package:vcore/src/vcore_metamodel/metamodel.dart';
 
 export 'package:vcore/src/built_collection_helpers.dart';
+export 'package:vcore/src/type_name.dart';
