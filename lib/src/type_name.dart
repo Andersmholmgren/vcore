@@ -117,8 +117,20 @@ class TypeName {
 //}
 
 abstract class BuiltBuilderNamingPattern {
+  const BuiltBuilderNamingPattern();
+
   String builderNameFor(String builtName);
   String builtNameFor(String builderName);
+
+  TypeName toBuilderName(TypeName builtTypeName) =>
+      new TypeName(builderNameFor(builtTypeName.baseName),
+          typeParameters:
+              builtTypeName.typeParameters.map((p) => toBuilderName(p)));
+
+  TypeName toBuiltName(TypeName builderTypeName) =>
+      new TypeName(builderNameFor(builderTypeName.baseName),
+          typeParameters:
+              builderTypeName.typeParameters.map((p) => toBuiltName(p)));
 
   static const BuiltBuilderNamingPattern standard =
       const _StandardBuiltBuilderNamingPattern();
@@ -131,7 +143,7 @@ abstract class BuiltBuilderNamingPattern {
 }
 
 // Foo / FooBuilder
-class _StandardBuiltBuilderNamingPattern implements BuiltBuilderNamingPattern {
+class _StandardBuiltBuilderNamingPattern extends BuiltBuilderNamingPattern {
   const _StandardBuiltBuilderNamingPattern();
 
   @override
@@ -143,8 +155,7 @@ class _StandardBuiltBuilderNamingPattern implements BuiltBuilderNamingPattern {
 }
 
 // BuiltFoo / FooBuilder
-class _CollectionBuiltBuilderNamingPattern
-    implements BuiltBuilderNamingPattern {
+class _CollectionBuiltBuilderNamingPattern extends BuiltBuilderNamingPattern {
   const _CollectionBuiltBuilderNamingPattern();
 
   @override
