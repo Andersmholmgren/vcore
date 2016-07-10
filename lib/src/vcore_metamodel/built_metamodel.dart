@@ -1,4 +1,5 @@
 import 'package:vcore/src/model/model.dart';
+import 'package:vcore/src/type_name.dart';
 
 Package get builtPackage => _builtPackage ??= _createPackage();
 
@@ -7,7 +8,9 @@ Package _builtPackage;
 Package _createPackage() {
   final packageBuilder = new PackageBuilder()..name = 'built';
   final classifiers = packageBuilder.classifiers;
-  classifiers..add(builtSet)..add(builtList)..add(builtMap);
+  final builtClasses = [builtSet, builtList, builtMap];
+  final builderClasses = builtClasses.map((c) => _createBuilder(c));
+  classifiers..addAll(builtClasses)..addAll(builderClasses);
   return packageBuilder.build();
 }
 
@@ -37,4 +40,13 @@ ExternalClass _createBuiltMap() {
     ..name = 'BuiltMap'
     ..genericTypes.add(new TypeParameter((b) => b..name = 'K'))
     ..genericTypes.add(new TypeParameter((b) => b..name = 'V')));
+}
+
+const BuiltBuilderNamingPattern _namingPattern =
+    BuiltBuilderNamingPattern.collections;
+
+ExternalClass _createBuilder(ExternalClass builtClass) {
+  return new ExternalClass((cb) => cb
+    ..name = _namingPattern.builderNameFor(builtClass.name)
+    ..genericTypes.addAll(builtClass.genericTypes));
 }

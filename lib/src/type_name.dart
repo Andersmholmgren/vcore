@@ -1,8 +1,12 @@
+import 'package:vcore/src/model/model.dart';
+
 class TypeName {
   final String baseName, fullTypeName;
   final Iterable<TypeName> typeParameters;
 
   TypeName get baseTypeName => new TypeName.parse(baseName);
+
+  bool get isGeneric => typeParameters.isNotEmpty;
 
 //,  fullTypeName;
 
@@ -186,6 +190,8 @@ class _CollectionBuiltBuilderNamingPattern extends BuiltBuilderNamingPattern {
   bool isBuiltName(String name) =>
       name?.startsWith('Built') && !isBuilderName(name);
 }
+
+//typedef ClassifierBuilder TypeNameToClassifierBuilder(TypeName typeName);
 
 main() {
   final std = new _StandardBuiltBuilderNamingPattern();
