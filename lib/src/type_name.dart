@@ -121,6 +121,8 @@ abstract class BuiltBuilderNamingPattern {
 
   String builderNameFor(String builtName);
   String builtNameFor(String builderName);
+  bool isBuiltName(String name);
+  bool isBuilderName(String name) => name?.endsWith('Builder');
 
   TypeName toBuilderName(TypeName builtTypeName) =>
       new TypeName(builderNameFor(builtTypeName.baseName),
@@ -152,6 +154,9 @@ class _StandardBuiltBuilderNamingPattern extends BuiltBuilderNamingPattern {
   @override
   String builtNameFor(String builderName) =>
       builderName.substring(0, builderName.length - 'Builder'.length);
+
+  @override
+  bool isBuiltName(String name) => !isBuilderName(name);
 }
 
 // BuiltFoo / FooBuilder
@@ -165,6 +170,10 @@ class _CollectionBuiltBuilderNamingPattern extends BuiltBuilderNamingPattern {
   @override
   String builtNameFor(String builderName) =>
       'Built' + builderName.substring(0, builderName.length - 'Builder'.length);
+
+  @override
+  bool isBuiltName(String name) =>
+      name.startsWith('Built') && !isBuilderName(name);
 }
 
 main() {
