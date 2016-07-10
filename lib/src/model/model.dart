@@ -250,6 +250,7 @@ abstract class ValueClassBuilder
   String name;
   SetBuilder<TypeParameterBuilder> genericTypes =
       new SetBuilder<TypeParameterBuilder>();
+  bool get isGeneric => genericTypes.build().isNotEmpty;
   SetBuilder<PropertyBuilder> properties = new SetBuilder<PropertyBuilder>();
   bool isAbstract = false;
   SetBuilder<ValueClassBuilder> superTypes =
@@ -314,6 +315,8 @@ abstract class ExternalClassBuilder
   String name;
   SetBuilder<TypeParameterBuilder> genericTypes =
       new SetBuilder<TypeParameterBuilder>();
+
+  bool get isGeneric => genericTypes.build().isNotEmpty;
 
   ExternalClassBuilder._();
 
