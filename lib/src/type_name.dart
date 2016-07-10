@@ -111,3 +111,46 @@ class TypeName {
 //    return null;
 //  }
 }
+
+//class KnownBuiltBuilderPair {
+//
+//}
+
+abstract class BuiltBuilderNamingPattern {
+  String builderNameFor(String builtName);
+  String builtNameFor(String builderName);
+}
+
+// Foo / FooBuilder
+class _StandardBuiltBuilderNamingPattern implements BuiltBuilderNamingPattern {
+  @override
+  String builderNameFor(String builtName) => '${builtName}Builder';
+
+  @override
+  String builtNameFor(String builderName) =>
+      builderName.substring(0, builderName.length - 'Builder'.length);
+}
+
+// BuiltFoo / FooBuilder
+class _CollectionBuiltBuilderNamingPattern
+    implements BuiltBuilderNamingPattern {
+  @override
+  String builderNameFor(String builtName) =>
+      '${builtName.substring('Built'.length)}Builder';
+
+  @override
+  String builtNameFor(String builderName) =>
+      'Built' + builderName.substring(0, builderName.length - 'Builder'.length);
+}
+
+main() {
+  final std = new _StandardBuiltBuilderNamingPattern();
+  final col = new _CollectionBuiltBuilderNamingPattern();
+
+  print(std.builderNameFor('Foo'));
+  print(std.builtNameFor('FooBuilder'));
+
+  print(col.builderNameFor('BuiltMap'));
+  print(col.builtNameFor('ListBuilder'));
+
+}
