@@ -46,9 +46,18 @@ abstract class TypedClassifierBuilder<V extends TypedClassifier<V, B>,
 }
 
 abstract class GenericClassifier<V extends GenericClassifier<V, B>,
-    B extends TypedClassifierBuilder<V, B>> implements TypedClassifier<V, B> {
+    B extends GenericClassifierBuilder<V, B>> implements TypedClassifier<V, B> {
   BuiltSet<TypeParameter> get genericTypes;
   bool get isGeneric => genericTypes.isNotEmpty;
+}
+
+abstract class GenericClassifierBuilder<V extends GenericClassifier<V, B>,
+        B extends GenericClassifierBuilder<V, B>>
+    implements TypedClassifierBuilder<V, B> {
+  SetBuilder<TypeParameterBuilder> genericTypes =
+      new SetBuilder<TypeParameterBuilder>();
+  // damn!!
+  bool get isGeneric => genericTypes.build().isNotEmpty;
 }
 
 abstract class GenericType
@@ -165,7 +174,8 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
 /// where ValueClass has a field of type ValueClass but that instance doesn't
 /// exist yet
 abstract class ValuableClass<V extends ValuableClass<V, B>,
-    B extends TypedClassifierBuilder<V, B>> implements GenericClassifier<V, B> {
+        B extends GenericClassifierBuilder<V, B>>
+    implements GenericClassifier<V, B> {
   BuiltSet<Property> get properties;
   BuiltSet<Property> get allProperties;
   bool get isAbstract;
@@ -234,7 +244,7 @@ abstract class ValueClass
 abstract class ValueClassBuilder
     implements
         Builder<ValueClass, ValueClassBuilder>,
-        TypedClassifierBuilder<ValueClass, ValueClassBuilder> {
+        GenericClassifierBuilder<ValueClass, ValueClassBuilder> {
   @nullable
   String docComment;
   String name;
@@ -298,11 +308,12 @@ abstract class ExternalClass
 abstract class ExternalClassBuilder
     implements
         Builder<ExternalClass, ExternalClassBuilder>,
-        TypedClassifierBuilder<ExternalClass, ExternalClassBuilder> {
+        GenericClassifierBuilder<ExternalClass, ExternalClassBuilder> {
   @nullable
   String docComment;
   String name;
-  SetBuilder<TypeParameter> genericTypes = new SetBuilder<TypeParameter>();
+  SetBuilder<TypeParameterBuilder> genericTypes =
+      new SetBuilder<TypeParameterBuilder>();
 
   ExternalClassBuilder._();
 
