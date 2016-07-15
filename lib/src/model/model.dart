@@ -56,8 +56,8 @@ abstract class GenericClassifierBuilder<V extends GenericClassifier<V, B>,
     implements TypedClassifierBuilder<V, B> {
   SetBuilder<TypeParameterBuilder> genericTypes =
       new SetBuilder<TypeParameterBuilder>();
-  // damn!!
-  bool get isGeneric => genericTypes.build().isNotEmpty;
+//  // damn!!
+//  bool get isGeneric => genericTypes.build().isNotEmpty;
 }
 
 abstract class GenericType
@@ -250,7 +250,7 @@ abstract class ValueClassBuilder
   String name;
   SetBuilder<TypeParameterBuilder> genericTypes =
       new SetBuilder<TypeParameterBuilder>();
-  bool get isGeneric => genericTypes.build().isNotEmpty;
+//  bool get isGeneric => genericTypes.build().isNotEmpty;
   SetBuilder<PropertyBuilder> properties = new SetBuilder<PropertyBuilder>();
   bool isAbstract = false;
   SetBuilder<ValueClassBuilder> superTypes =
@@ -316,7 +316,7 @@ abstract class ExternalClassBuilder
   SetBuilder<TypeParameterBuilder> genericTypes =
       new SetBuilder<TypeParameterBuilder>();
 
-  bool get isGeneric => genericTypes.build().isNotEmpty;
+//  bool get isGeneric => genericTypes.build().isNotEmpty;
 
   ExternalClassBuilder._();
 
