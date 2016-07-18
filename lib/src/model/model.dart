@@ -123,19 +123,6 @@ abstract class TypeParameterBuilder
   factory TypeParameterBuilder() = _$TypeParameterBuilder;
 }
 
-//class PropertyBuilderTypeExpressionSegment {
-//  final Classifier classifier;
-//  final bool isBuilderForClassifier;
-//
-//  PropertyBuilderTypeExpressionSegment(this.classifier, this.isBuilderForClassifier);
-//}
-//
-//class PropertyBuilderTypeExpression {
-//  final BuiltList<PropertyBuilderTypeExpressionSegment> segments;
-//
-//  PropertyBuilderTypeExpression(this.segments);
-//}
-
 abstract class Property
     implements Built<Property, PropertyBuilder>, NamedElement {
   @nullable
