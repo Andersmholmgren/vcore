@@ -5,6 +5,7 @@ import 'package:built_value/built_value.dart';
 import 'package:option/option.dart';
 import 'package:quiver/iterables.dart';
 import 'package:vcore/src/vcore_metamodel/built_metamodel.dart';
+import 'package:vcore/src/type_name.dart';
 
 part 'model.g.dart';
 
@@ -17,6 +18,11 @@ abstract class NamedElement implements ModelElement {
   String get name;
 }
 
+abstract class NamedElementBuilder {
+  String name;
+  NamedElement build();
+}
+
 abstract class Classifier implements NamedElement {
   bool get isAbstract;
   ClassifierBuilder toBuilder();
@@ -24,11 +30,9 @@ abstract class Classifier implements NamedElement {
 //  bool isAssignableTo(V other) => name == other.name;
 }
 
-abstract class ClassifierBuilder {
+abstract class ClassifierBuilder implements NamedElementBuilder {
   String name;
   Classifier build();
-//  void replace(Classifier value);
-//  void update(updates(ClassifierBuilder builder));
 }
 
 abstract class TypedClassifier<V extends TypedClassifier<V, B>,
@@ -119,6 +123,19 @@ abstract class TypeParameterBuilder
   factory TypeParameterBuilder() = _$TypeParameterBuilder;
 }
 
+//class PropertyBuilderTypeExpressionSegment {
+//  final Classifier classifier;
+//  final bool isBuilderForClassifier;
+//
+//  PropertyBuilderTypeExpressionSegment(this.classifier, this.isBuilderForClassifier);
+//}
+//
+//class PropertyBuilderTypeExpression {
+//  final BuiltList<PropertyBuilderTypeExpressionSegment> segments;
+//
+//  PropertyBuilderTypeExpression(this.segments);
+//}
+
 abstract class Property
     implements Built<Property, PropertyBuilder>, NamedElement {
   @nullable
@@ -129,8 +146,8 @@ abstract class Property
   // TODO: does it make sense to put builder type on Property
   // rather than have a separate set of builder properties??
   @nullable
-  Classifier get explicitBuilderType;
-  Classifier get builderType => explicitBuilderType ?? type;
+  NamedElement get explicitBuilderType;
+  NamedElement get builderType => explicitBuilderType ?? type;
 
   bool get isNullable;
   @nullable
@@ -157,7 +174,7 @@ abstract class PropertyBuilder implements Builder<Property, PropertyBuilder> {
   String name;
   ClassifierBuilder type;
   @nullable
-  ClassifierBuilder explicitBuilderType;
+  NamedElementBuilder explicitBuilderType;
 
   bool isNullable = false;
   @nullable
@@ -204,6 +221,9 @@ abstract class ValueClass
   BuiltSet<ValueClass> get allSuperTypes =>
       _allSuperTypes ??= new BuiltSet<ValueClass>(
           concat([superTypes.expand((vc) => vc.allSuperTypes), superTypes]));
+
+  BuilderType get builderType =>
+      new BuilderType(this, BuiltBuilderNamingPattern.standard);
 
   bool isSubTypeOf(ValueClass other) {
     final result = _isSubTypeOf(other);
@@ -321,6 +341,30 @@ abstract class ExternalClassBuilder
   ExternalClassBuilder._();
 
   factory ExternalClassBuilder() = _$ExternalClassBuilder;
+}
+
+/// The type for a Classifier's builder. This is rarely used directly, except
+/// for cases where it needs to be distinguished from it's Classifier
+class BuilderType<C extends Classifier>
+    implements NamedElement, NamedElementBuilder {
+  @override
+  final String docComment;
+
+  final C classifier;
+  final BuiltBuilderNamingPattern _namingPattern;
+
+  BuilderType(this.classifier, this._namingPattern, {this.docComment});
+
+  @override
+  String get name => _namingPattern.builderNameFor(classifier.name);
+
+  @override
+  NamedElement build() => this;
+
+  @override
+  void set name(String _name) {
+    throw new StateError('Not implemented. Doh this is ugly');
+  }
 }
 
 abstract class Package implements Built<Package, PackageBuilder>, NamedElement {
