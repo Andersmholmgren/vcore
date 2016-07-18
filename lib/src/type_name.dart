@@ -1,5 +1,3 @@
-import 'package:vcore/src/model/model.dart';
-
 class TypeName {
   final String baseName, fullTypeName;
   final Iterable<TypeName> typeParameters;
@@ -8,16 +6,6 @@ class TypeName {
 
   bool get isGeneric => typeParameters.isNotEmpty;
 
-//,  fullTypeName;
-
-//  if (typeName != 'Built' && !typeName.startsWith('Serializer')) {
-//    final _ResolvingClassifierHelper classifierHelper =
-//      _classifierHelpers[fullTypeName] ?? _classifierHelpers[typeName];
-//    if (classifierHelper == null) {
-//      final coreType = _coreTypes[typeName];
-//      if (coreType != null) {
-//        return new _ResolvedExternalClassifier(coreType);
-//      } else {
   bool get isSet => baseName == 'BuiltSet';
   bool get isList => baseName == 'BuiltList';
   bool get isCollection => isSet || isList;
@@ -60,65 +48,7 @@ class TypeName {
       other is TypeName && other.fullTypeName == fullTypeName;
 
   int get hashCode => fullTypeName.hashCode;
-
-//  Iterable<String>
-
-//        if (isMultiValued) {
-//          print('found new multivalued type $fullTypeName');
-//          final typeParamNames = fullTypeName
-//            .substring(fullTypeName.indexOf('<') + 1,
-//            fullTypeName.lastIndexOf('>'))
-//            .split(',')
-//            .map((s) => s.trim());
-//          final typeParamHelpers = typeParamNames.map((typeParamFullName) {
-//            print('typeParamFullName: $typeParamFullName');
-//
-//            final i = typeParamFullName.indexOf('<');
-//            final typeParamName =
-//            i < 0 ? typeParamFullName : typeParamFullName.substring(0, i);
-//
-//            return _resolveHelperByName(typeParamName, typeParamFullName);
-//          });
-//          print('*** $typeParamHelpers for $typeParamNames');
-//
-//          if (isCollection) {
-//            final typeParamHelper = typeParamHelpers.first;
-//
-//            final typeBuilder = isSet
-//              ? createBuiltSet(typeParamHelper.resolvingClassifier)
-//              : createBuiltList(typeParamHelper.resolvingClassifier);
-//            final helper = new _ResolvingGenericTypeClassifier(typeBuilder);
-//            _classifierHelpers[fullTypeName] = helper;
-//            print('added: $fullTypeName -> $helper');
-//            return helper;
-//          } else if (isMap) {
-//            final typeBuilder = createBuiltMap(
-//              typeParamHelpers.first.resolvingClassifier,
-//              typeParamHelpers.elementAt(1).resolvingClassifier);
-//            final helper = new _ResolvingGenericTypeClassifier(typeBuilder);
-//            _classifierHelpers[fullTypeName] = helper;
-//            print('added: $fullTypeName -> $helper');
-//            return helper;
-//          }
-//        } else {
-////          throw new StateError(
-////              "failed to resolve classifier helper class: $type");
-//          print("failed to resolve classifier helper class: $typeName");
-//          return new _ResolvedExternalClassifier(
-//            (new ExternalClassBuilder()..name = typeName).build());
-//        }
-//      }
-//    } else {
-//      return classifierHelper;
-//    }
-//  } else {
-//    return null;
-//  }
 }
-
-//class KnownBuiltBuilderPair {
-//
-//}
 
 abstract class BuiltBuilderNamingPattern {
   static List<String> _knownCollectionBuilderNames = [
@@ -157,6 +87,26 @@ abstract class BuiltBuilderNamingPattern {
       _knownCollectionBuilderNames.contains(builderName)
           ? collections
           : standard;
+
+  /// Attempts to determine what naming scheme is used and then toggle from
+  /// builtValue name <-> builder name
+  /// Note: it falls back to assuming it is a [standard] built name which is
+  /// not guaranteed to be true.
+  static TypeName toggleName(TypeName typeName) {
+    if (_knownCollectionBuilderNames.contains(typeName.baseName)) {
+      return collections.toBuiltName(typeName);
+    }
+
+    if (collections.isBuiltName(typeName.baseName)) {
+      return collections.toBuilderName(typeName);
+    }
+
+    if (standard.isBuilderName(typeName.baseName)) {
+      return standard.toBuiltName(typeName);
+    }
+
+    return standard.toBuilderName(typeName);
+  }
 }
 
 // Foo / FooBuilder
@@ -164,11 +114,13 @@ class _StandardBuiltBuilderNamingPattern extends BuiltBuilderNamingPattern {
   const _StandardBuiltBuilderNamingPattern();
 
   @override
-  String builderNameFor(String builtName) => '${builtName}Builder';
+  String builderNameFor(String builtName) =>
+      isBuiltName(builtName) ? '${builtName}Builder' : builtName;
 
   @override
-  String builtNameFor(String builderName) =>
-      builderName.substring(0, builderName.length - 'Builder'.length);
+  String builtNameFor(String builderName) => isBuilderName(builderName)
+      ? builderName.substring(0, builderName.length - 'Builder'.length)
+      : builderName;
 
   @override
   bool isBuiltName(String name) => !isBuilderName(name);
@@ -179,12 +131,15 @@ class _CollectionBuiltBuilderNamingPattern extends BuiltBuilderNamingPattern {
   const _CollectionBuiltBuilderNamingPattern();
 
   @override
-  String builderNameFor(String builtName) =>
-      '${builtName.substring('Built'.length)}Builder';
+  String builderNameFor(String builtName) => isBuiltName(builtName)
+      ? '${builtName.substring('Built'.length)}Builder'
+      : builtName;
 
   @override
-  String builtNameFor(String builderName) =>
-      'Built' + builderName.substring(0, builderName.length - 'Builder'.length);
+  String builtNameFor(String builderName) => isBuilderName(builderName)
+      ? 'Built' +
+          builderName.substring(0, builderName.length - 'Builder'.length)
+      : builderName;
 
   @override
   bool isBuiltName(String name) =>
@@ -193,13 +148,13 @@ class _CollectionBuiltBuilderNamingPattern extends BuiltBuilderNamingPattern {
 
 //typedef ClassifierBuilder TypeNameToClassifierBuilder(TypeName typeName);
 
-main() {
-  final std = new _StandardBuiltBuilderNamingPattern();
-  final col = new _CollectionBuiltBuilderNamingPattern();
-
-  print(std.builderNameFor('Foo'));
-  print(std.builtNameFor('FooBuilder'));
-
-  print(col.builderNameFor('BuiltMap'));
-  print(col.builtNameFor('ListBuilder'));
-}
+//main() {
+//  final std = new _StandardBuiltBuilderNamingPattern();
+//  final col = new _CollectionBuiltBuilderNamingPattern();
+//
+//  print(std.builderNameFor('Foo'));
+//  print(std.builtNameFor('FooBuilder'));
+//
+//  print(col.builderNameFor('BuiltMap'));
+//  print(col.builtNameFor('ListBuilder'));
+//}
